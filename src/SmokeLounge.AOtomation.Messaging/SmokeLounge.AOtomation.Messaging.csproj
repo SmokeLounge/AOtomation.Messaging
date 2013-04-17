@@ -164,7 +164,6 @@
     <Compile Include="Serialization\Serializers\Int32Serializer.cs" />
     <Compile Include="Serialization\Serializers\Int16Serializer.cs" />
     <Compile Include="Serialization\KnownType.cs" />
-    <Compile Include="Serialization\MessageBodyTypeResolver.cs" />
     <Compile Include="Serialization\SerializationContext.cs" />
     <Compile Include="Serialization\Serializers\ISerializer.cs" />
     <Compile Include="Serialization\Serializers\SerializationOptions.cs" />
