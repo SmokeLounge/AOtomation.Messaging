@@ -16,6 +16,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 {
     using System;
     using System.IO;
+    using System.Net;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -124,7 +125,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             var expected = new ZoneRedirectionMessage
                                {
                                    CharacterId = 1234567890, 
-                                   ServerIpAddress = new byte[] { 192, 168, 0, 1 }, 
+                                   ServerIpAddress = IPAddress.Loopback, 
                                    ServerPort = 45678
                                };
 
@@ -133,7 +134,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
             this.AssertSystemMessage(expected, actual);
             Assert.AreEqual(expected.CharacterId, actual.CharacterId);
-            CollectionAssert.AreEqual(expected.ServerIpAddress, actual.ServerIpAddress);
+            Assert.AreEqual(expected.ServerIpAddress, actual.ServerIpAddress);
             Assert.AreEqual(expected.ServerPort, actual.ServerPort);
         }
 

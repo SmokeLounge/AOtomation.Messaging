@@ -154,6 +154,7 @@
     <Compile Include="Serialization\Serializers\ArraySerializer.cs" />
     <Compile Include="Serialization\Serializers\ArraySizeSerializer.cs" />
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
+    <Compile Include="Serialization\Serializers\IPAddressSerializer.cs" />
     <Compile Include="Serialization\Serializers\UInt16Serializer.cs" />
     <Compile Include="Serialization\Serializers\HeaderSerializer.cs" />
     <Compile Include="Serialization\Serializers\PropertyMeta.cs" />

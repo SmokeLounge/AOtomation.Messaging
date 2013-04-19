@@ -18,6 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
+    using System.Net;
 
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
 
@@ -39,6 +40,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                        { typeof(short), new Int16Serializer() }, 
                                        { typeof(int), new Int32Serializer() }, 
                                        { typeof(long), new Int64Serializer() }, 
+                                       { typeof(IPAddress), new IPAddressSerializer() },
                                        { typeof(float), new SingleSerializer() }, 
                                        { typeof(string), new StringSerializer() }, 
                                        { typeof(ushort), new UInt16Serializer() }, 

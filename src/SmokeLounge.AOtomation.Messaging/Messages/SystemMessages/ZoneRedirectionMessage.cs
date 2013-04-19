@@ -14,6 +14,8 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
+    using System.Net;
+
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
     [AoContract((int)SystemMessageType.ZoneRedirection)]
@@ -33,8 +35,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
         [AoMember(0)]
         public int CharacterId { get; set; }
 
-        [AoMember(1, FixedSizeLength = 4)]
-        public byte[] ServerIpAddress { get; set; }
+        [AoMember(1)]
+        public IPAddress ServerIpAddress { get; set; }
 
         [AoMember(2)]
         public ushort ServerPort { get; set; }

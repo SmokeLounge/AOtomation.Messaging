@@ -69,6 +69,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             return this.reader.ReadByte();
         }
 
+        public byte[] ReadBytes(int count)
+        {
+            return this.reader.ReadBytes(count);
+        }
+
         public short ReadInt16()
         {
             return IPAddress.NetworkToHostOrder(this.reader.ReadInt16());
