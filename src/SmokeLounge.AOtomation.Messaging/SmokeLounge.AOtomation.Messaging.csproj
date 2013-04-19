@@ -151,6 +151,7 @@
     <Compile Include="Serialization\AoKnownTypeAttribute.cs" />
     <Compile Include="Serialization\IdentifierType.cs" />
     <Compile Include="Serialization\ArraySizeType.cs" />
+    <Compile Include="Serialization\ReflectionHelper.cs" />
     <Compile Include="Serialization\Serializers\ArraySerializer.cs" />
     <Compile Include="Serialization\Serializers\ArraySizeSerializer.cs" />
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
