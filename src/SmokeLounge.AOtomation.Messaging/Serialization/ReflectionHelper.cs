@@ -37,40 +37,13 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 throw new InvalidOperationException();
             }
 
-            var constantExpression = methodCallExpression.Object as ConstantExpression;
-            if (constantExpression == null)
+            if (methodCallExpression.Arguments.Count < 3)
             {
                 throw new InvalidOperationException();
             }
 
-            var methodInfo = constantExpression.Value as MethodInfo;
-            if (methodInfo == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return methodInfo;
-        }
-
-        #endregion
-
-        #region Methods
-
-        private static MethodInfo GetMethodNameInternal(LambdaExpression lambdaExpression)
-        {
-            var unaryExpression = lambdaExpression.Body as UnaryExpression;
-            if (unaryExpression == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            var methodCallExpression = unaryExpression.Operand as MethodCallExpression;
-            if (methodCallExpression == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            var constantExpression = methodCallExpression.Object as ConstantExpression;
+            // TODO: use methodCallExpression.Object with .NET 4.5
+            var constantExpression = methodCallExpression.Arguments[2] as ConstantExpression;
             if (constantExpression == null)
             {
                 throw new InvalidOperationException();

@@ -128,7 +128,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 var t = stack.Pop();
                 var p = from property in t.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                         let memberAttribute =
-                            property.GetCustomAttributes(typeof(AoMemberAttribute))
+                            property.GetCustomAttributes(typeof(AoMemberAttribute), false)
                                     .Cast<AoMemberAttribute>()
                                     .FirstOrDefault()
                         where property.CanWrite && memberAttribute != null && property.DeclaringType == t

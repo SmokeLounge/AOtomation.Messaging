@@ -84,12 +84,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
         {
             var writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<byte[]>>(o => o.WriteBytes);
-            var mapToIPv4MethodInfo = ReflectionHelper.GetMethodInfo<IPAddress, Func<IPAddress>>(o => o.MapToIPv4);
             var getAddressBytesMethodInfo =
                 ReflectionHelper.GetMethodInfo<IPAddress, Func<byte[]>>(o => o.GetAddressBytes);
 
-            var mapToIPv4Exp = Expression.Call(valueExpression, mapToIPv4MethodInfo);
-            var callGetAddressBytesExp = Expression.Call(mapToIPv4Exp, getAddressBytesMethodInfo);
+            var callGetAddressBytesExp = Expression.Call(valueExpression, getAddressBytesMethodInfo);
 
             var callWriteExp = Expression.Call(
                 streamWriterExpression, writeMethodInfo, new Expression[] { callGetAddressBytesExp });
@@ -109,7 +107,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         private void SerializerImp(StreamWriter writer, SerializationOptions options, object value)
         {
             var address = (IPAddress)value;
-            writer.WriteBytes(address.MapToIPv4().GetAddressBytes());
+            writer.WriteBytes(address.GetAddressBytes());
         }
 
         #endregion
