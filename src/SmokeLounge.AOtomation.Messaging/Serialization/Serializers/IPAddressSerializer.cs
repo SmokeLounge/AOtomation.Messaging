@@ -64,7 +64,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             ConstantExpression optionsExpression, 
             Expression assignmentTargetExpression)
         {
-            var readMethodInfo = typeof(StreamReader).GetMethod("ReadBytes");
+            var readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<int, byte[]>>(o => o.ReadBytes);
             var callReadExp = Expression.Call(
                 streamReaderExpression, readMethodInfo, new Expression[] { Expression.Constant(4) });
 
@@ -83,9 +83,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
         {
-            var writeMethodInfo = typeof(StreamWriter).GetMethod("WriteBytes");
-            var mapToIPv4MethodInfo = typeof(IPAddress).GetMethod("MapToIPv4");
-            var getAddressBytesMethodInfo = typeof(IPAddress).GetMethod("GetAddressBytes");
+            var writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<byte[]>>(o => o.WriteBytes);
+            var mapToIPv4MethodInfo = ReflectionHelper.GetMethodInfo<IPAddress, Func<IPAddress>>(o => o.MapToIPv4);
+            var getAddressBytesMethodInfo =
+                ReflectionHelper.GetMethodInfo<IPAddress, Func<byte[]>>(o => o.GetAddressBytes);
 
             var mapToIPv4Exp = Expression.Call(valueExpression, mapToIPv4MethodInfo);
             var callGetAddressBytesExp = Expression.Call(mapToIPv4Exp, getAddressBytesMethodInfo);

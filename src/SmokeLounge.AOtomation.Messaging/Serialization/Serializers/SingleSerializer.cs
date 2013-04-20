@@ -59,7 +59,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             ConstantExpression optionsExpression, 
             Expression assignmentTargetExpression)
         {
-            var readMethodInfo = typeof(StreamReader).GetMethod("ReadSingle");
+            var readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<float>>(o => o.ReadSingle);
             var callReadExp = Expression.Call(streamReaderExpression, readMethodInfo);
             if (assignmentTargetExpression.Type.IsAssignableFrom(this.type))
             {
@@ -74,7 +74,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
         {
-            var writeMethodInfo = typeof(StreamWriter).GetMethod("WriteSingle");
+            var writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<float>>(o => o.WriteSingle);
             if (valueExpression.Type.IsAssignableFrom(this.type))
             {
                 return Expression.Call(streamWriterExpression, writeMethodInfo, new[] { valueExpression });

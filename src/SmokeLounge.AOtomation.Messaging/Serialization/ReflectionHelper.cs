@@ -22,36 +22,34 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     {
         #region Public Methods and Operators
 
-        public static MethodInfo GetMethodInfo<TSource>(Expression<Func<TSource, Func<object>>> methodCallExpression)
+        public static MethodInfo GetMethodInfo<TSource, TSignature>(
+            Expression<Func<TSource, TSignature>> lambdaExpression)
         {
-            return GetMethodNameInternal(methodCallExpression);
-        }
+            var unaryExpression = lambdaExpression.Body as UnaryExpression;
+            if (unaryExpression == null)
+            {
+                throw new InvalidOperationException();
+            }
 
-        public static MethodInfo GetMethodInfo<TSource, T1>(
-            Expression<Func<TSource, Func<T1, object>>> methodCallExpression)
-        {
-            return GetMethodNameInternal(methodCallExpression);
-        }
+            var methodCallExpression = unaryExpression.Operand as MethodCallExpression;
+            if (methodCallExpression == null)
+            {
+                throw new InvalidOperationException();
+            }
 
-        public static MethodInfo GetMethodInfo<TSource, T1, T2>(
-            Expression<Func<TSource, Func<T1, T2, object>>> methodCallExpression)
-        {
-            return GetMethodNameInternal(methodCallExpression);
-        }
+            var constantExpression = methodCallExpression.Object as ConstantExpression;
+            if (constantExpression == null)
+            {
+                throw new InvalidOperationException();
+            }
 
-        public static MethodInfo GetMethodInfo<T>(Expression<Func<T, Action>> methodCallExpression)
-        {
-            return GetMethodNameInternal(methodCallExpression);
-        }
+            var methodInfo = constantExpression.Value as MethodInfo;
+            if (methodInfo == null)
+            {
+                throw new InvalidOperationException();
+            }
 
-        public static MethodInfo GetMethodInfo<T, T1>(Expression<Func<T, Action<T1>>> methodCallExpression)
-        {
-            return GetMethodNameInternal(methodCallExpression);
-        }
-
-        public static MethodInfo GetMethodInfo<T, T1, T2>(Expression<Func<T, Action<T1, T2>>> methodCallExpression)
-        {
-            return GetMethodNameInternal(methodCallExpression);
+            return methodInfo;
         }
 
         #endregion

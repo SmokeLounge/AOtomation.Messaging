@@ -80,7 +80,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             expressions.Add(setSize);
 
-            var readMethodInfo = typeof(StreamReader).GetMethod("ReadString");
+            var readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<int, string>>(o => o.ReadString);
             var callReadExp = Expression.Call(streamReaderExpression, readMethodInfo, new[] { size });
 
             Expression setString = assignmentTargetExpression.Type.IsAssignableFrom(this.type)
@@ -114,7 +114,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 expressions.Add(serializeSizeExp);
             }
 
-            var writeMethodInfo = typeof(StreamWriter).GetMethod("WriteString");
+            var writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<string, int?>>(o => o.WriteString);
 
             Expression writeStringParam = options.IsFixedSize
                                               ? Expression.Constant(options.FixedSizeLength, typeof(int?))

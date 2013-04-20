@@ -82,12 +82,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             if (this.type == typeof(short))
             {
-                readMethodInfo = typeof(StreamReader).GetMethod("ReadInt16");
+                readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<short>>(o => o.ReadInt16);
             }
 
             if (this.type == typeof(int))
             {
-                readMethodInfo = typeof(StreamReader).GetMethod("ReadInt32");
+                readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<int>>(o => o.ReadInt32);
             }
 
             if (readMethodInfo == null)
@@ -135,12 +135,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             if (this.type == typeof(short))
             {
-                writeMethodInfo = typeof(StreamWriter).GetMethod("WriteInt16");
+                writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<short>>(o => o.WriteInt16);
             }
 
             if (this.type == typeof(int))
             {
-                writeMethodInfo = typeof(StreamWriter).GetMethod("WriteInt32");
+                writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<int>>(o => o.WriteInt32);
             }
 
             if (writeMethodInfo == null)
