@@ -30,8 +30,11 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #region Public Properties
 
-        [AoMember(0, SerializeSize = ArraySizeType.Int16)]
+        [AoMember(1, SerializeSize = ArraySizeType.Int32)]
         public string Credentials { get; set; }
+
+        [AoMember(0, IsFixedSize = true, FixedSizeLength = 40)]
+        public string UserName { get; set; }
 
         #endregion
     }
