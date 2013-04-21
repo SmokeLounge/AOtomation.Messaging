@@ -143,6 +143,8 @@
     <Compile Include="Messages\SystemMessage.cs" />
     <Compile Include="Messages\N3Messages\SetStatMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
+    <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />
+    <Compile Include="Messages\SystemMessages\LoginErrorType.cs" />
     <Compile Include="Messages\SystemMessages\ServerSaltMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserCredentialsMessage.cs" />
     <Compile Include="Messages\SystemMessages\SelectCharacterMessage.cs" />
