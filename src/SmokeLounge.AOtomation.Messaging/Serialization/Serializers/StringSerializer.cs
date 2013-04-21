@@ -68,20 +68,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             var options = (SerializationOptions)optionsExpression.Value;
 
-            if (options.SerializeSize != ArraySizeType.NoSerialization)
+            if (options.SerializeSize == ArraySizeType.NoSerialization)
             {
-                setSize = new ArraySizeSerializer(options.SerializeSize).DeserializerExpression(
-                    streamReaderExpression, optionsExpression, size);
+                setSize = Expression.Assign(size, Expression.Constant(options.FixedSizeLength, typeof(int)));
             }
             else
             {
-                setSize = Expression.Assign(size, Expression.Constant(options.FixedSizeLength, typeof(int)));
+                setSize = new ArraySizeSerializer(options.SerializeSize).DeserializerExpression(
+                    streamReaderExpression, optionsExpression, size);
             }
 
             expressions.Add(setSize);
 
             var readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<int, string>>(o => o.ReadString);
-            var callReadExp = Expression.Call(streamReaderExpression, readMethodInfo, new[] { size });
+            var callReadExp = Expression.Call(streamReaderExpression, readMethodInfo, new Expression[] { size });
 
             Expression setString = assignmentTargetExpression.Type.IsAssignableFrom(this.type)
                                        ? Expression.Assign(assignmentTargetExpression, callReadExp)

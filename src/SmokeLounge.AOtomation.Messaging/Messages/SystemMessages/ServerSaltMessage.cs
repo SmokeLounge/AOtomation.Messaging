@@ -31,7 +31,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
         #region Public Properties
 
         [AoMember(0, IsFixedSize = true, FixedSizeLength = 32)]
-        public string ServerSalt { get; set; }
+        public byte[] ServerSalt { get; set; }
 
         #endregion
     }

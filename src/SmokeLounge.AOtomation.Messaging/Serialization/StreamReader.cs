@@ -99,7 +99,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         public string ReadString(int length)
         {
             var bytes = this.reader.ReadBytes(length);
-            return Encoding.ASCII.GetString(bytes);
+            return Encoding.ASCII.GetString(bytes).TrimEnd(char.MinValue);
         }
 
         public ushort ReadUInt16()
