@@ -23,7 +23,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         public LoginCharacterInfo()
         {
             this.Unknown1 = 4;
-            this.Unknown5 = 1;
+            this.Unknown2 = 1;
         }
 
         #endregion
@@ -42,6 +42,12 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         [AoMember(8)]
         public int CharacterInfoVersion { get; set; }
 
+        [AoMember(5)]
+        public int ExitDoor { get; set; }
+
+        [AoMember(6)]
+        public Identity ExitDoorId { get; set; }
+
         [AoMember(13)]
         public Gender Gender { get; set; }
 
@@ -54,6 +60,9 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         [AoMember(11, SerializeSize = ArraySizeType.Int32)]
         public string Name { get; set; }
 
+        [AoMember(4)]
+        public int PlayfieldAttribute { get; set; }
+
         [AoMember(3)]
         public Identity PlayfieldId { get; set; }
 
@@ -63,38 +72,32 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         [AoMember(14)]
         public Profession Profession { get; set; }
 
+        [AoMember(22)]
+        public CharacterStatus Status { get; set; }
+
         [AoMember(0)]
         public int Unknown1 { get; set; }
 
-        [AoMember(20)]
-        public int Unknown10 { get; set; }
-
-        [AoMember(21)]
-        public int Unknown11 { get; set; }
-
-        [AoMember(4)]
+        [AoMember(7)]
         public int Unknown2 { get; set; }
 
-        [AoMember(5)]
+        [AoMember(10)]
         public int Unknown3 { get; set; }
 
-        [AoMember(6)]
-        public Identity Unknown4 { get; set; }
-
-        [AoMember(7)]
-        public int Unknown5 { get; set; }
-
-        [AoMember(10)]
-        public int Unknown6 { get; set; }
-
         [AoMember(17)]
-        public int Unknown7 { get; set; }
+        public int Unknown4 { get; set; }
 
         [AoMember(18)]
-        public int Unknown8 { get; set; }
+        public int Unknown5 { get; set; }
 
         [AoMember(19)]
-        public int Unknown9 { get; set; }
+        public int Unknown6 { get; set; }
+
+        [AoMember(20)]
+        public int Unknown7 { get; set; }
+
+        [AoMember(21)]
+        public int Unknown8 { get; set; }
 
         #endregion
     }

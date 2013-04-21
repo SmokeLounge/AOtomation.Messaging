@@ -82,14 +82,14 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                                        Name = "Trolololo", 
                                                        AreaName = "ICC", 
                                                        PlayfieldId = Identity.None, 
-                                                       Unknown4 = Identity.None
+                                                       ExitDoorId = Identity.None
                                                    }, 
                                                new LoginCharacterInfo
                                                    {
                                                        Name = "Haiguise", 
                                                        AreaName = "Bore", 
                                                        PlayfieldId = Identity.None, 
-                                                       Unknown4 = Identity.None
+                                                       ExitDoorId = Identity.None
                                                    }
                                            }
                                };

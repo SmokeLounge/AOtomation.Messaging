@@ -31,7 +31,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
         #region Public Properties
 
         [AoMember(0)]
-        public LoginErrorType Error { get; set; }
+        public LoginError Error { get; set; }
 
         #endregion
     }

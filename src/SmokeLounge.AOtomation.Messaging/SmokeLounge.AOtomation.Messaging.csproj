@@ -123,6 +123,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="GameData\Breed.cs" />
+    <Compile Include="GameData\CharacterStatus.cs" />
     <Compile Include="GameData\LoginCharacterInfo.cs" />
     <Compile Include="GameData\CharacterStat.cs" />
     <Compile Include="GameData\Gender.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="Messages\N3Messages\SetStatMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />
-    <Compile Include="Messages\SystemMessages\LoginErrorType.cs" />
+    <Compile Include="Messages\SystemMessages\LoginError.cs" />
     <Compile Include="Messages\SystemMessages\ServerSaltMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserCredentialsMessage.cs" />
     <Compile Include="Messages\SystemMessages\SelectCharacterMessage.cs" />

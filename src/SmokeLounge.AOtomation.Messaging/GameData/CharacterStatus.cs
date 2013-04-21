@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IdentityType.cs" company="SmokeLounge">
+// <copyright file="CharacterStatus.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,20 +8,14 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the IdentityType type.
+//   Defines the CharacterStatus type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    public enum IdentityType
+    public enum CharacterStatus
     {
-        None = 0,
-
-        CanbeAffected = 50000,
-
-        Playfield = 51101,
-
-        VendingMachine = 51035
+        Active = 0x00000001
     }
 }
