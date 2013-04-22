@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SystemMessageType.cs" company="SmokeLounge">
+// <copyright file="CharacterDeletedMessage.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,34 +8,31 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the SystemMessageType type.
+//   Defines the CharacterDeletedMessage type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    public enum SystemMessageType
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+
+    [AoContract((int)SystemMessageType.CharacterDeleted)]
+    public class CharacterDeletedMessage : SystemMessage
     {
-        LoginError = 0x0000000D, 
+        #region Constructors and Destructors
 
-        CharacterList = 0x0000000E, 
+        public CharacterDeletedMessage()
+        {
+            this.SystemMessageType = SystemMessageType.CharacterDeleted;
+        }
 
-        DeleteCharacter = 0x00000014, 
+        #endregion
 
-        CharacterDeleted = 0x00000015, 
+        #region Public Properties
 
-        SelectCharacter = 0x00000016, 
+        [AoMember(0)]
+        public int CharacterId { get; set; }
 
-        ZoneRedirection = 0x00000017, 
-
-        UserLogin = 0x00000022, 
-
-        ServerSalt = 0x00000024, 
-
-        UserCredentials = 0x00000025, 
-
-        RandomNameRequest = 0x00000055, 
-
-        SuggestName = 0x00000056
+        #endregion
     }
 }
