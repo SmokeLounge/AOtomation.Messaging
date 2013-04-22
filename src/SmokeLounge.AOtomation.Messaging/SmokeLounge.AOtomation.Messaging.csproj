@@ -144,6 +144,7 @@
     <Compile Include="Messages\SystemMessage.cs" />
     <Compile Include="Messages\N3Messages\SetStatMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
+    <Compile Include="Messages\SystemMessages\DeleteCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginError.cs" />
     <Compile Include="Messages\SystemMessages\RandomNameRequestMessage.cs" />
