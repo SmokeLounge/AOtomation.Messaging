@@ -31,6 +31,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #region Public Properties
 
+        [AoMember(6, SerializeSize = ArraySizeType.Int32)]
+        public string AreaName { get; set; }
+
         [AoMember(2)]
         public Breed Breed { get; set; }
 
@@ -58,17 +61,14 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
         [AoMember(12)]
         public StarterArea StarterArea { get; set; }
 
-        [AoMember(0, IsFixedSize = true, FixedSizeLength = 45)]
+        [AoMember(0, IsFixedSize = true, FixedSizeLength = 49)]
         public byte[] Unknown1 { get; set; }
 
-        [AoMember(6, SerializeSize = ArraySizeType.Int32)]
-        public byte[] Unknown2 { get; set; }
-
         [AoMember(7)]
-        public int Unknown3 { get; set; }
+        public int Unknown2 { get; set; }
 
         [AoMember(8)]
-        public int Unknown4 { get; set; }
+        public int Unknown3 { get; set; }
 
         #endregion
     }
