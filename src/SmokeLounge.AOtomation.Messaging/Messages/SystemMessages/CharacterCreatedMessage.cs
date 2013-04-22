@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SystemMessageType.cs" company="SmokeLounge">
+// <copyright file="CharacterCreatedMessage.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,40 +8,35 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the SystemMessageType type.
+//   Defines the CharacterCreatedMessage type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    public enum SystemMessageType
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+
+    [AoContract((int)SystemMessageType.CharacterCreated)]
+    public class CharacterCreatedMessage : SystemMessage
     {
-        LoginError = 0x0000000D, 
+        #region Constructors and Destructors
 
-        CharacterList = 0x0000000E, 
+        public CharacterCreatedMessage()
+        {
+            this.SystemMessageType = SystemMessageType.CharacterCreated;
+            this.Unknown = 0xB0D2FFFF;
+        }
 
-        CreateCharacter = 0x0000000F, 
+        #endregion
 
-        NameInUse = 0x00000010, 
+        #region Public Properties
 
-        CharacterCreated = 0x00000011, 
+        [AoMember(0)]
+        public int CharacterId { get; set; }
 
-        DeleteCharacter = 0x00000014, 
+        [AoMember(1)]
+        public uint Unknown { get; set; }
 
-        CharacterDeleted = 0x00000015, 
-
-        SelectCharacter = 0x00000016, 
-
-        ZoneRedirection = 0x00000017, 
-
-        UserLogin = 0x00000022, 
-
-        ServerSalt = 0x00000024, 
-
-        UserCredentials = 0x00000025, 
-
-        RandomNameRequest = 0x00000055, 
-
-        SuggestName = 0x00000056
+        #endregion
     }
 }

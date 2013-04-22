@@ -143,6 +143,7 @@
     <Compile Include="Messages\PingMessage.cs" />
     <Compile Include="Messages\SystemMessage.cs" />
     <Compile Include="Messages\N3Messages\SetStatMessage.cs" />
+    <Compile Include="Messages\SystemMessages\CharacterCreatedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterDeletedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
     <Compile Include="Messages\SystemMessages\CreateCharacterMessage.cs" />
