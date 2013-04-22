@@ -149,6 +149,7 @@
     <Compile Include="Messages\SystemMessages\DeleteCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginError.cs" />
+    <Compile Include="Messages\SystemMessages\NameInUseMessage.cs" />
     <Compile Include="Messages\SystemMessages\RandomNameRequestMessage.cs" />
     <Compile Include="Messages\SystemMessages\ServerSaltMessage.cs" />
     <Compile Include="Messages\SystemMessages\StarterArea.cs" />

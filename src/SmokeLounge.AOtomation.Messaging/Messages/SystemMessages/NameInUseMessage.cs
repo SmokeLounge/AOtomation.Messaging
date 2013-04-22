@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SystemMessageType.cs" company="SmokeLounge">
+// <copyright file="NameInUseMessage.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,38 +8,32 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the SystemMessageType type.
+//   Defines the NameInUseMessage type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    public enum SystemMessageType
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+
+    [AoContract((int)SystemMessageType.NameInUse)]
+    public class NameInUseMessage : SystemMessage
     {
-        LoginError = 0x0000000D, 
+        #region Constructors and Destructors
 
-        CharacterList = 0x0000000E, 
+        public NameInUseMessage()
+        {
+            this.SystemMessageType = SystemMessageType.NameInUse;
+            this.Unknown = 0x0000001E;
+        }
 
-        CreateCharacter = 0x0000000F, 
+        #endregion
 
-        NameInUse = 0x00000010, 
+        #region Public Properties
 
-        DeleteCharacter = 0x00000014, 
+        [AoMember(0)]
+        public int Unknown { get; set; }
 
-        CharacterDeleted = 0x00000015, 
-
-        SelectCharacter = 0x00000016, 
-
-        ZoneRedirection = 0x00000017, 
-
-        UserLogin = 0x00000022, 
-
-        ServerSalt = 0x00000024, 
-
-        UserCredentials = 0x00000025, 
-
-        RandomNameRequest = 0x00000055, 
-
-        SuggestName = 0x00000056
+        #endregion
     }
 }
