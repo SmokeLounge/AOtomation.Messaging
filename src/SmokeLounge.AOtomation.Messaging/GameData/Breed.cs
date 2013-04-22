@@ -16,6 +16,12 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     public enum Breed
     {
+        Solitus = 1, 
+
+        Opifex = 2, 
+
+        Nanomage = 3, 
+
         Atrox = 4
     }
 }

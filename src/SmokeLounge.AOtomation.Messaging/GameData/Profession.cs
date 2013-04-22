@@ -16,6 +16,32 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     public enum Profession
     {
-        Enforcer = 9
+        Soldier = 1, 
+
+        MartialArtist = 2, 
+
+        Engineer = 3, 
+
+        Fixer = 4, 
+
+        Agent = 5, 
+
+        Adventurer = 6, 
+
+        Trader = 7, 
+
+        Bureaucrat = 8, 
+
+        Enforcer = 9, 
+
+        Doctor = 10, 
+
+        Nanotechnician = 11, 
+
+        Metaphysicist = 12, 
+
+        Keeper = 13, 
+
+        Shade = 14
     }
 }
