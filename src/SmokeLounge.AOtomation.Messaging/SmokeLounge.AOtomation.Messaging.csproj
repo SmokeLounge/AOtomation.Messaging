@@ -145,11 +145,13 @@
     <Compile Include="Messages\N3Messages\SetStatMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterDeletedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
+    <Compile Include="Messages\SystemMessages\CreateCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\DeleteCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginError.cs" />
     <Compile Include="Messages\SystemMessages\RandomNameRequestMessage.cs" />
     <Compile Include="Messages\SystemMessages\ServerSaltMessage.cs" />
+    <Compile Include="Messages\SystemMessages\StarterArea.cs" />
     <Compile Include="Messages\SystemMessages\SuggestNameMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserCredentialsMessage.cs" />
     <Compile Include="Messages\SystemMessages\SelectCharacterMessage.cs" />

@@ -20,6 +20,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         CharacterList = 0x0000000E, 
 
+        CreateCharacter = 0x0000000F, 
+
         DeleteCharacter = 0x00000014, 
 
         CharacterDeleted = 0x00000015, 

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="StarterArea.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,16 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the StarterArea type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
+{
+    public enum StarterArea
+    {
+        RubiKa = 0, 
 
-
-using System.Reflection;
-
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.3.6.0")]
-[assembly: AssemblyFileVersion("0.3.6.0")]
+        Shadowlands = 1
+    }
+}
