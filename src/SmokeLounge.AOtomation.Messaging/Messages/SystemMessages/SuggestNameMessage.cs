@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SystemMessageType.cs" company="SmokeLounge">
+// <copyright file="SuggestNameMessage.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,30 +8,31 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the SystemMessageType type.
+//   Defines the SuggestNameMessage type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    public enum SystemMessageType
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+
+    [AoContract((int)SystemMessageType.SuggestName)]
+    public class SuggestNameMessage : SystemMessage
     {
-        LoginError = 0x0000000D, 
+        #region Constructors and Destructors
 
-        CharacterList = 0x0000000E, 
+        public SuggestNameMessage()
+        {
+            this.SystemMessageType = SystemMessageType.SuggestName;
+        }
 
-        SelectCharacter = 0x00000016, 
+        #endregion
 
-        ZoneRedirection = 0x00000017, 
+        #region Public Properties
 
-        UserLogin = 0x00000022, 
+        [AoMember(0, SerializeSize = ArraySizeType.Int16)]
+        public string Name { get; set; }
 
-        ServerSalt = 0x00000024, 
-
-        UserCredentials = 0x00000025, 
-
-        RandomNameRequest = 0x00000055, 
-
-        SuggestName = 0x00000056
+        #endregion
     }
 }

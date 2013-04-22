@@ -148,6 +148,7 @@
     <Compile Include="Messages\SystemMessages\LoginError.cs" />
     <Compile Include="Messages\SystemMessages\RandomNameRequestMessage.cs" />
     <Compile Include="Messages\SystemMessages\ServerSaltMessage.cs" />
+    <Compile Include="Messages\SystemMessages\SuggestNameMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserCredentialsMessage.cs" />
     <Compile Include="Messages\SystemMessages\SelectCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserLoginMessage.cs" />
