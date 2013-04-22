@@ -14,7 +14,6 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
     [AoContract((int)SystemMessageType.SuggestName)]
@@ -33,9 +32,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         [AoMember(0, SerializeSize = ArraySizeType.Int16)]
         public string Name { get; set; }
-
-        [AoMember(1)]
-        public Profession Profession { get; set; }
 
         #endregion
     }
