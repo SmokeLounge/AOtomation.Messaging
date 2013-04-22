@@ -58,6 +58,39 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             return methodInfo;
         }
 
+        public static PropertyInfo GetPropertyInfo<TSource>(Expression<Func<TSource, object>> propertyExpression)
+        {
+            var lambdaExpression = propertyExpression as LambdaExpression;
+            if (lambdaExpression == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            MemberExpression memberExpression;
+            var unaryExpression = lambdaExpression.Body as UnaryExpression;
+            if (unaryExpression != null)
+            {
+                memberExpression = unaryExpression.Operand as MemberExpression;
+            }
+            else
+            {
+                memberExpression = lambdaExpression.Body as MemberExpression;
+            }
+
+            if (memberExpression == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            var propertyInfo = memberExpression.Member as PropertyInfo;
+            if (propertyInfo == null)
+            {
+                throw new InvalidOperationException();
+            }
+
+            return propertyInfo;
+        }
+
         #endregion
     }
 }

@@ -16,11 +16,11 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     public enum IdentityType
     {
-        None = 0,
+        None = 0, 
 
-        CanbeAffected = 50000,
+        CanbeAffected = 50000, 
 
-        Playfield = 51101,
+        Playfield = 51101, 
 
         VendingMachine = 51035
     }

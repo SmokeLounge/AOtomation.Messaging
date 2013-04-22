@@ -81,7 +81,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             }
 
             var callWriteExp = Expression.Call(
-                streamWriterExpression, writeMethodInfo, new[] { Expression.Convert(valueExpression, this.type) });
+                streamWriterExpression, 
+                writeMethodInfo, 
+                new Expression[] { Expression.Convert(valueExpression, this.type) });
             return callWriteExp;
         }
 
