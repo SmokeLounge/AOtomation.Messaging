@@ -133,6 +133,7 @@
     <Compile Include="GameData\Profession.cs" />
     <Compile Include="GameData\Side.cs" />
     <Compile Include="Messages\Header.cs" />
+    <Compile Include="Messages\InitiateCompressionMessage.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\MessageBody.cs" />
     <Compile Include="Messages\N3Message.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Messages\SystemMessages\SelectCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserLoginMessage.cs" />
     <Compile Include="Messages\SystemMessages\SystemMessageType.cs" />
+    <Compile Include="Messages\SystemMessages\ZoneLoginMessage.cs" />
     <Compile Include="Messages\SystemMessages\ZoneRedirectionMessage.cs" />
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Serialization\AoKnownTypeAttribute.cs" />

@@ -16,14 +16,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 {
     public enum PacketType : short
     {
-        SystemMessage = 0x01, 
+        SystemMessage = 0x0001, 
 
-        TextMessage = 0x05, 
+        TextMessage = 0x0005, 
 
-        N3Message = 0x0A, 
+        N3Message = 0x000A, 
 
-        PingMessage = 0x0B, 
+        PingMessage = 0x000B, 
 
-        OperatorMessage = 0x0E
+        OperatorMessage = 0x000E, 
+
+        InitiateCompressionMessage = 0x7F00
     }
 }

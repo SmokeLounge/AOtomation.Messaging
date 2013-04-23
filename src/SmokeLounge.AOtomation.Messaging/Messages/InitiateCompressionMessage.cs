@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="InitiateCompressionMessage.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,27 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the InitiateCompressionMessage type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.Messages
+{
+    using SmokeLounge.AOtomation.Messaging.Serialization;
 
+    [AoContract((int)PacketType.InitiateCompressionMessage)]
+    public class InitiateCompressionMessage : MessageBody
+    {
+        #region Public Properties
 
-using System.Reflection;
+        public override PacketType PacketType
+        {
+            get
+            {
+                return PacketType.InitiateCompressionMessage;
+            }
+        }
 
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.7.1.0")]
-[assembly: AssemblyFileVersion("0.7.1.0")]
+        #endregion
+    }
+}
