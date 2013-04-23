@@ -30,10 +30,12 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         ChangeVisualFlag = 166, 
 
-        TradeskillSourceChanged = 0xDC, 
+        ChangeAnimationAndStance = 0x000000A7, 
 
-        TradeskillTargetChanged = 0xDD, 
+        TradeskillSourceChanged = 0x000000DC, 
 
-        TradeskillBuildPressed = 0xDE
+        TradeskillTargetChanged = 0x000000DD, 
+
+        TradeskillBuildPressed = 0x000000DE
     }
 }
