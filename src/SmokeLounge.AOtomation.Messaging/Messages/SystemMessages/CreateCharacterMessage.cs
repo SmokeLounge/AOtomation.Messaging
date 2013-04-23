@@ -38,7 +38,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
         public Breed Breed { get; set; }
 
         [AoMember(11)]
-        public int Fatness { get; set; }
+        public Fatness Fatness { get; set; }
 
         [AoMember(3)]
         public Gender Gender { get; set; }

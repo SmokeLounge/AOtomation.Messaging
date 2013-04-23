@@ -16,6 +16,8 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     public enum Profession
     {
+        None = 0,
+
         Soldier = 1, 
 
         MartialArtist = 2, 
@@ -40,8 +42,10 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         Metaphysicist = 12, 
 
-        Keeper = 13, 
+        Monster = 13, 
 
-        Shade = 14
+        Keeper = 14, 
+
+        Shade = 15
     }
 }

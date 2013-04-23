@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Gender.cs" company="SmokeLounge">
+// <copyright file="Side.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,20 +8,28 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the Gender type.
+//   Defines the Side type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    public enum Gender
+    public enum Side
     {
-        None = 0,
+        Neutral = 0, 
 
-        Neutral = 1, 
+        Clan = 1, 
 
-        Male = 2, 
+        Omni = 2, 
 
-        Female = 3
+        Monster = 3, 
+
+        Advisor = 4, 
+
+        Guardian = 5, 
+
+        Gm = 6, 
+
+        Mixed = 7
     }
 }

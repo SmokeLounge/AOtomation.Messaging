@@ -124,12 +124,14 @@
     </Compile>
     <Compile Include="GameData\Breed.cs" />
     <Compile Include="GameData\CharacterStatus.cs" />
+    <Compile Include="GameData\Fatness.cs" />
     <Compile Include="GameData\LoginCharacterInfo.cs" />
     <Compile Include="GameData\CharacterStat.cs" />
     <Compile Include="GameData\Gender.cs" />
     <Compile Include="GameData\Identity.cs" />
     <Compile Include="GameData\IdentityType.cs" />
     <Compile Include="GameData\Profession.cs" />
+    <Compile Include="GameData\Side.cs" />
     <Compile Include="Messages\Header.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\MessageBody.cs" />

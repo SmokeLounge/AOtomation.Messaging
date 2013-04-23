@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Gender.cs" company="SmokeLounge">
+// <copyright file="Fatness.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,20 +8,18 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the Gender type.
+//   Defines the Fatness type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    public enum Gender
+    public enum Fatness
     {
-        None = 0,
+        Thin = 0, 
 
-        Neutral = 1, 
+        Normal = 1, 
 
-        Male = 2, 
-
-        Female = 3
+        Fat = 2
     }
 }
