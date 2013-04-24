@@ -18,7 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
     [AoContract((int)N3MessageType.SpecialAttackWeapon)]
-    internal class SpecialAttackWeaponMessage : N3Message
+    public class SpecialAttackWeaponMessage : N3Message
     {
         #region Constructors and Destructors
 
