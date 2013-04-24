@@ -133,6 +133,7 @@
     <Compile Include="GameData\PlayfieldVendorInfo.cs" />
     <Compile Include="GameData\Profession.cs" />
     <Compile Include="GameData\Side.cs" />
+    <Compile Include="GameData\StatValue.cs" />
     <Compile Include="GameData\Vector3.cs" />
     <Compile Include="Messages\Header.cs" />
     <Compile Include="Messages\InitiateCompressionMessage.cs" />

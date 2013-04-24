@@ -25,21 +25,14 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         public StatMessage()
         {
             this.N3MessageType = N3MessageType.Stat;
-            this.Unknown = 1;
         }
 
         #endregion
 
         #region Public Properties
 
-        [AoMember(1)]
-        public CharacterStat Stat { get; set; }
-
-        [AoMember(0)]
-        public int Unknown { get; set; }
-
-        [AoMember(2)]
-        public uint Value { get; set; }
+        [AoMember(0, SerializeSize = ArraySizeType.Int32)]
+        public StatValue[] Stats { get; set; }
 
         #endregion
     }
