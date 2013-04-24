@@ -133,6 +133,7 @@
     <Compile Include="GameData\PlayfieldVendorInfo.cs" />
     <Compile Include="GameData\Profession.cs" />
     <Compile Include="GameData\Side.cs" />
+    <Compile Include="GameData\SpecialAttackInfo.cs" />
     <Compile Include="GameData\StatValue.cs" />
     <Compile Include="GameData\Vector3.cs" />
     <Compile Include="Messages\Header.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Messages\N3Messages\CharacterActionType.cs" />
     <Compile Include="Messages\N3Messages\GameTimeMessage.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
+    <Compile Include="Messages\N3Messages\SpecialAttackWeaponMessage.cs" />
     <Compile Include="Messages\N3Messages\StatMessage.cs" />
     <Compile Include="Messages\N3MessageType.cs" />
     <Compile Include="Messages\OperatorMessage.cs" />

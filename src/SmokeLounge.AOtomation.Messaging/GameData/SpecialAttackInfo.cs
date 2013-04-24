@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="SpecialAttackInfo.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,30 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the SpecialAttackInfo type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.GameData
+{
+    using SmokeLounge.AOtomation.Messaging.Serialization;
 
+    public class SpecialAttackInfo
+    {
+        #region Public Properties
 
-using System.Reflection;
+        [AoMember(0)]
+        public int Unknown1 { get; set; }
 
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.7.8.0")]
-[assembly: AssemblyFileVersion("0.7.8.0")]
+        [AoMember(1)]
+        public int Unknown2 { get; set; }
+
+        [AoMember(2)]
+        public int Unknown3 { get; set; }
+
+        [AoMember(3, IsFixedSize = true, FixedSizeLength = 4)]
+        public string Unknown4 { get; set; }
+
+        #endregion
+    }
+}
