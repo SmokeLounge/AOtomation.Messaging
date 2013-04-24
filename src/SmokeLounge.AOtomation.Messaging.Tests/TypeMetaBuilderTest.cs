@@ -124,9 +124,9 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
             var expected = new PlayfieldAnarchyFMessage
                                {
-                                   Identity = Identity.None,
-                                   CharacterCoordinates = new Vector3(),
-                                   PlayfieldId1 = Identity.None,
+                                   Identity = Identity.None, 
+                                   CharacterCoordinates = new Vector3(), 
+                                   PlayfieldId1 = Identity.None, 
                                    PlayfieldId2 = Identity.None, 
                                    PlayfieldX = 1, 
                                    PlayfieldZ = 2
@@ -147,9 +147,9 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
             var expected = new PlayfieldAnarchyFMessage
                                {
-                                   Identity = Identity.None,
-                                   CharacterCoordinates = new Vector3(),
-                                   PlayfieldId1 = Identity.None,
+                                   Identity = Identity.None, 
+                                   CharacterCoordinates = new Vector3(), 
+                                   PlayfieldId1 = Identity.None, 
                                    PlayfieldId2 = Identity.None, 
                                    PlayfieldVendorInfo = new PlayfieldVendorInfo(), 
                                    PlayfieldX = 1, 
