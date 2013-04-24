@@ -130,8 +130,10 @@
     <Compile Include="GameData\Gender.cs" />
     <Compile Include="GameData\Identity.cs" />
     <Compile Include="GameData\IdentityType.cs" />
+    <Compile Include="GameData\PlayfieldVendorInfo.cs" />
     <Compile Include="GameData\Profession.cs" />
     <Compile Include="GameData\Side.cs" />
+    <Compile Include="GameData\Vector3.cs" />
     <Compile Include="Messages\Header.cs" />
     <Compile Include="Messages\InitiateCompressionMessage.cs" />
     <Compile Include="Messages\Message.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Messages\N3Messages\CharacterActionMessages\CastNanoMessage.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionMessages\ChangeAnimationAndStanceMessage.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionType.cs" />
+    <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
     <Compile Include="Messages\N3MessageType.cs" />
     <Compile Include="Messages\OperatorMessage.cs" />
     <Compile Include="Messages\PacketType.cs" />
@@ -174,6 +177,7 @@
     <Compile Include="Serialization\Serializers\ArraySerializer.cs" />
     <Compile Include="Serialization\Serializers\ArraySizeSerializer.cs" />
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
+    <Compile Include="Serialization\Serializers\Custom\PlayfieldVendorInfoSerializer.cs" />
     <Compile Include="Serialization\Serializers\IPAddressSerializer.cs" />
     <Compile Include="Serialization\Serializers\UInt16Serializer.cs" />
     <Compile Include="Serialization\Serializers\HeaderSerializer.cs" />
@@ -199,6 +203,7 @@
     <Compile Include="Serialization\TypeInfo.cs" />
     <Compile Include="Serialization\SerializationContextBuilder.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

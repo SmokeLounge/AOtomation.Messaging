@@ -20,7 +20,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System.Linq.Expressions;
     using System.Net;
 
+    using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom;
 
     public class SerializationContextBuilder<T>
     {
@@ -44,7 +46,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                        { typeof(float), new SingleSerializer() }, 
                                        { typeof(string), new StringSerializer() }, 
                                        { typeof(ushort), new UInt16Serializer() }, 
-                                       { typeof(uint), new UInt32Serializer() }
+                                       { typeof(uint), new UInt32Serializer() }, 
+                                       {
+                                           typeof(PlayfieldVendorInfo), 
+                                           new PlayfieldVendorInfoSerializer()
+                                       }
                                    };
         }
 

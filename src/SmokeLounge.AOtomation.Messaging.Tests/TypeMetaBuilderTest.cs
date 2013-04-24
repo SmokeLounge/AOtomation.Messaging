@@ -118,6 +118,53 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         }
 
         [TestMethod]
+        public void PlayfieldAnarchyFMessageTest()
+        {
+            var context = new SerializationContextBuilder<MessageBody>().Build();
+
+            var expected = new PlayfieldAnarchyFMessage
+                               {
+                                   Identity = Identity.None,
+                                   CharacterCoordinates = new Vector3(),
+                                   PlayfieldId1 = Identity.None,
+                                   PlayfieldId2 = Identity.None, 
+                                   PlayfieldX = 1, 
+                                   PlayfieldZ = 2
+                               };
+
+            var serializer = context.GetSerializer(expected.GetType());
+
+            var actual = (PlayfieldAnarchyFMessage)this.SerializeDeserialize(serializer, expected);
+
+            Assert.AreEqual(expected.PlayfieldX, actual.PlayfieldX);
+            Assert.AreEqual(expected.PlayfieldZ, actual.PlayfieldZ);
+        }
+
+        [TestMethod]
+        public void PlayfieldAnarchyFMessageWithVendorTest()
+        {
+            var context = new SerializationContextBuilder<MessageBody>().Build();
+
+            var expected = new PlayfieldAnarchyFMessage
+                               {
+                                   Identity = Identity.None,
+                                   CharacterCoordinates = new Vector3(),
+                                   PlayfieldId1 = Identity.None,
+                                   PlayfieldId2 = Identity.None, 
+                                   PlayfieldVendorInfo = new PlayfieldVendorInfo(), 
+                                   PlayfieldX = 1, 
+                                   PlayfieldZ = 2
+                               };
+
+            var serializer = context.GetSerializer(expected.GetType());
+
+            var actual = (PlayfieldAnarchyFMessage)this.SerializeDeserialize(serializer, expected);
+
+            Assert.AreEqual(expected.PlayfieldX, actual.PlayfieldX);
+            Assert.AreEqual(expected.PlayfieldZ, actual.PlayfieldZ);
+        }
+
+        [TestMethod]
         public void ZoneRedirectionMessageTest()
         {
             var context = new SerializationContextBuilder<MessageBody>().Build();

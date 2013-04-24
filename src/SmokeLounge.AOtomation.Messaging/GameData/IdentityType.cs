@@ -18,10 +18,14 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
     {
         None = 0, 
 
+        Playfield2 = 0x00009C50, 
+
         CanbeAffected = 0x0000C350, 
 
-        Playfield = 0x0000C79D, 
+        VendingMachine = 0x0000C75B, 
 
-        VendingMachine = 0x0000C75B
+        Playfield1 = 0x0000C79C, 
+
+        Playfield = 0x0000C79D, 
     }
 }
