@@ -16,7 +16,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     public enum Profession
     {
-        None = 0,
+        None = 0, 
 
         Soldier = 1, 
 

@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SystemMessageType.cs" company="SmokeLounge">
-//   Copyright © 2013 SmokeLounge.
+//   Copyright � 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -12,7 +12,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
+namespace SmokeLounge.AOtomation.Messaging.Messages
 {
     public enum SystemMessageType
     {
@@ -41,6 +41,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
         ServerSalt = 0x00000024, 
 
         UserCredentials = 0x00000025, 
+
+        ChatServerDetails = 0x00000043, 
 
         RandomNameRequest = 0x00000055, 
 

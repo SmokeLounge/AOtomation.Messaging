@@ -14,7 +14,6 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Messages.SystemMessages;
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
     [AoContract((int)PacketType.SystemMessage)]

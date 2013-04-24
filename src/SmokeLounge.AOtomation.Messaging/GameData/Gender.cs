@@ -16,7 +16,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     public enum Gender
     {
-        None = 0,
+        None = 0, 
 
         Neutral = 1, 
 

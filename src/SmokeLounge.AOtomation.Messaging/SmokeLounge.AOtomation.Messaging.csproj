@@ -141,7 +141,7 @@
     <Compile Include="Messages\N3Messages\CharacterActionMessages\CastNanoMessage.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionMessages\ChangeAnimationAndStanceMessage.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionType.cs" />
-    <Compile Include="Messages\N3Messages\N3MessageType.cs" />
+    <Compile Include="Messages\N3MessageType.cs" />
     <Compile Include="Messages\OperatorMessage.cs" />
     <Compile Include="Messages\PacketType.cs" />
     <Compile Include="Messages\PingMessage.cs" />
@@ -150,6 +150,7 @@
     <Compile Include="Messages\SystemMessages\CharacterCreatedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterDeletedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
+    <Compile Include="Messages\SystemMessages\ChatServerDetailsMessage.cs" />
     <Compile Include="Messages\SystemMessages\CreateCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\DeleteCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />
@@ -162,9 +163,9 @@
     <Compile Include="Messages\SystemMessages\UserCredentialsMessage.cs" />
     <Compile Include="Messages\SystemMessages\SelectCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserLoginMessage.cs" />
-    <Compile Include="Messages\SystemMessages\SystemMessageType.cs" />
     <Compile Include="Messages\SystemMessages\ZoneLoginMessage.cs" />
     <Compile Include="Messages\SystemMessages\ZoneRedirectionMessage.cs" />
+    <Compile Include="Messages\SystemMessageType.cs" />
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Serialization\AoKnownTypeAttribute.cs" />
     <Compile Include="Serialization\IdentifierType.cs" />

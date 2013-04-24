@@ -15,7 +15,6 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
     [AoContract((int)PacketType.N3Message)]
