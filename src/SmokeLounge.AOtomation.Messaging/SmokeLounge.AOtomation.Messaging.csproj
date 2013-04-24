@@ -150,7 +150,7 @@
     <Compile Include="Messages\SystemMessages\CharacterCreatedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterDeletedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
-    <Compile Include="Messages\SystemMessages\ChatServerDetailsMessage.cs" />
+    <Compile Include="Messages\SystemMessages\ChatServerInfoMessage.cs" />
     <Compile Include="Messages\SystemMessages\CreateCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\DeleteCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />

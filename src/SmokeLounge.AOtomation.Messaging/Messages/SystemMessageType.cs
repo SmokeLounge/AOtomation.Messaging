@@ -42,7 +42,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 
         UserCredentials = 0x00000025, 
 
-        ChatServerDetails = 0x00000043, 
+        ChatServerInfo = 0x00000043, 
 
         RandomNameRequest = 0x00000055, 
 

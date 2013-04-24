@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ChatServerDetailsMessage.cs" company="SmokeLounge">
+// <copyright file="ChatServerInfoMessage.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the ChatServerDetailsMessage type.
+//   Defines the ChatServerInfoMessage type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,14 +16,14 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
-    [AoContract((int)SystemMessageType.ChatServerDetails)]
-    public class ChatServerDetailsMessage : SystemMessage
+    [AoContract((int)SystemMessageType.ChatServerInfo)]
+    public class ChatServerInfoMessage : SystemMessage
     {
         #region Constructors and Destructors
 
-        public ChatServerDetailsMessage()
+        public ChatServerInfoMessage()
         {
-            this.SystemMessageType = SystemMessageType.ChatServerDetails;
+            this.SystemMessageType = SystemMessageType.ChatServerInfo;
             this.Unknown1 = 1;
         }
 
