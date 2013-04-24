@@ -25,7 +25,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         public SpecialAttackWeaponMessage()
         {
             this.N3MessageType = N3MessageType.SpecialAttackWeapon;
-            this.Unknown = 0x00;
             this.Unknown1 = 0x00000007;
             this.Unknown2 = 0x00000007;
             this.Unknown3 = 0x00000007;
