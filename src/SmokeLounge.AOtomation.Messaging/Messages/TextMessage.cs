@@ -14,12 +14,16 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
+    using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
     [AoContract((int)PacketType.TextMessage)]
-    public abstract class TextMessage : MessageBody
+    public class TextMessage : MessageBody
     {
         #region Public Properties
+
+        [AoMember(4)]
+        public ChatMessage Message { get; set; }
 
         public override PacketType PacketType
         {
@@ -28,6 +32,18 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
                 return PacketType.TextMessage;
             }
         }
+
+        [AoMember(0)]
+        public TextMessageRange Range { get; set; }
+
+        [AoMember(1)]
+        public int Unknown1 { get; set; }
+
+        [AoMember(2)]
+        public int Unknown2 { get; set; }
+
+        [AoMember(3)]
+        public int Unknown3 { get; set; }
 
         #endregion
     }

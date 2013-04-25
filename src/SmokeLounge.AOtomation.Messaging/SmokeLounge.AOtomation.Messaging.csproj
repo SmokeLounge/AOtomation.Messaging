@@ -126,6 +126,8 @@
     <Compile Include="GameData\Breed.cs" />
     <Compile Include="GameData\CharacterFlags.cs" />
     <Compile Include="GameData\CharacterStatus.cs" />
+    <Compile Include="GameData\ChatMessage.cs" />
+    <Compile Include="GameData\ChatMessageType.cs" />
     <Compile Include="GameData\Fatness.cs" />
     <Compile Include="GameData\GameTuple.cs" />
     <Compile Include="GameData\InventorySlot.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="Messages\SystemMessages\ZoneRedirectionMessage.cs" />
     <Compile Include="Messages\SystemMessageType.cs" />
     <Compile Include="Messages\TextMessage.cs" />
+    <Compile Include="Messages\TextMessageRange.cs" />
     <Compile Include="Serialization\AoKnownTypeAttribute.cs" />
     <Compile Include="Serialization\IdentifierType.cs" />
     <Compile Include="Serialization\ArraySizeType.cs" />

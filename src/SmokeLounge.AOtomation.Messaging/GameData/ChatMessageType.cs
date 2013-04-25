@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="ChatMessageType.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,18 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the ChatMessageType type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.GameData
+{
+    public enum ChatMessageType : byte
+    {
+        Say = 0x00, 
 
+        Whisper = 0x01, 
 
-using System.Reflection;
-
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.10.1.0")]
-[assembly: AssemblyFileVersion("0.10.1.0")]
+        Shout = 0x02
+    }
+}

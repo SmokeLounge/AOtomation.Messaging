@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="TextMessageRange.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,18 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the TextMessageRange type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.Messages
+{
+    public enum TextMessageRange
+    {
+        Whisper = 0x00000002, 
 
+        Say = 0x00000003, 
 
-using System.Reflection;
-
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.10.1.0")]
-[assembly: AssemblyFileVersion("0.10.1.0")]
+        Shout = 0x00000004
+    }
+}
