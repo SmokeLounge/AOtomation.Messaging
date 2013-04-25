@@ -35,6 +35,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         [AoMember(9)]
         public short AccountFlags { get; set; }
 
+        [AoMember(22, SerializeSize = ArraySizeType.X3F1)]
+        public ActiveNano[] ActiveNanos { get; set; }
+
         [AoMember(6)]
         public Appearance Appearance { get; set; }
 
@@ -85,9 +88,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(7)]
         public string Name { get; set; }
-
-        [AoMember(22, SerializeSize = ArraySizeType.X3F1)]
-        public ActiveNano[] ActiveNanos { get; set; }
 
         [AoMember(2)]
         public int? PlayfieldId { get; set; }

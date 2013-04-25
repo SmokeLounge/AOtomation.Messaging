@@ -33,8 +33,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         public PlayfieldVendorInfoSerializer()
         {
             this.type = typeof(PlayfieldVendorInfo);
-            this.Serializer = this.SerializerImp;
-            this.Deserializer = this.DeserializerImp;
+            this.Serializer = this.Serialize;
+            this.Deserializer = this.Deserialize;
         }
 
         #endregion
@@ -65,7 +65,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
             var deserializerMethodInfo =
                 ReflectionHelper
                     .GetMethodInfo<PlayfieldVendorInfoSerializer, Func<StreamReader, SerializationOptions, object>>(
-                        o => o.DeserializerImp);
+                        o => o.Deserialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
                 serializerExp, deserializerMethodInfo, new Expression[] { streamReaderExpression, optionsExpression });
@@ -81,7 +81,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
             var serializerMethodInfo =
                 ReflectionHelper
                     .GetMethodInfo<PlayfieldVendorInfoSerializer, Action<StreamWriter, SerializationOptions, object>>(
-                        o => o.SerializerImp);
+                        o => o.Serialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
                 serializerExp, 
@@ -94,7 +94,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
 
         #region Methods
 
-        private object DeserializerImp(StreamReader reader, SerializationOptions options)
+        private object Deserialize(StreamReader reader, SerializationOptions options)
         {
             var identityType = (IdentityType)reader.ReadInt32();
             if (identityType != IdentityType.VendingMachine)
@@ -118,7 +118,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
             return playfieldVendorInfo;
         }
 
-        private void SerializerImp(StreamWriter writer, SerializationOptions options, object value)
+        private void Serialize(StreamWriter writer, SerializationOptions options, object value)
         {
             if (value == null)
             {

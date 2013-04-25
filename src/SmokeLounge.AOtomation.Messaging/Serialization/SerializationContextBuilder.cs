@@ -71,6 +71,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
             foreach (var subType in subTypes)
             {
+                if (this.serializers.ContainsKey(subType))
+                {
+                    continue;
+                }
+
                 var serializer = this.CreateSerializer(subType);
                 if (serializer != null)
                 {

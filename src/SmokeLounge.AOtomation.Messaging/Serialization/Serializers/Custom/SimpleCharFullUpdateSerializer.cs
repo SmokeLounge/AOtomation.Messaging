@@ -16,7 +16,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
 {
     using System;
     using System.Linq.Expressions;
-    using System.Text;
 
     using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
@@ -35,8 +34,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         public SimpleCharFullUpdateSerializer()
         {
             this.type = typeof(SimpleCharFullUpdateMessage);
-            this.Serializer = this.SerializerImp;
-            this.Deserializer = this.DeserializerImp;
+            this.Serializer = this.Serialize;
+            this.Deserializer = this.Deserialize;
         }
 
         #endregion
@@ -60,14 +59,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         #region Public Methods and Operators
 
         public Expression DeserializerExpression(
-            ParameterExpression streamReaderExpression,
-            ConstantExpression optionsExpression,
+            ParameterExpression streamReaderExpression, 
+            ConstantExpression optionsExpression, 
             Expression assignmentTargetExpression)
         {
             var deserializerMethodInfo =
                 ReflectionHelper
                     .GetMethodInfo<SimpleCharFullUpdateSerializer, Func<StreamReader, SerializationOptions, object>>(
-                        o => o.DeserializerImp);
+                        o => o.Deserialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
                 serializerExp, deserializerMethodInfo, new Expression[] { streamReaderExpression, optionsExpression });
@@ -83,11 +82,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
             var serializerMethodInfo =
                 ReflectionHelper
                     .GetMethodInfo<SimpleCharFullUpdateSerializer, Action<StreamWriter, SerializationOptions, object>>(
-                        o => o.SerializerImp);
+                        o => o.Serialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
-                serializerExp,
-                serializerMethodInfo,
+                serializerExp, 
+                serializerMethodInfo, 
                 new[] { streamWriterExpression, optionsExpression, valueExpression });
             return callExp;
         }
@@ -96,12 +95,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
 
         #region Methods
 
-        private object DeserializerImp(StreamReader reader, SerializationOptions options)
+        private object Deserialize(StreamReader reader, SerializationOptions options)
         {
             throw new NotSupportedException("Deserializing SimpleCharFullUpdateMessage is not supported yet.");
         }
 
-        private void SerializerImp(StreamWriter writer, SerializationOptions options, object value)
+        private void Serialize(StreamWriter writer, SerializationOptions options, object value)
         {
             var scfu = (SimpleCharFullUpdateMessage)value;
 
@@ -188,6 +187,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
                 writer.WriteInt16(spc.AgilityBase);
                 writer.WriteInt16(spc.StaminaBase);
                 writer.WriteInt16(spc.IntelligenceBase);
+                writer.WriteInt16(spc.SenseBase);
                 writer.WriteInt16(spc.PsychicBase);
 
                 if (scfu.CharacterFlags.HasFlag(CharacterFlags.HasVisibleName))

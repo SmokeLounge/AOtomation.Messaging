@@ -35,8 +35,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         {
             this.type = typeof(IPAddress);
             this.constructor = this.type.GetConstructor(new[] { typeof(byte[]) });
-            this.Serializer = this.SerializerImp;
-            this.Deserializer = this.DeserializerImp;
+            this.Serializer = this.Serialize;
+            this.Deserializer = this.Deserialize;
         }
 
         #endregion
@@ -98,13 +98,13 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Methods
 
-        private object DeserializerImp(StreamReader reader, SerializationOptions options)
+        private object Deserialize(StreamReader reader, SerializationOptions options)
         {
             var address = new IPAddress(reader.ReadBytes(4));
             return address;
         }
 
-        private void SerializerImp(StreamWriter writer, SerializationOptions options, object value)
+        private void Serialize(StreamWriter writer, SerializationOptions options, object value)
         {
             var address = (IPAddress)value;
             writer.WriteBytes(address.GetAddressBytes());
