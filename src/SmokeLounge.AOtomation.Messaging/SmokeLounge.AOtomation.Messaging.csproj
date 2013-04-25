@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="GameData\Appearance.cs" />
     <Compile Include="GameData\Breed.cs" />
+    <Compile Include="GameData\CharacterFlags.cs" />
     <Compile Include="GameData\CharacterStatus.cs" />
     <Compile Include="GameData\Fatness.cs" />
     <Compile Include="GameData\LoginCharacterInfo.cs" />
@@ -132,7 +133,7 @@
     <Compile Include="GameData\Identity.cs" />
     <Compile Include="GameData\IdentityType.cs" />
     <Compile Include="GameData\Mesh.cs" />
-    <Compile Include="GameData\NanoInNcu.cs" />
+    <Compile Include="GameData\ActiveNano.cs" />
     <Compile Include="GameData\PlayfieldVendorInfo.cs" />
     <Compile Include="GameData\Profession.cs" />
     <Compile Include="GameData\Quaternion.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Serialization\Serializers\ArraySizeSerializer.cs" />
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
     <Compile Include="Serialization\Serializers\Custom\PlayfieldVendorInfoSerializer.cs" />
+    <Compile Include="Serialization\Serializers\Custom\SimpleCharFullUpdateSerializer.cs" />
     <Compile Include="Serialization\Serializers\IPAddressSerializer.cs" />
     <Compile Include="Serialization\Serializers\UInt16Serializer.cs" />
     <Compile Include="Serialization\Serializers\HeaderSerializer.cs" />

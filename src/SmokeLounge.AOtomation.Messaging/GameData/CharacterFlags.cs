@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="NanoInNcu.cs" company="SmokeLounge">
+// <copyright file="CharacterFlags.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,30 +8,21 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the NanoInNcu type.
+//   Defines the CharacterFlags type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using System;
 
-    public class NanoInNcu
+    [Flags]
+    public enum CharacterFlags
     {
-        #region Public Properties
+        // 0000 0000 0000 0000 0000 0000 0000 0000
+        None = 0x00000000, 
 
-        [AoMember(0)]
-        public int NanoId { get; set; }
-
-        [AoMember(1)]
-        public int NanoInstance { get; set; }
-
-        [AoMember(2)]
-        public int Time1 { get; set; }
-
-        [AoMember(3)]
-        public int Time2 { get; set; }
-
-        #endregion
+        // 0000 0000 0100 0000 0000 0000 0000 0000
+        HasVisibleName = 0x00400000
     }
 }

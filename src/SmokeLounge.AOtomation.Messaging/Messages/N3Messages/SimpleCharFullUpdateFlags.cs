@@ -19,40 +19,43 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
     [Flags]
     public enum SimpleCharFullUpdateFlags
     {
+        // 0000 0000 0000 0000 0000 0000 0000 0000
+        None = 0x00000000, 
+
         // 0000 0000 0000 0000 0000 0000 0000 0001
-        IsNpc = 0x00000001,
+        IsNpc = 0x00000001, 
 
         // 0000 0000 0000 0000 0000 0000 0010 0000
-        HasFightingTarget = 0x00000020,
+        HasFightingTarget = 0x00000020, 
 
         // 0000 0000 0000 0000 0000 0000 0100 0000
-        HasPlayfieldId = 0x00000040,
+        HasPlayfieldId = 0x00000040, 
 
         // 0000 0000 0000 0000 0000 0000 1000 0000
-        HasHeadMesh = 0x00000080,
+        HasHeadMesh = 0x00000080, 
 
         // 0000 0000 0000 0000 0000 0010 0000 0000
-        HasHeading = 0x00000200,
+        HasHeading = 0x00000200, 
 
         // 0000 0000 0000 0000 0000 1000 0000 0000
-        HasSmallHealth = 0x00000800,
+        HasSmallHealth = 0x00000800, 
 
         // 0000 0000 0000 0000 0001 0000 0000 0000
-        HasExtendedLevel = 0x00001000,
+        HasExtendedLevel = 0x00001000, 
 
         // 0000 0000 0000 0000 0010 0000 0000 0000
-        HasExtendedRunSpeed = 0x00002000,
+        HasExtendedRunSpeed = 0x00002000, 
 
         // 0000 0000 0000 0000 0100 0000 0000 0000
-        HasSmallHealthDamage = 0x00004000,
+        HasSmallHealthDamage = 0x00004000, 
 
         // 0000 0000 0000 0010 0000 0000 0000 0000
-        HasExtendedNpcFamily = 0x00020000,
+        HasExtendedNpcFamily = 0x00020000, 
 
         // 0000 0000 0000 1000 0000 0000 0000 0000
-        HasExtendedLosHeight = 0x00080000,
+        HasExtendedNpcLosHeight = 0x00080000, 
 
         // 0000 0100 0000 0000 0000 0000 0000 0000
-        HasOrgName = 0x04000000,
+        HasOrgName = 0x04000000, 
     }
 }

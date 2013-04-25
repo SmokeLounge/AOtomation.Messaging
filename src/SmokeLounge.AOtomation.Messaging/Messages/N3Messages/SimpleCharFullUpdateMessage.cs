@@ -39,7 +39,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         public Appearance Appearance { get; set; }
 
         [AoMember(8)]
-        public uint CharacterFlags { get; set; }
+        public CharacterFlags CharacterFlags { get; set; }
 
         [AoMember(11)]
         public SimpleCharacterInfo CharacterInfo { get; set; }
@@ -87,18 +87,18 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         public string Name { get; set; }
 
         [AoMember(22, SerializeSize = ArraySizeType.X3F1)]
-        public NanoInNcu[] NanosInNcu { get; set; }
+        public ActiveNano[] ActiveNanos { get; set; }
 
         [AoMember(2)]
-        public int PlayfieldId { get; set; }
+        public int? PlayfieldId { get; set; }
 
         [AoMember(21)]
-        public short RunSpeed { get; set; }
+        public short RunSpeedBase { get; set; }
 
         [AoMember(23, SerializeSize = ArraySizeType.X3F1)]
-        public Texture Texture { get; set; }
+        public Texture[] Textures { get; set; }
 
-        [AoMember(19)]
+        [AoMember(19, SerializeSize = ArraySizeType.Int32)]
         public byte[] Unknown1 { get; set; }
 
         [AoMember(26)]

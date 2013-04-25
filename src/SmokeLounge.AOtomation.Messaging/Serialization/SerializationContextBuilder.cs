@@ -21,6 +21,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System.Net;
 
     using SmokeLounge.AOtomation.Messaging.GameData;
+    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom;
 
@@ -50,6 +51,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                        {
                                            typeof(PlayfieldVendorInfo), 
                                            new PlayfieldVendorInfoSerializer()
+                                       }, 
+                                       {
+                                           typeof(SimpleCharFullUpdateMessage), 
+                                           new SimpleCharFullUpdateSerializer()
                                        }
                                    };
         }

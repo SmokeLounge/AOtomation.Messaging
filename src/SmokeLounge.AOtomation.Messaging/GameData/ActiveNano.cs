@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Texture.cs" company="SmokeLounge">
+// <copyright file="ActiveNano.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the Texture type.
+//   Defines the ActiveNano type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,18 +16,21 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
-    public class Texture
+    public class ActiveNano
     {
         #region Public Properties
 
-        [AoMember(1)]
-        public int Id { get; set; }
-
         [AoMember(0)]
-        public int Place { get; set; }
+        public int NanoId { get; set; }
+
+        [AoMember(1)]
+        public int NanoInstance { get; set; }
 
         [AoMember(2)]
-        public int Unknown { get; set; }
+        public int Time1 { get; set; }
+
+        [AoMember(3)]
+        public int Time2 { get; set; }
 
         #endregion
     }
