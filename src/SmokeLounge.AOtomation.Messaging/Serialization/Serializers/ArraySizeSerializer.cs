@@ -109,8 +109,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             if (this.arraySizeType == ArraySizeType.X3F1)
             {
                 var originalValue = deserializedValueExpression;
-                deserializedValueExpression = Expression.Subtract(
-                    Expression.Divide(originalValue, Expression.Constant(0x3F1)), Expression.Constant(1));
+                deserializedValueExpression =
+                    Expression.Subtract(
+                        Expression.Divide(originalValue, Expression.Constant(0x3F1)), Expression.Constant(1));
             }
 
             var deserializerExpression = Expression.Assign(
@@ -163,7 +164,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             if (this.arraySizeType == ArraySizeType.X3F1)
             {
                 var originalValue = serializedValueExpression;
-                serializedValueExpression = Expression.Multiply(Expression.Add(originalValue, Expression.Constant(1)), Expression.Constant(0x3F1));
+                serializedValueExpression = Expression.Multiply(
+                    Expression.Add(originalValue, Expression.Constant(1)), Expression.Constant(0x3F1));
             }
 
             var serializerExpression = Expression.Call(

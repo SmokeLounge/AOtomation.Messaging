@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="SimpleCharacterInfo.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,13 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the SimpleCharacterInfo type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-
-
-using System.Reflection;
-
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.7.11.0")]
-[assembly: AssemblyFileVersion("0.7.11.0")]
+namespace SmokeLounge.AOtomation.Messaging.GameData
+{
+    public abstract class SimpleCharacterInfo
+    {
+    }
+}

@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="SimpleNpcInfo.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,24 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the SimpleNpcInfo type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.GameData
+{
+    using SmokeLounge.AOtomation.Messaging.Serialization;
 
+    public class SimpleNpcInfo : SimpleCharacterInfo
+    {
+        #region Public Properties
 
-using System.Reflection;
+        [AoMember(0)]
+        public short Family { get; set; }
 
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.7.11.0")]
-[assembly: AssemblyFileVersion("0.7.11.0")]
+        [AoMember(0)]
+        public short LosHeight { get; set; }
+
+        #endregion
+    }
+}
