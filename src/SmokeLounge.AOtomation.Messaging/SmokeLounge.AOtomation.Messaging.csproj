@@ -127,6 +127,8 @@
     <Compile Include="GameData\CharacterFlags.cs" />
     <Compile Include="GameData\CharacterStatus.cs" />
     <Compile Include="GameData\Fatness.cs" />
+    <Compile Include="GameData\GameTuple.cs" />
+    <Compile Include="GameData\InventorySlot.cs" />
     <Compile Include="GameData\LoginCharacterInfo.cs" />
     <Compile Include="GameData\CharacterStat.cs" />
     <Compile Include="GameData\Gender.cs" />
@@ -142,7 +144,6 @@
     <Compile Include="GameData\SimpleNpcInfo.cs" />
     <Compile Include="GameData\SimplePcInfo.cs" />
     <Compile Include="GameData\SpecialAttackInfo.cs" />
-    <Compile Include="GameData\StatValue.cs" />
     <Compile Include="GameData\Texture.cs" />
     <Compile Include="GameData\Vector3.cs" />
     <Compile Include="Messages\Header.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Messages\N3Messages\CharacterActionMessages\CastNanoMessage.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionMessages\ChangeAnimationAndStanceMessage.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionType.cs" />
+    <Compile Include="Messages\N3Messages\FullCharacterMessage.cs" />
     <Compile Include="Messages\N3Messages\GameTimeMessage.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateFlags.cs" />

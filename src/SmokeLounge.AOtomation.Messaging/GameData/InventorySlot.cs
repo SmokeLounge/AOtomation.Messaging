@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StatValue.cs" company="SmokeLounge">
+// <copyright file="InventorySlot.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the StatValue type.
+//   Defines the InventorySlot type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -16,15 +16,33 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
-    public class StatValue
+    public class InventorySlot
     {
         #region Public Properties
 
-        [AoMember(0)]
-        public CharacterStat Stat { get; set; }
+        [AoMember(2)]
+        public short Count { get; set; }
 
         [AoMember(1)]
-        public uint Value { get; set; }
+        public short Flags { get; set; }
+
+        [AoMember(3)]
+        public Identity Identity { get; set; }
+
+        [AoMember(5)]
+        public int ItemHighId { get; set; }
+
+        [AoMember(4)]
+        public int ItemLowId { get; set; }
+
+        [AoMember(0)]
+        public int Placement { get; set; }
+
+        [AoMember(6)]
+        public int Quality { get; set; }
+
+        [AoMember(7)]
+        public int Unknown { get; set; }
 
         #endregion
     }

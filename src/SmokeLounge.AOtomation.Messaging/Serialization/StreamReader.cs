@@ -111,7 +111,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         public uint ReadUInt32()
         {
             var littleEndian = this.reader.ReadUInt32() << 32;
-            return (uint)IPAddress.NetworkToHostOrder(littleEndian);
+            return (uint)(IPAddress.NetworkToHostOrder(littleEndian) >> 32);
         }
 
         #endregion

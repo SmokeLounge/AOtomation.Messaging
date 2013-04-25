@@ -165,6 +165,60 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         }
 
         [TestMethod]
+        public void StatMessageTest()
+        {
+            var context = new SerializationContextBuilder<MessageBody>().Build();
+
+            var expected = new StatMessage
+                               {
+                                   Identity = Identity.None, 
+                                   Stats =
+                                       new[]
+                                           {
+                                               new GameTuple<CharacterStat, uint>
+                                                   {
+                                                       Value1 =
+                                                           CharacterStat
+                                                           .ACGEntranceStyles, 
+                                                       Value2 = 1
+                                                   }, 
+                                               new GameTuple<CharacterStat, uint>
+                                                   {
+                                                       Value1 =
+                                                           CharacterStat
+                                                           .BackMesh, 
+                                                       Value2 = 3
+                                                   }, 
+                                               new GameTuple<CharacterStat, uint>
+                                                   {
+                                                       Value1 =
+                                                           CharacterStat
+                                                           .CATAnim, 
+                                                       Value2 = 5
+                                                   }
+                                           }
+                               };
+
+            var serializer = context.GetSerializer(expected.GetType());
+            var actual = (StatMessage)this.SerializeDeserialize(serializer, expected);
+
+            this.AssertN3Message(expected, actual);
+
+            var expectedChars = expected.Stats.GetEnumerator();
+            var actualChars = actual.Stats.GetEnumerator();
+
+            while (expectedChars.MoveNext())
+            {
+                actualChars.MoveNext();
+                var expectedChar = (GameTuple<CharacterStat, uint>)expectedChars.Current;
+                var actualChar = (GameTuple<CharacterStat, uint>)actualChars.Current;
+
+                Assert.AreEqual(expectedChar.Value1, actualChar.Value1);
+                Assert.AreEqual(expectedChar.Value2, actualChar.Value2);
+            }
+        }
+
+        [TestMethod]
         public void ZoneRedirectionMessageTest()
         {
             var context = new SerializationContextBuilder<MessageBody>().Build();
