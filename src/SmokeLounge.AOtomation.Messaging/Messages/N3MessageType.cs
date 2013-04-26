@@ -228,7 +228,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 
         ArriveAtBs = 0x540e3b27, 
 
-        CharDcMove = 0x54111123, 
+        CharDCMove = 0x54111123, 
 
         PlayfieldAllTowers = 0x55220726, 
 
