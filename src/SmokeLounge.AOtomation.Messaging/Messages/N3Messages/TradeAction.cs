@@ -22,6 +22,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         Decline = 0x02, 
 
+        Unknown = 0x04,
+
         AddItem = 0x05, 
 
         RemoveItem = 0x06
