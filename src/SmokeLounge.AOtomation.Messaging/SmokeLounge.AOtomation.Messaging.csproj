@@ -167,6 +167,7 @@
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateFlags.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateMessage.cs" />
+    <Compile Include="Messages\N3Messages\SocialActionCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\SpecialAttackWeaponMessage.cs" />
     <Compile Include="Messages\N3Messages\StatMessage.cs" />
     <Compile Include="Messages\N3Messages\TradeAction.cs" />
