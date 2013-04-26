@@ -18,6 +18,30 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
     {
         None = 0, 
 
+        WeaponPage = 0x00000065, 
+
+        ArmorPage = 0x00000066, 
+
+        ImplantPage = 0x00000067, 
+
+        Inventory = 0x00000068, 
+
+        Bank = 0x00000069, 
+
+        Backpack = 0x0000006B, 
+
+        KnuBotTradeWindow = 0x0000006C, 
+
+        OverflowWindow = 0x0000006E, 
+
+        TradeWindow = 0x0000006F, 
+
+        SocialPage = 0x00000073, 
+
+        ShopInventory = 0x00000767, 
+
+        PlayerShopInventory = 0x00000790, 
+
         Playfield2 = 0x00009C50, 
 
         CanbeAffected = 0x0000C350, 
@@ -27,5 +51,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         Playfield1 = 0x0000C79C, 
 
         Playfield = 0x0000C79D, 
+
+        IncomingTradeWindow = 0x0000DEAD
     }
 }

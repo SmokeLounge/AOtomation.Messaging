@@ -150,6 +150,7 @@
     <Compile Include="GameData\Vector3.cs" />
     <Compile Include="Messages\Header.cs" />
     <Compile Include="Messages\InitiateCompressionMessage.cs" />
+    <Compile Include="Messages\N3Messages\ContainerAddItemMessage.cs" />
     <Compile Include="Messages\N3Messages\FollowTargetMessage.cs" />
     <Compile Include="Messages\N3Messages\GenericCmdAction.cs" />
     <Compile Include="Messages\N3Messages\GenericCmdMessage.cs" />

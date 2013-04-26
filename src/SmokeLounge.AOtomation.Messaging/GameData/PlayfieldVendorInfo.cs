@@ -22,7 +22,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         public PlayfieldVendorInfo()
         {
-            this.Unknown1 = new Identity { IdentityType = IdentityType.VendingMachine, Instance = 1 };
+            this.Unknown1 = new Identity { Type = IdentityType.VendingMachine, Instance = 1 };
             this.Unknown2 = 0x00000001;
         }
 

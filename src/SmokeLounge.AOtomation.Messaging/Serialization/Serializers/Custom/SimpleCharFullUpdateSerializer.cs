@@ -106,7 +106,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
 
             // N3Message
             writer.WriteInt32((int)scfu.N3MessageType);
-            writer.WriteInt32((int)scfu.Identity.IdentityType);
+            writer.WriteInt32((int)scfu.Identity.Type);
             writer.WriteInt32(scfu.Identity.Instance);
             writer.WriteByte(scfu.Unknown);
 
@@ -125,7 +125,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
             if (scfu.FightingTarget != null)
             {
                 flags |= SimpleCharFullUpdateFlags.HasFightingTarget;
-                writer.WriteInt32((int)scfu.Identity.IdentityType);
+                writer.WriteInt32((int)scfu.Identity.Type);
                 writer.WriteInt32(scfu.Identity.Instance);
             }
 

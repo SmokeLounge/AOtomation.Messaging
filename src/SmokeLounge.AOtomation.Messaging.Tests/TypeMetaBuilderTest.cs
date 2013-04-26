@@ -47,10 +47,10 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                    Identity =
                                        new Identity
                                            {
-                                               IdentityType = IdentityType.CanbeAffected, 
+                                               Type = IdentityType.CanbeAffected, 
                                                Instance = 12345
                                            }, 
-                                   TargetId = new Identity { IdentityType = IdentityType.None }
+                                   TargetId = new Identity { Type = IdentityType.None }
                                };
 
             var serializer = context.GetSerializer(expected.GetType());
@@ -61,7 +61,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             this.AssertCharacterActionMessage(expected, actual);
 
             Assert.AreEqual(expected.NanoId, actual.NanoId);
-            Assert.AreEqual(expected.TargetId.IdentityType, actual.TargetId.IdentityType);
+            Assert.AreEqual(expected.TargetId.Type, actual.TargetId.Type);
             Assert.AreEqual(expected.TargetId.Instance, actual.TargetId.Instance);
             Assert.AreEqual(expected.Unknown1, actual.Unknown1);
             Assert.AreEqual(expected.Unknown2, actual.Unknown2);
@@ -250,7 +250,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         private void AssertN3Message(N3Message expected, N3Message actual)
         {
-            Assert.AreEqual(expected.Identity.IdentityType, actual.Identity.IdentityType);
+            Assert.AreEqual(expected.Identity.Type, actual.Identity.Type);
             Assert.AreEqual(expected.Identity.Instance, actual.Identity.Instance);
             Assert.AreEqual(expected.N3MessageType, actual.N3MessageType);
             Assert.AreEqual(expected.PacketType, actual.PacketType);

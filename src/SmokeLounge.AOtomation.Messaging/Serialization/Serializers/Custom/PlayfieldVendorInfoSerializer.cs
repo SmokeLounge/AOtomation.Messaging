@@ -108,7 +108,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
                                               Unknown1 =
                                                   new Identity
                                                       {
-                                                          IdentityType = identityType, 
+                                                          Type = identityType, 
                                                           Instance = reader.ReadInt32()
                                                       }, 
                                               Unknown2 = reader.ReadInt32(), 
@@ -126,7 +126,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
             }
 
             var playfieldVendorInfo = (PlayfieldVendorInfo)value;
-            writer.WriteInt32((int)playfieldVendorInfo.Unknown1.IdentityType);
+            writer.WriteInt32((int)playfieldVendorInfo.Unknown1.Type);
             writer.WriteInt32(playfieldVendorInfo.Unknown1.Instance);
             writer.WriteInt32(playfieldVendorInfo.Unknown2);
             writer.WriteInt32(playfieldVendorInfo.VendorCount);
