@@ -159,6 +159,7 @@
     <Compile Include="Messages\N3Messages\GenericCmdAction.cs" />
     <Compile Include="Messages\N3Messages\GenericCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotCloseChatWindowMessage.cs" />
+    <Compile Include="Messages\N3Messages\KnuBotStartTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\LookAtMessage.cs" />
     <Compile Include="Messages\Message.cs" />
