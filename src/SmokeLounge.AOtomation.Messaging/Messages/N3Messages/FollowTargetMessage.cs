@@ -31,14 +31,14 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #region Public Properties
 
-        [AoMember(1)]
+        [AoMember(2)]
         public Identity Target { get; set; }
 
         [AoMember(0)]
         public byte Unknown1 { get; set; }
 
-        [AoMember(2)]
-        public int Unknown2 { get; set; }
+        [AoMember(1)]
+        public byte Unknown2 { get; set; }
 
         [AoMember(3)]
         public int Unknown3 { get; set; }
@@ -50,7 +50,10 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         public int Unknown5 { get; set; }
 
         [AoMember(6)]
-        public byte Unknown6 { get; set; }
+        public int Unknown6 { get; set; }
+
+        [AoMember(7)]
+        public byte Unknown7 { get; set; }
 
         #endregion
     }
