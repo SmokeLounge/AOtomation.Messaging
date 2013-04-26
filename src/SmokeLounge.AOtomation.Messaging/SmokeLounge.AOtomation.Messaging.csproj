@@ -159,6 +159,7 @@
     <Compile Include="Messages\N3Messages\CharacterActionType.cs" />
     <Compile Include="Messages\N3Messages\FullCharacterMessage.cs" />
     <Compile Include="Messages\N3Messages\GameTimeMessage.cs" />
+    <Compile Include="Messages\N3Messages\KnuBotAnswerMessage.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateFlags.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateMessage.cs" />
