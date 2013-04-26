@@ -25,17 +25,25 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         public KnuBotStartTradeMessage()
         {
             this.N3MessageType = N3MessageType.KnuBotStartTrade;
+            this.Identity = new Identity();
+            this.Target = new Identity();
         }
 
         #endregion
 
         #region Public Properties
 
+        [AoMember(0)]
+        public short Unknown1 { get; set; }
+
         [AoMember(1)]
         public Identity Target { get; set; }
 
-        [AoMember(0)]
-        public short Unknown1 { get; set; }
+        [AoMember(2)]
+        public int NumberOfItemSlotsInTradeWindow { get; set; }
+
+        [AoMember(3, SerializeSize = ArraySizeType.Int32)]
+        public string Message { get; set; }
 
         #endregion
     }
