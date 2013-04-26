@@ -152,6 +152,7 @@
     <Compile Include="Messages\InitiateCompressionMessage.cs" />
     <Compile Include="Messages\N3Messages\FollowTargetMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotCloseChatWindowMessage.cs" />
+    <Compile Include="Messages\N3Messages\KnuBotTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\LookAtMessage.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Messages\MessageBody.cs" />
