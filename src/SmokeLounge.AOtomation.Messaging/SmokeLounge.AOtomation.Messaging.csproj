@@ -168,6 +168,8 @@
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateMessage.cs" />
     <Compile Include="Messages\N3Messages\SpecialAttackWeaponMessage.cs" />
     <Compile Include="Messages\N3Messages\StatMessage.cs" />
+    <Compile Include="Messages\N3Messages\TradeAction.cs" />
+    <Compile Include="Messages\N3Messages\TradeMessage.cs" />
     <Compile Include="Messages\N3MessageType.cs" />
     <Compile Include="Messages\OperatorMessage.cs" />
     <Compile Include="Messages\PacketType.cs" />
