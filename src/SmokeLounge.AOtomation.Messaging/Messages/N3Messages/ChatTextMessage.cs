@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CharacterActionType.cs" company="SmokeLounge">
+// <copyright file="ChatTextMessage.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,40 +8,37 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the CharacterActionType type.
+//   Defines the ChatTextMessage type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
-    public enum CharacterActionType
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+
+    [AoContract((int)N3MessageType.ChatText)]
+    public class ChatTextMessage : N3Message
     {
-        CastNano = 0x00000013, 
+        #region Constructors and Destructors
 
-        UseItemOnItem = 0x00000051, 
+        public ChatTextMessage()
+        {
+            this.N3MessageType = N3MessageType.ChatText;
+        }
 
-        Unknown2 = 0x00000062, 
+        #endregion
 
-        InfoRequest = 0x00000069, 
+        #region Public Properties
 
-        Unknown1 = 0x0000006B, 
+        [AoMember(0, SerializeSize = ArraySizeType.Int16)]
+        public string Text { get; set; }
 
-        Logout = 0x00000078, 
+        [AoMember(1)]
+        public short Unknown1 { get; set; }
 
-        StopLogout = 0x0000007A,
+        [AoMember(2)]
+        public int Unknown2 { get; set; }
 
-        StartedSneaking = 0x000000A2, 
-
-        StartSneak = 0x000000A3, 
-
-        ChangeVisualFlag = 0x000000A6, 
-
-        ChangeAnimationAndStance = 0x000000A7, 
-
-        TradeskillSourceChanged = 0x000000DC, 
-
-        TradeskillTargetChanged = 0x000000DD, 
-
-        TradeskillBuildPressed = 0x000000DE, 
+        #endregion
     }
 }
