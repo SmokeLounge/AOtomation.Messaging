@@ -32,7 +32,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 
         SelectCharacter = 0x00000016, 
 
-        ZoneRedirection = 0x00000017, 
+        ZoneInfo = 0x00000017, 
 
         ZoneLogin = 0x0000001B, 
 
@@ -41,6 +41,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
         ServerSalt = 0x00000024, 
 
         UserCredentials = 0x00000025, 
+
+        ZoneRedirection = 0x0000003C, 
 
         ChatServerInfo = 0x00000043, 
 

@@ -54,6 +54,8 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         NanoProgram = 0x0000CF1B,
 
-        IncomingTradeWindow = 0x0000DEAD
+        IncomingTradeWindow = 0x0000DEAD,
+
+        Playfield3 = 0x000186A1
     }
 }

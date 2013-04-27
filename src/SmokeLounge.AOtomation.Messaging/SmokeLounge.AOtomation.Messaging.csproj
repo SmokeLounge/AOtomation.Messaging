@@ -172,6 +172,7 @@
     <Compile Include="Messages\N3Messages\FullCharacterMessage.cs" />
     <Compile Include="Messages\N3Messages\GameTimeMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotAnswerMessage.cs" />
+    <Compile Include="Messages\N3Messages\N3TeleportMessage.cs" />
     <Compile Include="Messages\N3Messages\OrgClientCommand.cs" />
     <Compile Include="Messages\N3Messages\OrgClientMessage.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
@@ -194,6 +195,7 @@
     <Compile Include="Messages\SystemMessages\CharacterDeletedMessage.cs" />
     <Compile Include="Messages\SystemMessages\CharacterListMessage.cs" />
     <Compile Include="Messages\SystemMessages\ChatServerInfoMessage.cs" />
+    <Compile Include="Messages\SystemMessages\ZoneRedirectionMessage.cs" />
     <Compile Include="Messages\SystemMessages\CreateCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\DeleteCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\LoginErrorMessage.cs" />
@@ -207,7 +209,7 @@
     <Compile Include="Messages\SystemMessages\SelectCharacterMessage.cs" />
     <Compile Include="Messages\SystemMessages\UserLoginMessage.cs" />
     <Compile Include="Messages\SystemMessages\ZoneLoginMessage.cs" />
-    <Compile Include="Messages\SystemMessages\ZoneRedirectionMessage.cs" />
+    <Compile Include="Messages\SystemMessages\ZoneInfoMessage.cs" />
     <Compile Include="Messages\SystemMessageType.cs" />
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Messages\TextMessageRange.cs" />

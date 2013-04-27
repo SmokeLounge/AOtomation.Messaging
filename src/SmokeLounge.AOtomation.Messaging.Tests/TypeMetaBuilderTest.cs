@@ -228,7 +228,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         {
             var context = new SerializationContextBuilder<MessageBody>().Build();
 
-            var expected = new ZoneRedirectionMessage
+            var expected = new ZoneInfoMessage
                                {
                                    CharacterId = 1234567890, 
                                    ServerIpAddress = IPAddress.Loopback, 
@@ -236,7 +236,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                };
 
             var serializer = context.GetSerializer(expected.GetType());
-            var actual = (ZoneRedirectionMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (ZoneInfoMessage)this.SerializeDeserialize(serializer, expected);
 
             this.AssertSystemMessage(expected, actual);
             Assert.AreEqual(expected.CharacterId, actual.CharacterId);
