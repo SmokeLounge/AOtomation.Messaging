@@ -23,7 +23,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
     using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Messages;
     using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
-    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages.CharacterActionMessages;
     using SmokeLounge.AOtomation.Messaging.Messages.SystemMessages;
     using SmokeLounge.AOtomation.Messaging.Serialization;
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
@@ -37,33 +36,39 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         #region Public Methods and Operators
 
         [TestMethod]
-        public void CastNanoMessageTest()
+        public void CharacterActionMessageTest()
         {
             var context = new SerializationContextBuilder<MessageBody>().Build();
 
-            var expected = new CastNanoMessage
+            var expected = new CharacterActionMessage
                                {
-                                   NanoId = 12345, 
                                    Identity =
                                        new Identity
                                            {
                                                Type = IdentityType.CanbeAffected, 
                                                Instance = 12345
                                            }, 
-                                   TargetId = new Identity { Type = IdentityType.None }
+                                   Target = new Identity { Type = IdentityType.None }, 
+                                   ActionArgs =
+                                       new Identity
+                                           {
+                                               Type = IdentityType.None, 
+                                               Instance = 12345
+                                           }
                                };
 
             var serializer = context.GetSerializer(expected.GetType());
 
-            var actual = (CastNanoMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (CharacterActionMessage)this.SerializeDeserialize(serializer, expected);
 
             this.AssertN3Message(expected, actual);
             this.AssertCharacterActionMessage(expected, actual);
 
-            Assert.AreEqual(expected.NanoId, actual.NanoId);
-            Assert.AreEqual(expected.TargetId.Type, actual.TargetId.Type);
-            Assert.AreEqual(expected.TargetId.Instance, actual.TargetId.Instance);
+            Assert.AreEqual(expected.Target.Type, actual.Target.Type);
+            Assert.AreEqual(expected.Target.Instance, actual.Target.Instance);
             Assert.AreEqual(expected.Unknown1, actual.Unknown1);
+            Assert.AreEqual(expected.ActionArgs.Type, actual.ActionArgs.Type);
+            Assert.AreEqual(expected.ActionArgs.Instance, actual.ActionArgs.Instance);
             Assert.AreEqual(expected.Unknown2, actual.Unknown2);
         }
 

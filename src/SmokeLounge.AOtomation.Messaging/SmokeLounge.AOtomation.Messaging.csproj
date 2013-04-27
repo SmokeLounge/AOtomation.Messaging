@@ -166,8 +166,6 @@
     <Compile Include="Messages\MessageBody.cs" />
     <Compile Include="Messages\N3Message.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionMessage.cs" />
-    <Compile Include="Messages\N3Messages\CharacterActionMessages\CastNanoMessage.cs" />
-    <Compile Include="Messages\N3Messages\CharacterActionMessages\ChangeAnimationAndStanceMessage.cs" />
     <Compile Include="Messages\N3Messages\CharacterActionType.cs" />
     <Compile Include="Messages\N3Messages\FullCharacterMessage.cs" />
     <Compile Include="Messages\N3Messages\GameTimeMessage.cs" />

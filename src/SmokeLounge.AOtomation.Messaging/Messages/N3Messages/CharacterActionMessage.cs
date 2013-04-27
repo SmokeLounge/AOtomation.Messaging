@@ -14,15 +14,15 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
+    using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
     [AoContract((int)N3MessageType.CharacterAction)]
-    [AoKnownType(29, IdentifierType.Int32)]
-    public abstract class CharacterActionMessage : N3Message
+    public class CharacterActionMessage : N3Message
     {
         #region Constructors and Destructors
 
-        protected CharacterActionMessage()
+        public CharacterActionMessage()
         {
             this.N3MessageType = N3MessageType.CharacterAction;
         }
@@ -31,8 +31,20 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #region Public Properties
 
+        [AoMember(3)]
+        public Identity ActionArgs { get; set; }
+
         [AoMember(0)]
         public CharacterActionType CharacterActionType { get; set; }
+
+        [AoMember(2)]
+        public Identity Target { get; set; }
+
+        [AoMember(1)]
+        public int Unknown1 { get; set; }
+
+        [AoMember(4)]
+        public short Unknown2 { get; set; }
 
         #endregion
     }
