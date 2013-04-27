@@ -16,7 +16,15 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     public enum CharacterActionType
     {
+        TeamRequest = 0x0000001A,
+
         CastNano = 0x00000013, 
+
+        TeamRequestReply = 0x00000015,
+
+        LeaveTeam = 0x00000020,
+
+        AcceptTeamRequest = 0x00000023,
 
         UseItemOnItem = 0x00000051, 
 
