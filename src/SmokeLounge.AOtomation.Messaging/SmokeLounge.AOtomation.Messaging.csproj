@@ -172,6 +172,8 @@
     <Compile Include="Messages\N3Messages\FullCharacterMessage.cs" />
     <Compile Include="Messages\N3Messages\GameTimeMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotAnswerMessage.cs" />
+    <Compile Include="Messages\N3Messages\OrgClientCommand.cs" />
+    <Compile Include="Messages\N3Messages\OrgClientMessage.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateFlags.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateMessage.cs" />
@@ -216,6 +218,7 @@
     <Compile Include="Serialization\Serializers\ArraySerializer.cs" />
     <Compile Include="Serialization\Serializers\ArraySizeSerializer.cs" />
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
+    <Compile Include="Serialization\Serializers\Custom\OrgClientMessageSerializer.cs" />
     <Compile Include="Serialization\Serializers\Custom\PlayfieldVendorInfoSerializer.cs" />
     <Compile Include="Serialization\Serializers\Custom\SimpleCharFullUpdateSerializer.cs" />
     <Compile Include="Serialization\Serializers\IPAddressSerializer.cs" />
