@@ -16,19 +16,25 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     public enum CharacterActionType
     {
-        CastNano = 19, 
+        CastNano = 0x00000013, 
 
-        InfoRequest = 105, 
+        UseItemOnItem = 0x00000051, 
 
-        Logout = 120, 
+        Unknown2 = 0x00000062, 
 
-        StopLogout = 121, 
+        InfoRequest = 0x00000069, 
 
-        StartSneak = 163, 
+        Unknown1 = 0x0000006B, 
 
-        UseItemOnItem = 81, 
+        Logout = 0x00000078, 
 
-        ChangeVisualFlag = 166, 
+        StopLogout = 0x00000079, 
+
+        StartedSneaking = 0x000000A2, 
+
+        StartSneak = 0x000000A3, 
+
+        ChangeVisualFlag = 0x000000A6, 
 
         ChangeAnimationAndStance = 0x000000A7, 
 
@@ -36,6 +42,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         TradeskillTargetChanged = 0x000000DD, 
 
-        TradeskillBuildPressed = 0x000000DE
+        TradeskillBuildPressed = 0x000000DE, 
     }
 }
