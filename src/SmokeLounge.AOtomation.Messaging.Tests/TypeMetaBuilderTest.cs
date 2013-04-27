@@ -49,12 +49,8 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                                Instance = 12345
                                            }, 
                                    Target = new Identity { Type = IdentityType.None }, 
-                                   Parameter = 
-                                       new Identity
-                                           {
-                                               Type = IdentityType.None, 
-                                               Instance = 12345
-                                           }
+                                   Parameter1 = 0,
+                                   Parameter2 = 12345
                                };
 
             var serializer = context.GetSerializer(expected.GetType());
@@ -67,8 +63,8 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             Assert.AreEqual(expected.Target.Type, actual.Target.Type);
             Assert.AreEqual(expected.Target.Instance, actual.Target.Instance);
             Assert.AreEqual(expected.Unknown1, actual.Unknown1);
-            Assert.AreEqual(expected.Parameter.Type, actual.Parameter.Type);
-            Assert.AreEqual(expected.Parameter.Instance, actual.Parameter.Instance);
+            Assert.AreEqual(expected.Parameter1, actual.Parameter1);
+            Assert.AreEqual(expected.Parameter2, actual.Parameter2);
             Assert.AreEqual(expected.Unknown2, actual.Unknown2);
         }
 

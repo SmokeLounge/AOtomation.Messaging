@@ -120,7 +120,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 
         Trade = 0x36284f6e, 
 
-        Despa = 0x36510078,
+        Despawn = 0x36510078,
 
         DoorFullUpdate = 0x365a5071, 
 
