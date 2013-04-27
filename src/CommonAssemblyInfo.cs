@@ -18,5 +18,5 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("SmokeLounge")]
 [assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.29.0.0")]
-[assembly: AssemblyFileVersion("0.29.0.0")]
+[assembly: AssemblyVersion("0.30.0.0")]
+[assembly: AssemblyFileVersion("0.30.0.0")]

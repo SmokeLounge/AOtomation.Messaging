@@ -152,6 +152,7 @@
     <Compile Include="Messages\InitiateCompressionMessage.cs" />
     <Compile Include="Messages\N3Messages\ChatCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\ChatTextMessage.cs" />
+    <Compile Include="Messages\N3Messages\FeedbackMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotFinishTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\CharDCMoveMessage.cs" />
     <Compile Include="Messages\N3Messages\CharInPlayMessage.cs" />
