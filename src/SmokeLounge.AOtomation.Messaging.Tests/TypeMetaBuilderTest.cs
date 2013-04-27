@@ -49,7 +49,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                                Instance = 12345
                                            }, 
                                    Target = new Identity { Type = IdentityType.None }, 
-                                   ActionArgs =
+                                   Parameter = 
                                        new Identity
                                            {
                                                Type = IdentityType.None, 
@@ -67,8 +67,8 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             Assert.AreEqual(expected.Target.Type, actual.Target.Type);
             Assert.AreEqual(expected.Target.Instance, actual.Target.Instance);
             Assert.AreEqual(expected.Unknown1, actual.Unknown1);
-            Assert.AreEqual(expected.ActionArgs.Type, actual.ActionArgs.Type);
-            Assert.AreEqual(expected.ActionArgs.Instance, actual.ActionArgs.Instance);
+            Assert.AreEqual(expected.Parameter.Type, actual.Parameter.Type);
+            Assert.AreEqual(expected.Parameter.Instance, actual.Parameter.Instance);
             Assert.AreEqual(expected.Unknown2, actual.Unknown2);
         }
 
@@ -250,7 +250,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         private void AssertCharacterActionMessage(CharacterActionMessage expected, CharacterActionMessage actual)
         {
-            Assert.AreEqual(expected.CharacterActionType, actual.CharacterActionType);
+            Assert.AreEqual(expected.Action, actual.Action);
         }
 
         private void AssertN3Message(N3Message expected, N3Message actual)

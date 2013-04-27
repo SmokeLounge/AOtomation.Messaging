@@ -31,11 +31,11 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #region Public Properties
 
-        [AoMember(3)]
-        public Identity ActionArgs { get; set; }
-
         [AoMember(0)]
-        public CharacterActionType CharacterActionType { get; set; }
+        public CharacterActionType Action { get; set; }
+
+        [AoMember(3)]
+        public Identity Parameter { get; set; }
 
         [AoMember(2)]
         public Identity Target { get; set; }
