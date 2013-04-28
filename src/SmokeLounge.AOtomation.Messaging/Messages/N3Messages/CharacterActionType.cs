@@ -32,11 +32,15 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         InfoRequest = 0x00000069, 
 
-        Unknown1 = 0x0000006B, 
+        Unknown1 = 0x0000006B,
+
+        DeleteItem = 0x00000070,
 
         Logout = 0x00000078, 
 
         StopLogout = 0x0000007A,
+
+        Equip = 0x00000083,
 
         StartedSneaking = 0x000000A2, 
 
