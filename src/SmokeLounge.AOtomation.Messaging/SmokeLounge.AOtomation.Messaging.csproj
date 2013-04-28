@@ -132,6 +132,7 @@
     <Compile Include="GameData\Fatness.cs" />
     <Compile Include="GameData\GameTuple.cs" />
     <Compile Include="GameData\InventorySlot.cs" />
+    <Compile Include="GameData\KnuBotDialogOption.cs" />
     <Compile Include="GameData\LoginCharacterInfo.cs" />
     <Compile Include="GameData\CharacterStat.cs" />
     <Compile Include="GameData\Gender.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="GameData\SpecialAttackInfo.cs" />
     <Compile Include="GameData\Texture.cs" />
     <Compile Include="GameData\Vector3.cs" />
+    <Compile Include="GameData\VendingMachineSlot.cs" />
     <Compile Include="Messages\Header.cs" />
     <Compile Include="Messages\InitiateCompressionMessage.cs" />
     <Compile Include="Messages\N3Messages\AddTemplateMessage.cs" />
@@ -158,6 +160,8 @@
     <Compile Include="Messages\N3Messages\ChatCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\ChatTextMessage.cs" />
     <Compile Include="Messages\N3Messages\FeedbackMessage.cs" />
+    <Compile Include="Messages\N3Messages\KnuBotAnswerListMessage.cs" />
+    <Compile Include="Messages\N3Messages\KnuBotAppendTextMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotFinishTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\CharDCMoveMessage.cs" />
     <Compile Include="Messages\N3Messages\CharInPlayMessage.cs" />
@@ -166,6 +170,7 @@
     <Compile Include="Messages\N3Messages\GenericCmdAction.cs" />
     <Compile Include="Messages\N3Messages\GenericCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotCloseChatWindowMessage.cs" />
+    <Compile Include="Messages\N3Messages\KnuBotOpenChatWindowMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotStartTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\LookAtMessage.cs" />
@@ -181,6 +186,7 @@
     <Compile Include="Messages\N3Messages\OrgClientCommand.cs" />
     <Compile Include="Messages\N3Messages\OrgClientMessage.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
+    <Compile Include="Messages\N3Messages\ShopUpdateMessage.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateFlags.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateMessage.cs" />
     <Compile Include="Messages\N3Messages\SkillMessage.cs" />

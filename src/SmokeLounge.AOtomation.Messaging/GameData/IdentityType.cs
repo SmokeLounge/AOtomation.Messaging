@@ -48,6 +48,8 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         VendingMachine = 0x0000C75B, 
 
+        TempBag = 0x0000C767,
+
         Playfield1 = 0x0000C79C, 
 
         Playfield = 0x0000C79D, 
