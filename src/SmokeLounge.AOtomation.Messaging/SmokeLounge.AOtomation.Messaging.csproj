@@ -123,6 +123,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="GameData\Appearance.cs" />
+    <Compile Include="GameData\BankSlot.cs" />
     <Compile Include="GameData\Breed.cs" />
     <Compile Include="GameData\CharacterFlags.cs" />
     <Compile Include="GameData\CharacterStatus.cs" />
