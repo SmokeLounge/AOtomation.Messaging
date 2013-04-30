@@ -28,16 +28,16 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(2)]
-        public int FirstVendorId { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public Identity Unknown1 { get; set; }
 
         [AoMember(1)]
         public int Unknown2 { get; set; }
+
+        [AoMember(2)]
+        public int FirstVendorId { get; set; }
 
         [AoMember(3)]
         public int VendorCount { get; set; }

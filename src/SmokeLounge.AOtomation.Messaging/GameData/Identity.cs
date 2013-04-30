@@ -27,15 +27,19 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
-        public static Identity None { get; private set; }
+        [AoMember(0)]
+        public IdentityType Type { get; set; }
 
         [AoMember(1)]
         public int Instance { get; set; }
 
-        [AoMember(0)]
-        public IdentityType Type { get; set; }
+        #endregion
+
+        #region Public Properties
+
+        public static Identity None { get; private set; }
 
         #endregion
     }

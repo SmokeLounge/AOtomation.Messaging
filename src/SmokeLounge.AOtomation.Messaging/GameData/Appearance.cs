@@ -34,6 +34,25 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         #endregion
 
+        #region AoMember Properties
+
+        [AoMember(0)]
+        public uint Value
+        {
+            get
+            {
+                return this.value;
+            }
+
+            set
+            {
+                this.value = value;
+                this.UpdateStats();
+            }
+        }
+
+        #endregion
+
         #region Public Properties
 
         public Breed Breed
@@ -103,21 +122,6 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
             {
                 this.side = value;
                 this.UpdateValue();
-            }
-        }
-
-        [AoMember(0)]
-        public uint Value
-        {
-            get
-            {
-                return this.value;
-            }
-
-            set
-            {
-                this.value = value;
-                this.UpdateStats();
             }
         }
 

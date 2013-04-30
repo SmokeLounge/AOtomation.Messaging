@@ -29,13 +29,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(1)]
-        public int AllowedCharacters { get; set; }
+        #region AoMember Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int32)]
         public LoginCharacterInfo[] Characters { get; set; }
+
+        [AoMember(1)]
+        public int AllowedCharacters { get; set; }
 
         [AoMember(2)]
         public int Expansions { get; set; }

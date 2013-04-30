@@ -29,46 +29,46 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
-        [AoMember(6, SerializeSize = ArraySizeType.Int32)]
-        public string AreaName { get; set; }
-
-        [AoMember(2)]
-        public Breed Breed { get; set; }
-
-        [AoMember(11)]
-        public Fatness Fatness { get; set; }
-
-        [AoMember(3)]
-        public Gender Gender { get; set; }
-
-        [AoMember(9)]
-        public int HeadMesh { get; set; }
-
-        [AoMember(5)]
-        public int Level { get; set; }
-
-        [AoMember(10)]
-        public int MonsterScale { get; set; }
+        [AoMember(0, IsFixedSize = true, FixedSizeLength = 49)]
+        public byte[] Unknown1 { get; set; }
 
         [AoMember(1, SerializeSize = ArraySizeType.Int32)]
         public string Name { get; set; }
 
+        [AoMember(2)]
+        public Breed Breed { get; set; }
+
+        [AoMember(3)]
+        public Gender Gender { get; set; }
+
         [AoMember(4)]
         public Profession Profession { get; set; }
 
-        [AoMember(12)]
-        public StarterArea StarterArea { get; set; }
+        [AoMember(5)]
+        public int Level { get; set; }
 
-        [AoMember(0, IsFixedSize = true, FixedSizeLength = 49)]
-        public byte[] Unknown1 { get; set; }
+        [AoMember(6, SerializeSize = ArraySizeType.Int32)]
+        public string AreaName { get; set; }
 
         [AoMember(7)]
         public int Unknown2 { get; set; }
 
         [AoMember(8)]
         public int Unknown3 { get; set; }
+
+        [AoMember(9)]
+        public int HeadMesh { get; set; }
+
+        [AoMember(10)]
+        public int MonsterScale { get; set; }
+
+        [AoMember(11)]
+        public Fatness Fatness { get; set; }
+
+        [AoMember(12)]
+        public StarterArea StarterArea { get; set; }
 
         #endregion
     }

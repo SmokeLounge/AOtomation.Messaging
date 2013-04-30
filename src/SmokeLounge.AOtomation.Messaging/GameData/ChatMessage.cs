@@ -18,7 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class ChatMessage
     {
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int16)]
         public string Text { get; set; }

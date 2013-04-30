@@ -28,10 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(3)]
-        public int Count { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int HighId { get; set; }
@@ -41,6 +38,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(2)]
         public int Quality { get; set; }
+
+        [AoMember(3)]
+        public int Count { get; set; }
 
         #endregion
     }

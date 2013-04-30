@@ -32,16 +32,34 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
+
+        [AoMember(0)]
+        public int Unknown1 { get; set; }
 
         [AoMember(1)]
         public Vector3 CharacterCoordinates { get; set; }
 
+        [AoMember(2)]
+        public byte Unknown2 { get; set; }
+
         [AoMember(3)]
         public Identity PlayfieldId1 { get; set; }
 
+        [AoMember(4)]
+        public int Unknown3 { get; set; }
+
+        [AoMember(5)]
+        public int Unknown4 { get; set; }
+
         [AoMember(6)]
         public Identity PlayfieldId2 { get; set; }
+
+        [AoMember(7)]
+        public int Unknown5 { get; set; }
+
+        [AoMember(8)]
+        public int Unknown6 { get; set; }
 
         [AoMember(9)]
         public PlayfieldVendorInfo PlayfieldVendorInfo { get; set; }
@@ -51,24 +69,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(11)]
         public int PlayfieldZ { get; set; }
-
-        [AoMember(0)]
-        public int Unknown1 { get; set; }
-
-        [AoMember(2)]
-        public byte Unknown2 { get; set; }
-
-        [AoMember(4)]
-        public int Unknown3 { get; set; }
-
-        [AoMember(5)]
-        public int Unknown4 { get; set; }
-
-        [AoMember(7)]
-        public int Unknown5 { get; set; }
-
-        [AoMember(8)]
-        public int Unknown6 { get; set; }
 
         #endregion
     }

@@ -34,7 +34,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
         public SpecialAttackInfo[] Specials { get; set; }

@@ -18,13 +18,13 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class Texture
     {
-        #region Public Properties
-
-        [AoMember(1)]
-        public int Id { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int Place { get; set; }
+
+        [AoMember(1)]
+        public int Id { get; set; }
 
         [AoMember(2)]
         public int Unknown { get; set; }

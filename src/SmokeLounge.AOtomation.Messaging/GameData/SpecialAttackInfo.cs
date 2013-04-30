@@ -18,7 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class SpecialAttackInfo
     {
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public int Unknown1 { get; set; }

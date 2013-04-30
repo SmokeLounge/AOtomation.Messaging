@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
-        [AoMember(2)]
-        public Vector3 Coordinates { get; set; }
+        [AoMember(0)]
+        public byte MoveType { get; set; }
 
         [AoMember(1)]
         public Quaternion Heading { get; set; }
 
-        [AoMember(0)]
-        public byte MoveType { get; set; }
+        [AoMember(2)]
+        public Vector3 Coordinates { get; set; }
 
         [AoMember(3)]
         public int Unknown1 { get; set; }

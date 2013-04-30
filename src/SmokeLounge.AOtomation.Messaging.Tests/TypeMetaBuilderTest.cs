@@ -49,7 +49,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                                Instance = 12345
                                            }, 
                                    Target = new Identity { Type = IdentityType.None }, 
-                                   Parameter1 = 0,
+                                   Parameter1 = 0, 
                                    Parameter2 = 12345
                                };
 

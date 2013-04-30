@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
+
+        [AoMember(0)]
+        public int Unknown1 { get; set; }
 
         [AoMember(1, SerializeSize = ArraySizeType.Int32)]
         public string HostName { get; set; }
 
         [AoMember(2)]
         public int Port { get; set; }
-
-        [AoMember(0)]
-        public int Unknown1 { get; set; }
 
         [AoMember(3)]
         public int Unknown2 { get; set; }

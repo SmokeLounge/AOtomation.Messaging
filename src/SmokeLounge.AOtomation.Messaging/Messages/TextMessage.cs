@@ -20,18 +20,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
     [AoContract((int)PacketType.TextMessage)]
     public class TextMessage : MessageBody
     {
-        #region Public Properties
-
-        [AoMember(4)]
-        public ChatMessage Message { get; set; }
-
-        public override PacketType PacketType
-        {
-            get
-            {
-                return PacketType.TextMessage;
-            }
-        }
+        #region AoMember Properties
 
         [AoMember(0)]
         public TextMessageRange Range { get; set; }
@@ -44,6 +33,21 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 
         [AoMember(3)]
         public int Unknown3 { get; set; }
+
+        [AoMember(4)]
+        public ChatMessage Message { get; set; }
+
+        #endregion
+
+        #region Public Properties
+
+        public override PacketType PacketType
+        {
+            get
+            {
+                return PacketType.TextMessage;
+            }
+        }
 
         #endregion
     }

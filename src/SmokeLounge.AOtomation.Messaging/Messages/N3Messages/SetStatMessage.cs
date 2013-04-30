@@ -36,13 +36,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(1)]
-        public CharacterStat Stat { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int Value { get; set; }
+
+        [AoMember(1)]
+        public CharacterStat Stat { get; set; }
 
         #endregion
     }

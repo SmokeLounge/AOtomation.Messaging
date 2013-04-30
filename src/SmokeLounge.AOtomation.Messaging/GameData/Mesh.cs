@@ -18,19 +18,19 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class Mesh
     {
-        #region Public Properties
+        #region AoMember Properties
+
+        [AoMember(0)]
+        public byte Position { get; set; }
 
         [AoMember(1)]
         public uint Id { get; set; }
 
-        [AoMember(3)]
-        public byte Layer { get; set; }
-
         [AoMember(2)]
         public int OverrideTextureId { get; set; }
 
-        [AoMember(0)]
-        public byte Position { get; set; }
+        [AoMember(3)]
+        public byte Layer { get; set; }
 
         #endregion
     }

@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
-        [AoMember(2, SerializeSize = ArraySizeType.Int32)]
-        public string Command { get; set; }
+        [AoMember(0)]
+        public int Unknown1 { get; set; }
 
         [AoMember(1)]
         public Identity Target { get; set; }
 
-        [AoMember(0)]
-        public int Unknown1 { get; set; }
+        [AoMember(2, SerializeSize = ArraySizeType.Int32)]
+        public string Command { get; set; }
 
         #endregion
     }

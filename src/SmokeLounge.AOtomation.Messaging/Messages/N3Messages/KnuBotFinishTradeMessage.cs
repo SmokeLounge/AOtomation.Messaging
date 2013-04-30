@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
-        [AoMember(2)]
-        public int Decline { get; set; }
+        [AoMember(0)]
+        public short Unknown1 { get; set; }
 
         [AoMember(1)]
         public Identity Target { get; set; }
 
-        [AoMember(0)]
-        public short Unknown1 { get; set; }
+        [AoMember(2)]
+        public int Decline { get; set; }
 
         #endregion
     }

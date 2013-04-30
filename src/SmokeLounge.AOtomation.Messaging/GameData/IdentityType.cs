@@ -48,17 +48,17 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         VendingMachine = 0x0000C75B, 
 
-        TempBag = 0x0000C767,
+        TempBag = 0x0000C767, 
 
         Playfield1 = 0x0000C79C, 
 
         Playfield = 0x0000C79D, 
 
-        NanoProgram = 0x0000CF1B,
+        NanoProgram = 0x0000CF1B, 
 
-        TeamWindow = 0x0000DEA9,
+        TeamWindow = 0x0000DEA9, 
 
-        IncomingTradeWindow = 0x0000DEAD,
+        IncomingTradeWindow = 0x0000DEAD, 
 
         Playfield3 = 0x000186A1
     }

@@ -52,23 +52,23 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         ChangeAnimationAndStance = 0x000000A7, 
 
-        UploadNano = 0x000000CC,
+        UploadNano = 0x000000CC, 
 
         TradeskillSourceChanged = 0x000000DC, 
 
         TradeskillTargetChanged = 0x000000DD, 
 
-        TradeskillBuildPressed = 0x000000DE,
+        TradeskillBuildPressed = 0x000000DE, 
 
-        TradeskillSource = 0x000000DF,
+        TradeskillSource = 0x000000DF, 
 
-        TradeskillTarget = 0x000000E0,
+        TradeskillTarget = 0x000000E0, 
 
-        TradeskillNotValid = 0x000000E1,
+        TradeskillNotValid = 0x000000E1, 
 
-        TradeskillOutOfRange = 0x000000E2,
+        TradeskillOutOfRange = 0x000000E2, 
 
-        TradeskillRequirement = 0x000000E3,
+        TradeskillRequirement = 0x000000E3, 
 
         TradeskillResult = 0x000000E4
     }

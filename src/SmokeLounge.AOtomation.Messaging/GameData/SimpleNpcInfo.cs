@@ -18,12 +18,12 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class SimpleNpcInfo : SimpleCharacterInfo
     {
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public short Family { get; set; }
 
-        [AoMember(0)]
+        [AoMember(1)]
         public short LosHeight { get; set; }
 
         #endregion
