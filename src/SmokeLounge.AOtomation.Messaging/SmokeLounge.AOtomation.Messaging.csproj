@@ -189,6 +189,7 @@
     <Compile Include="Messages\N3Messages\N3TeleportMessage.cs" />
     <Compile Include="Messages\N3Messages\OrgClientCommand.cs" />
     <Compile Include="Messages\N3Messages\OrgClientMessage.cs" />
+    <Compile Include="Messages\N3Messages\OrgInfoPacketMessage.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
     <Compile Include="Messages\N3Messages\ShopUpdateMessage.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateFlags.cs" />
