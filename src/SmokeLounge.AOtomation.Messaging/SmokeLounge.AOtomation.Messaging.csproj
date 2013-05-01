@@ -140,6 +140,7 @@
     <Compile Include="GameData\IdentityType.cs" />
     <Compile Include="GameData\Mesh.cs" />
     <Compile Include="GameData\ActiveNano.cs" />
+    <Compile Include="GameData\NanoEffect.cs" />
     <Compile Include="GameData\PlayfieldVendorInfo.cs" />
     <Compile Include="GameData\Profession.cs" />
     <Compile Include="GameData\Quaternion.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Messages\N3Messages\SocialAction.cs" />
     <Compile Include="Messages\N3Messages\SocialActionCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\SpecialAttackWeaponMessage.cs" />
+    <Compile Include="Messages\N3Messages\SpellListMessage.cs" />
     <Compile Include="Messages\N3Messages\StatMessage.cs" />
     <Compile Include="Messages\N3Messages\TeamMemberInfoMessage.cs" />
     <Compile Include="Messages\N3Messages\TeamMemberMessage.cs" />

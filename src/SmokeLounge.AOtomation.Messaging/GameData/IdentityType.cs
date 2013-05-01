@@ -56,7 +56,9 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         Playfield = 0x0000C79D, 
 
-        NanoProgram = 0x0000CF1B, 
+        NanoProgram = 0x0000CF1B,
+
+        GfxEffect = 0x0000CF26,
 
         TeamWindow = 0x0000DEA9, 
 
