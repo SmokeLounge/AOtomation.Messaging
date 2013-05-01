@@ -160,6 +160,7 @@
     <Compile Include="Messages\N3Messages\ChatCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\ChatTextMessage.cs" />
     <Compile Include="Messages\N3Messages\FeedbackMessage.cs" />
+    <Compile Include="Messages\N3Messages\FormatFeedbackMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotAnswerListMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotAppendTextMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotFinishTradeMessage.cs" />

@@ -18,6 +18,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     {
         NoSerialization, 
 
+        Byte, 
+
         Int16, 
 
         Int32, 

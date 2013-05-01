@@ -35,6 +35,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             this.arraySizeType = arraySizeType;
             switch (this.arraySizeType)
             {
+                case ArraySizeType.Byte:
+                    this.type = typeof(byte);
+                    break;
                 case ArraySizeType.Int16:
                     this.type = typeof(short);
                     break;
@@ -79,6 +82,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             var options = (SerializationOptions)optionsExpression.Value;
             MethodInfo readMethodInfo = null;
+
+            if (this.type == typeof(byte))
+            {
+                readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<byte>>(o => o.ReadByte);
+            }
 
             if (this.type == typeof(short))
             {
@@ -133,6 +141,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             var options = (SerializationOptions)optionsExpression.Value;
             MethodInfo writeMethodInfo = null;
+
+            if (this.type == typeof(byte))
+            {
+                writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<byte>>(o => o.WriteByte);
+            }
 
             if (this.type == typeof(short))
             {
