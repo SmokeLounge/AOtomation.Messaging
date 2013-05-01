@@ -195,6 +195,7 @@
     <Compile Include="Messages\N3Messages\SocialActionCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\SpecialAttackWeaponMessage.cs" />
     <Compile Include="Messages\N3Messages\StatMessage.cs" />
+    <Compile Include="Messages\N3Messages\TeamMemberMessage.cs" />
     <Compile Include="Messages\N3Messages\TemplateActionMessage.cs" />
     <Compile Include="Messages\N3Messages\TradeAction.cs" />
     <Compile Include="Messages\N3Messages\TradeMessage.cs" />
