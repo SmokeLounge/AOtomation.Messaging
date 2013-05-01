@@ -157,6 +157,7 @@
     <Compile Include="Messages\N3Messages\AddTemplateMessage.cs" />
     <Compile Include="Messages\N3Messages\AppearanceUpdateMessage.cs" />
     <Compile Include="Messages\N3Messages\BankMessage.cs" />
+    <Compile Include="Messages\N3Messages\CastNanoSpellMessage.cs" />
     <Compile Include="Messages\N3Messages\DespawnMessage.cs" />
     <Compile Include="Messages\N3Messages\ChatCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\ChatTextMessage.cs" />
