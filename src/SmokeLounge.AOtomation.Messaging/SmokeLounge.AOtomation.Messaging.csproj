@@ -203,6 +203,7 @@
     <Compile Include="Messages\N3Messages\TradeAction.cs" />
     <Compile Include="Messages\N3Messages\TradeMessage.cs" />
     <Compile Include="Messages\N3Messages\VendingMachineFullUpdateMessage.cs" />
+    <Compile Include="Messages\N3Messages\WeaponItemFullUpdateMessage.cs" />
     <Compile Include="Messages\N3MessageType.cs" />
     <Compile Include="Messages\OperatorMessage.cs" />
     <Compile Include="Messages\PacketType.cs" />

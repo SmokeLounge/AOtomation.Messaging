@@ -46,6 +46,8 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         CanbeAffected = 0x0000C350, 
 
+        WeaponInstance = 0x0000C74A,
+
         VendingMachine = 0x0000C75B, 
 
         TempBag = 0x0000C767, 
