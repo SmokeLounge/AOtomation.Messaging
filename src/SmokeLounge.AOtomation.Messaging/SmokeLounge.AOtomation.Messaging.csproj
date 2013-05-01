@@ -143,6 +143,7 @@
     <Compile Include="GameData\PlayfieldVendorInfo.cs" />
     <Compile Include="GameData\Profession.cs" />
     <Compile Include="GameData\Quaternion.cs" />
+    <Compile Include="GameData\KnuBotRejectedItem.cs" />
     <Compile Include="GameData\Side.cs" />
     <Compile Include="GameData\SimpleCharacterInfo.cs" />
     <Compile Include="GameData\SimpleNpcInfo.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Messages\N3Messages\GenericCmdMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotCloseChatWindowMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotOpenChatWindowMessage.cs" />
+    <Compile Include="Messages\N3Messages\KnuBotRejectedItemsMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotStartTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\KnuBotTradeMessage.cs" />
     <Compile Include="Messages\N3Messages\LookAtMessage.cs" />
