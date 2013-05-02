@@ -76,6 +76,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             int identifier;
             switch (this.KnownType.IdentifierType)
             {
+                case IdentifierType.Byte:
+                    identifier = reader.ReadByte();
+                    break;
                 case IdentifierType.Int16:
                     identifier = reader.ReadInt16();
                     break;
