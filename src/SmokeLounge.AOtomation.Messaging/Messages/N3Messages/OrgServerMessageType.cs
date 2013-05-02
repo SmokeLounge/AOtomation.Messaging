@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IdentifierType.cs" company="SmokeLounge">
-//   Copyright � 2013 SmokeLounge.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="OrgServerMessageType.cs" company="SmokeLounge">
+//   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -8,18 +8,16 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the IdentifierType type.
+//   Defines the OrgServerMessageType type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization
+namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
-    public enum IdentifierType
+    public enum OrgServerMessageType : byte
     {
-        Byte, 
+        OrgInfo = 0x02, 
 
-        Int16, 
-
-        Int32, 
+        OrgInvite = 0x05
     }
 }

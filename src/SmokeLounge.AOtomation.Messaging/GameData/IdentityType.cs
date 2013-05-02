@@ -46,7 +46,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         CanbeAffected = 0x0000C350, 
 
-        WeaponInstance = 0x0000C74A,
+        WeaponInstance = 0x0000C74A, 
 
         VendingMachine = 0x0000C75B, 
 
@@ -56,11 +56,13 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         Playfield = 0x0000C79D, 
 
-        NanoProgram = 0x0000CF1B,
+        NanoProgram = 0x0000CF1B, 
 
-        GfxEffect = 0x0000CF26,
+        GfxEffect = 0x0000CF26, 
 
         TeamWindow = 0x0000DEA9, 
+
+        Organization = 0x0000DEAA, 
 
         IncomingTradeWindow = 0x0000DEAD, 
 

@@ -23,6 +23,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
     using SmokeLounge.AOtomation.Messaging.GameData;
     using SmokeLounge.AOtomation.Messaging.Messages;
     using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
+    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages;
     using SmokeLounge.AOtomation.Messaging.Messages.SystemMessages;
     using SmokeLounge.AOtomation.Messaging.Serialization;
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
@@ -116,6 +117,36 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             }
 
             Assert.AreEqual(expected.Expansions, actual.Expansions);
+        }
+
+        [TestMethod]
+        public void OrgInviteMessageTest()
+        {
+            var context = new SerializationContextBuilder<MessageBody>().Build();
+
+            var expected = new OrgInviteMessage
+                               {
+                                   Identity =
+                                       new Identity
+                                           {
+                                               Type = IdentityType.CanbeAffected, 
+                                               Instance = 12345
+                                           }, 
+                                   Organization =
+                                       new Identity
+                                           {
+                                               Type = IdentityType.Organization, 
+                                               Instance = 67890
+                                           }, 
+                                   OrganizationName = "Trollipopz"
+                               };
+
+            var serializer = context.GetSerializer(expected.GetType());
+
+            var actual = (OrgInviteMessage)this.SerializeDeserialize(serializer, expected);
+
+            this.AssertN3Message(expected, actual);
+            this.AssertOrgServerMessage(expected, actual);
         }
 
         [TestMethod]
@@ -256,6 +287,16 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             Assert.AreEqual(expected.N3MessageType, actual.N3MessageType);
             Assert.AreEqual(expected.PacketType, actual.PacketType);
             Assert.AreEqual(expected.Unknown, actual.Unknown);
+        }
+
+        private void AssertOrgServerMessage(OrgServerMessage expected, OrgServerMessage actual)
+        {
+            Assert.AreEqual(expected.OrgServerMessageType, actual.OrgServerMessageType);
+            Assert.AreEqual(expected.Unknown1, actual.Unknown1);
+            Assert.AreEqual(expected.Unknown2, actual.Unknown2);
+            Assert.AreEqual(expected.Organization.Type, actual.Organization.Type);
+            Assert.AreEqual(expected.Organization.Instance, actual.Organization.Instance);
+            Assert.AreEqual(expected.OrganizationName, actual.OrganizationName);
         }
 
         private void AssertSystemMessage(SystemMessage expected, SystemMessage actual)

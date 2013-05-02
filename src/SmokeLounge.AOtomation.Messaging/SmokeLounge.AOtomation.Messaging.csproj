@@ -191,6 +191,10 @@
     <Compile Include="Messages\N3Messages\OrgClientCommand.cs" />
     <Compile Include="Messages\N3Messages\OrgClientMessage.cs" />
     <Compile Include="Messages\N3Messages\OrgInfoPacketMessage.cs" />
+    <Compile Include="Messages\N3Messages\OrgServerMessage.cs" />
+    <Compile Include="Messages\N3Messages\OrgServerMessages\OrgInfoMessage.cs" />
+    <Compile Include="Messages\N3Messages\OrgServerMessages\OrgInviteMessage.cs" />
+    <Compile Include="Messages\N3Messages\OrgServerMessageType.cs" />
     <Compile Include="Messages\N3Messages\PlayfieldAnarchyFMessage.cs" />
     <Compile Include="Messages\N3Messages\ShopUpdateMessage.cs" />
     <Compile Include="Messages\N3Messages\SimpleCharFullUpdateFlags.cs" />
