@@ -28,6 +28,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         UseItemOnItem = 0x00000051, 
 
+        StandUp = 0x00000057,
+
         Unknown3 = 0x00000061, 
 
         Unknown2 = 0x00000062, 
