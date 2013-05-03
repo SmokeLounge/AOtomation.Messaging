@@ -91,6 +91,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             return propertyInfo;
         }
 
+        public static bool IsStruct(Type type)
+        {
+            return type.IsValueType && type.IsPrimitive == false && type.IsEnum == false;
+        }
+
         #endregion
     }
 }

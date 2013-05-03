@@ -42,7 +42,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         public int? PlayfieldId { get; set; }
 
         [AoMember(3)]
-        public Identity FightingTarget { get; set; }
+        public Identity? FightingTarget { get; set; }
 
         [AoMember(4)]
         public Vector3 Coordinates { get; set; }

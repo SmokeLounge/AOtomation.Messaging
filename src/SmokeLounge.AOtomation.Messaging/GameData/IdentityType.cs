@@ -52,6 +52,8 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         TempBag = 0x0000C767, 
 
+        Corpse = 0x0000C76A, 
+
         Playfield1 = 0x0000C79C, 
 
         Playfield = 0x0000C79D, 

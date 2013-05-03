@@ -16,14 +16,11 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 {
     using SmokeLounge.AOtomation.Messaging.Serialization;
 
-    public class Identity
+    public struct Identity
     {
-        #region Constructors and Destructors
+        #region Static Fields
 
-        static Identity()
-        {
-            None = new Identity { Type = IdentityType.None, Instance = 0 };
-        }
+        public static readonly Identity None = new Identity { Type = IdentityType.None, Instance = 0 };
 
         #endregion
 
@@ -34,12 +31,6 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         [AoMember(1)]
         public int Instance { get; set; }
-
-        #endregion
-
-        #region Public Properties
-
-        public static Identity None { get; private set; }
 
         #endregion
     }

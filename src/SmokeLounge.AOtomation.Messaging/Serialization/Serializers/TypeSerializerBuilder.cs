@@ -24,8 +24,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
     {
         #region Fields
 
-        private readonly ConstructorInfo constructor;
-
         private readonly Lazy<PropertyMeta[]> propertyMetas;
 
         private readonly Func<Type, ISerializer> serializerResolver;
@@ -40,7 +38,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         {
             this.type = type;
             this.serializerResolver = serializerResolver;
-            this.constructor = type.GetConstructor(new Type[] { });
             this.propertyMetas = new Lazy<PropertyMeta[]>(this.InitializePropertyMetas);
         }
 
@@ -53,7 +50,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         {
             var deserializedObject = Expression.Variable(this.type, "serializerVar");
 
-            var createInstance = Expression.Assign(deserializedObject, Expression.New(this.constructor));
+            var createInstance = Expression.Assign(deserializedObject, Expression.New(this.type));
             var deserializationExpressions = new List<Expression> { createInstance };
 
             foreach (var propertyMeta in this.propertyMetas.Value)
@@ -66,9 +63,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 deserializationExpressions.Add(deserializerExpression);
             }
 
+            Expression returnValue = deserializedObject;
+            if (ReflectionHelper.IsStruct(this.type))
+            {
+                returnValue = Expression.Convert(returnValue, typeof(object));
+            }
+
             var returnTarget = Expression.Label(typeof(object));
-            var returnExpression = Expression.Return(returnTarget, deserializedObject, typeof(object));
-            var returnLabel = Expression.Label(returnTarget, deserializedObject);
+            var returnExpression = Expression.Return(returnTarget, returnValue, typeof(object));
+            var returnLabel = Expression.Label(returnTarget, returnValue);
 
             deserializationExpressions.Add(returnExpression);
             deserializationExpressions.Add(returnLabel);
@@ -93,7 +96,13 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             {
                 var propertySerializer = this.serializerResolver(propertyMeta.Type);
                 var optionsConst = Expression.Constant(propertyMeta.Options);
+
                 Expression propertyExpression = Expression.Property(objectToSerialize, propertyMeta.Property);
+                if (ReflectionHelper.IsStruct(propertyMeta.Type))
+                {
+                    propertyExpression = Expression.Convert(propertyExpression, typeof(object));
+                }
+
                 var serializerExpression = propertySerializer.SerializerExpression(
                     streamWriterExpression, optionsConst, propertyExpression);
                 serializationExpressions.Add(serializerExpression);
