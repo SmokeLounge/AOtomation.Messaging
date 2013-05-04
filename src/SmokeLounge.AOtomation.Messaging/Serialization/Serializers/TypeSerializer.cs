@@ -78,8 +78,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ConstantExpression optionsExpression, 
-            Expression assignmentTargetExpression)
+            ParameterExpression optionsExpression, 
+            Expression assignmentTargetExpression, 
+            MemberOptions memberOptions)
         {
             var invokeExp = Expression.Invoke(
                 this.deserializerExpression, new Expression[] { streamReaderExpression, optionsExpression });
@@ -88,7 +89,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         }
 
         public Expression SerializerExpression(
-            ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
+            ParameterExpression streamWriterExpression, 
+            ParameterExpression optionsExpression, 
+            Expression valueExpression, 
+            MemberOptions memberOptions)
         {
             var invokeExp = Expression.Invoke(
                 this.serializerExpression, new[] { streamWriterExpression, optionsExpression, valueExpression });

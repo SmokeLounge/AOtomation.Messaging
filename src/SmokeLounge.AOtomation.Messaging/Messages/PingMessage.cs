@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)PacketType.PingMessage)]
     public abstract class PingMessage : MessageBody

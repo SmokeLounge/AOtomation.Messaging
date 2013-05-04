@@ -14,19 +14,12 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)PacketType.SystemMessage)]
     [AoKnownType(16, IdentifierType.Int32)]
     public abstract class SystemMessage : MessageBody
     {
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public SystemMessageType SystemMessageType { get; set; }
-
-        #endregion
-
         #region Public Properties
 
         public override PacketType PacketType
@@ -36,6 +29,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
                 return PacketType.SystemMessage;
             }
         }
+
+        [AoMember(0)]
+        public SystemMessageType SystemMessageType { get; set; }
 
         #endregion
     }

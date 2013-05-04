@@ -18,6 +18,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
     using System.Linq.Expressions;
     using System.Reflection;
 
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+
     public class ArraySizeSerializer : ISerializer
     {
         #region Fields
@@ -72,15 +74,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ConstantExpression optionsExpression, 
-            Expression assignmentTargetExpression)
+            ParameterExpression optionsExpression, 
+            Expression assignmentTargetExpression, 
+            MemberOptions memberOptions)
         {
             if (this.arraySizeType == ArraySizeType.NoSerialization)
             {
                 return null;
             }
 
-            var options = (SerializationOptions)optionsExpression.Value;
             MethodInfo readMethodInfo = null;
 
             if (this.type == typeof(byte))
@@ -105,9 +107,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             Expression deserializedValueExpression;
 
-            if (options.IsFixedSize)
+            if (memberOptions.IsFixedSize)
             {
-                deserializedValueExpression = Expression.Constant(options.FixedSizeLength, this.type);
+                deserializedValueExpression = Expression.Constant(memberOptions.FixedSizeLength, this.type);
             }
             else
             {
@@ -119,7 +121,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 var originalValue = deserializedValueExpression;
                 deserializedValueExpression =
                     Expression.Subtract(
-                        Expression.Divide(originalValue, Expression.Constant(0x3F1)), Expression.Constant(1));
+                        Expression.Divide(originalValue, Expression.Constant(0x03F1)), Expression.Constant(1));
             }
 
             var deserializerExpression = Expression.Assign(
@@ -132,14 +134,16 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         }
 
         public Expression SerializerExpression(
-            ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
+            ParameterExpression streamWriterExpression, 
+            ParameterExpression optionsExpression, 
+            Expression valueExpression, 
+            MemberOptions memberOptions)
         {
             if (this.arraySizeType == ArraySizeType.NoSerialization)
             {
                 return null;
             }
 
-            var options = (SerializationOptions)optionsExpression.Value;
             MethodInfo writeMethodInfo = null;
 
             if (this.type == typeof(byte))
@@ -164,9 +168,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             Expression serializedValueExpression;
 
-            if (options.IsFixedSize)
+            if (memberOptions.IsFixedSize)
             {
-                serializedValueExpression = Expression.Constant(options.FixedSizeLength, this.type);
+                serializedValueExpression = Expression.Constant(memberOptions.FixedSizeLength, this.type);
             }
             else
             {
@@ -178,7 +182,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             {
                 var originalValue = serializedValueExpression;
                 serializedValueExpression = Expression.Multiply(
-                    Expression.Add(originalValue, Expression.Constant(1)), Expression.Constant(0x3F1));
+                    Expression.Add(originalValue, Expression.Constant(1)), Expression.Constant(0x03F1));
             }
 
             var serializerExpression = Expression.Call(

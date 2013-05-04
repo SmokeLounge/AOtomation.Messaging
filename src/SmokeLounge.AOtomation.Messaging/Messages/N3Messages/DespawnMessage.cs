@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.Despawn)]
     public class DespawnMessage : N3Message

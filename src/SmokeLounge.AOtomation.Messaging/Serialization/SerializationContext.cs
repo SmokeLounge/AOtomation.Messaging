@@ -17,8 +17,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System;
     using System.Collections.Generic;
 
-    using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
-
     public class SerializationContext
     {
         #region Fields

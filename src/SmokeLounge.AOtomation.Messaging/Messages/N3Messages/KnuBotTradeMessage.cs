@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.KnuBotTrade)]
     public class KnuBotTradeMessage : N3Message
@@ -29,13 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
-        [AoMember(0)]
-        public short Unknown1 { get; set; }
+        [AoMember(5)]
+        public Identity Container { get; set; }
 
         [AoMember(1)]
         public Identity Target { get; set; }
+
+        [AoMember(0)]
+        public short Unknown1 { get; set; }
 
         [AoMember(2)]
         public int Unknown2 { get; set; }
@@ -45,9 +48,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(4)]
         public int Unknown4 { get; set; }
-
-        [AoMember(5)]
-        public Identity Container { get; set; }
 
         #endregion
     }

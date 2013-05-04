@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class PlayfieldVendorInfo
     {
@@ -28,16 +28,16 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(2)]
+        public int FirstVendorId { get; set; }
 
         [AoMember(0)]
         public Identity Unknown1 { get; set; }
 
         [AoMember(1)]
         public int Unknown2 { get; set; }
-
-        [AoMember(2)]
-        public int FirstVendorId { get; set; }
 
         [AoMember(3)]
         public int VendorCount { get; set; }

@@ -12,7 +12,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
+namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
     using System;
     using System.Linq.Expressions;
@@ -33,11 +33,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ConstantExpression optionsExpression, 
-            Expression assignmentTargetExpression);
+            ParameterExpression optionsExpression, 
+            Expression assignmentTargetExpression, 
+            MemberOptions memberOptions);
 
         Expression SerializerExpression(
-            ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression);
+            ParameterExpression streamWriterExpression, 
+            ParameterExpression optionsExpression, 
+            Expression valueExpression, 
+            MemberOptions memberOptions);
 
         #endregion
     }

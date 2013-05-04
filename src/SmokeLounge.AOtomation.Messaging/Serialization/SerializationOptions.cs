@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="KnownType.cs" company="SmokeLounge">
+// <copyright file="SerializationOptions.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,51 +8,19 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the KnownType type.
+//   Defines the SerializationOptions type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
-
-    public class KnownType
+    public class SerializationOptions
     {
-        #region Fields
-
-        private readonly IdentifierType identifierType;
-
-        private readonly int offset;
-
-        #endregion
-
         #region Constructors and Destructors
-
-        public KnownType(int offset, IdentifierType identifierType)
-        {
-            this.offset = offset;
-            this.identifierType = identifierType;
-        }
 
         #endregion
 
         #region Public Properties
-
-        public IdentifierType IdentifierType
-        {
-            get
-            {
-                return this.identifierType;
-            }
-        }
-
-        public int Offset
-        {
-            get
-            {
-                return this.offset;
-            }
-        }
 
         #endregion
     }

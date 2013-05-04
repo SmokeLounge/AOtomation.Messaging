@@ -14,17 +14,17 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class VendingMachineSlot
     {
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public int ItemLowId { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public int ItemHighId { get; set; }
+
+        [AoMember(0)]
+        public int ItemLowId { get; set; }
 
         [AoMember(2)]
         public int Quality { get; set; }

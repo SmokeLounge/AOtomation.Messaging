@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.Bank)]
     public class BankMessage : N3Message
@@ -29,7 +29,10 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(3, SerializeSize = ArraySizeType.X3F1)]
+        public BankSlot[] BankSlots { get; set; }
 
         [AoMember(0)]
         public int Unknown1 { get; set; }
@@ -39,9 +42,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(2)]
         public int Unknown3 { get; set; }
-
-        [AoMember(3, SerializeSize = ArraySizeType.X3F1)]
-        public BankSlot[] BankSlots { get; set; }
 
         #endregion
     }

@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.GameTime)]
     public class GameTimeMessage : N3Message
@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0)]
         public float Unknown1 { get; set; }

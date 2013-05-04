@@ -61,10 +61,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             }
 
             reader.Position = 0;
+            var serializationOptions = new SerializationOptions();
             var message = new Message
                               {
-                                  Header = (Header)this.headerSerializer.Deserializer(reader, null), 
-                                  Body = (MessageBody)serializer.Deserializer(reader, null)
+                                  Header =
+                                      (Header)this.headerSerializer.Deserializer(reader, serializationOptions), 
+                                  Body = (MessageBody)serializer.Deserializer(reader, serializationOptions)
                               };
             return message;
         }
@@ -77,9 +79,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 return;
             }
 
+            var serializationOptions = new SerializationOptions();
             var writer = new StreamWriter(stream) { Position = 0 };
-            this.headerSerializer.Serializer(writer, null, message.Header);
-            serializer.Serializer(writer, null, message.Body);
+            this.headerSerializer.Serializer(writer, serializationOptions, message.Header);
+            serializer.Serializer(writer, serializationOptions, message.Body);
             var length = writer.Position;
             writer.Position = 6;
             writer.WriteInt16((short)length);

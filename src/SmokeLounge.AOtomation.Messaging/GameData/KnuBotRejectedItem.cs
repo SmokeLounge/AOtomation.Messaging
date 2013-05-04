@@ -14,17 +14,17 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class KnuBotRejectedItem
     {
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public int LowId { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public int HighId { get; set; }
+
+        [AoMember(0)]
+        public int LowId { get; set; }
 
         [AoMember(2)]
         public int Quality { get; set; }

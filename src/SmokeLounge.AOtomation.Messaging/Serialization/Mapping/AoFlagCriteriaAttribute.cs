@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ArraySizeType.cs" company="SmokeLounge">
-//   Copyright © 2013 SmokeLounge.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AoFlagCriteriaAttribute.cs" company="SmokeLounge">
+//   Copyright � 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -8,22 +8,13 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the ArraySizeType type.
+//   Defines the AoFlagCriteriaAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization
+namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
 {
-    public enum ArraySizeType
+    public class AoFlagCriteriaAttribute
     {
-        NoSerialization, 
-
-        Byte, 
-
-        Int16, 
-
-        Int32, 
-
-        X3F1
     }
 }

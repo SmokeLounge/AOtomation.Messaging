@@ -14,11 +14,11 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class SpecialAttackInfo
     {
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0)]
         public int Unknown1 { get; set; }

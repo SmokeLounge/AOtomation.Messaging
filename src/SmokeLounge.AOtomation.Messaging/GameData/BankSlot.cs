@@ -14,29 +14,29 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class BankSlot
     {
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public int ItemFlags { get; set; }
-
-        [AoMember(1)]
-        public short Flags { get; set; }
+        #region Public Properties
 
         [AoMember(2)]
         public short Count { get; set; }
 
+        [AoMember(1)]
+        public short Flags { get; set; }
+
         [AoMember(3)]
         public Identity Identity { get; set; }
 
-        [AoMember(4)]
-        public int ItemLowId { get; set; }
+        [AoMember(0)]
+        public int ItemFlags { get; set; }
 
         [AoMember(5)]
         public int ItemHighId { get; set; }
+
+        [AoMember(4)]
+        public int ItemLowId { get; set; }
 
         [AoMember(6)]
         public int Quality { get; set; }

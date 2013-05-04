@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)SystemMessageType.UserLogin)]
     public class UserLoginMessage : SystemMessage
@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(2, IsFixedSize = true, FixedSizeLength = 20)]
+        public string ClientVersion { get; set; }
 
         [AoMember(0)]
         public int Unknown { get; set; }
 
         [AoMember(1, IsFixedSize = true, FixedSizeLength = 40)]
         public string UserName { get; set; }
-
-        [AoMember(2, IsFixedSize = true, FixedSizeLength = 20)]
-        public string ClientVersion { get; set; }
 
         #endregion
     }

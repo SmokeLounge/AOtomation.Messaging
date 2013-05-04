@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="TypeSerializerBuilder.cs" company="SmokeLounge">
-//   Copyright © 2013 SmokeLounge.
+//   Copyright � 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -12,13 +12,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
+namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Reflection;
+
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class TypeSerializerBuilder
     {
@@ -56,10 +58,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             foreach (var propertyMeta in this.propertyMetas.Value)
             {
                 var propertySerializer = this.serializerResolver(propertyMeta.Type);
-                var optionsConst = Expression.Constant(propertyMeta.Options);
                 Expression propertyExpression = Expression.Property(deserializedObject, propertyMeta.Property);
                 var deserializerExpression = propertySerializer.DeserializerExpression(
-                    streamReaderExpression, optionsConst, propertyExpression);
+                    streamReaderExpression, optionsExpression, propertyExpression, propertyMeta.Options);
                 deserializationExpressions.Add(deserializerExpression);
             }
 
@@ -95,7 +96,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             foreach (var propertyMeta in this.propertyMetas.Value)
             {
                 var propertySerializer = this.serializerResolver(propertyMeta.Type);
-                var optionsConst = Expression.Constant(propertyMeta.Options);
 
                 Expression propertyExpression = Expression.Property(objectToSerialize, propertyMeta.Property);
                 if (ReflectionHelper.IsStruct(propertyMeta.Type))
@@ -104,7 +104,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 }
 
                 var serializerExpression = propertySerializer.SerializerExpression(
-                    streamWriterExpression, optionsConst, propertyExpression);
+                    streamWriterExpression, optionsExpression, propertyExpression, propertyMeta.Options);
                 serializationExpressions.Add(serializerExpression);
             }
 

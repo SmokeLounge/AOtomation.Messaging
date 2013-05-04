@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)SystemMessageType.SelectCharacter)]
     public class SelectCharacterMessage : SystemMessage
@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0)]
         public int CharacterId { get; set; }

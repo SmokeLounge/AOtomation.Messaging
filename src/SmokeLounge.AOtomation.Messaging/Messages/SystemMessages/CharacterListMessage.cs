@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)SystemMessageType.CharacterList)]
     public class CharacterListMessage : SystemMessage
@@ -29,13 +29,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0, SerializeSize = ArraySizeType.Int32)]
-        public LoginCharacterInfo[] Characters { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public int AllowedCharacters { get; set; }
+
+        [AoMember(0, SerializeSize = ArraySizeType.Int32)]
+        public LoginCharacterInfo[] Characters { get; set; }
 
         [AoMember(2)]
         public int Expansions { get; set; }

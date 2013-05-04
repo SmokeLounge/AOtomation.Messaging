@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.FormatFeedback)]
     public class FormatFeedbackMessage : N3Message
@@ -28,7 +28,10 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(6, SerializeSize = ArraySizeType.Byte)]
+        public string Message { get; set; }
 
         [AoMember(0)]
         public int Unknown1 { get; set; }
@@ -47,9 +50,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(5)]
         public byte Unknown6 { get; set; }
-
-        [AoMember(6, SerializeSize = ArraySizeType.Byte)]
-        public string Message { get; set; }
 
         [AoMember(7)]
         public int Unknown7 { get; set; }

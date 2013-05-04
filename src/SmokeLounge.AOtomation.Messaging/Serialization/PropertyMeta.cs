@@ -12,18 +12,16 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
+namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
     using System;
     using System.Reflection;
 
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+
     public class PropertyMeta
     {
         #region Fields
-
-        private readonly AoMemberAttribute memberAttribute;
-
-        private readonly SerializationOptions options;
 
         private readonly PropertyInfo propertyInfo;
 
@@ -34,26 +32,19 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         public PropertyMeta(PropertyInfo propertyInfo, AoMemberAttribute memberAttribute)
         {
             this.propertyInfo = propertyInfo;
-            this.memberAttribute = memberAttribute;
-            this.options = new SerializationOptions(
-                this.memberAttribute.IsFixedSize, 
-                this.memberAttribute.FixedSizeLength, 
-                this.memberAttribute.SerializeSize, 
-                this.memberAttribute.PadAfter, 
-                this.memberAttribute.PadBefore);
+            this.Options = new MemberOptions(
+                memberAttribute.IsFixedSize, 
+                memberAttribute.FixedSizeLength, 
+                memberAttribute.SerializeSize, 
+                memberAttribute.PadAfter, 
+                memberAttribute.PadBefore);
         }
 
         #endregion
 
         #region Public Properties
 
-        public SerializationOptions Options
-        {
-            get
-            {
-                return this.options;
-            }
-        }
+        public MemberOptions Options { get; set; }
 
         public PropertyInfo Property
         {

@@ -59,8 +59,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ConstantExpression optionsExpression, 
-            Expression assignmentTargetExpression)
+            ParameterExpression optionsExpression, 
+            Expression assignmentTargetExpression, 
+            MemberOptions memberOptions)
         {
             var deserializerMethodInfo =
                 ReflectionHelper
@@ -76,7 +77,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         }
 
         public Expression SerializerExpression(
-            ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
+            ParameterExpression streamWriterExpression, 
+            ParameterExpression optionsExpression, 
+            Expression valueExpression, 
+            MemberOptions memberOptions)
         {
             var serializerMethodInfo =
                 ReflectionHelper

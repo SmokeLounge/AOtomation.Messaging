@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.TemplateAction)]
     public class TemplateActionMessage : N3Message
@@ -29,13 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(1)]
+        public int ItemHighId { get; set; }
 
         [AoMember(0)]
         public int ItemLowId { get; set; }
 
-        [AoMember(1)]
-        public int ItemHighId { get; set; }
+        [AoMember(5)]
+        public Identity Placement { get; set; }
 
         [AoMember(2)]
         public int Quality { get; set; }
@@ -45,9 +48,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(4)]
         public int Unknown2 { get; set; }
-
-        [AoMember(5)]
-        public Identity Placement { get; set; }
 
         [AoMember(6)]
         public int Unknown3 { get; set; }

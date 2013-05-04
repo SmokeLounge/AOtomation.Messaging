@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AoContractAttribute.cs" company="SmokeLounge">
-//   Copyright © 2013 SmokeLounge.
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AoKnownTypeAttribute.cs" company="SmokeLounge">
+//   Copyright � 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -8,39 +8,50 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the AoContractAttribute type.
+//   Defines the AoKnownTypeAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization
+namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
 {
     using System;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class AoContractAttribute : Attribute
+    public class AoKnownTypeAttribute : Attribute
     {
         #region Fields
 
-        private readonly int identifier;
+        private readonly IdentifierType identifierType;
+
+        private readonly int offset;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public AoContractAttribute(int identifier)
+        public AoKnownTypeAttribute(int offset, IdentifierType identifierType)
         {
-            this.identifier = identifier;
+            this.offset = offset;
+            this.identifierType = identifierType;
         }
 
         #endregion
 
         #region Public Properties
 
-        public int Identifier
+        public IdentifierType IdentifierType
         {
             get
             {
-                return this.identifier;
+                return this.identifierType;
+            }
+        }
+
+        public int Offset
+        {
+            get
+            {
+                return this.offset;
             }
         }
 

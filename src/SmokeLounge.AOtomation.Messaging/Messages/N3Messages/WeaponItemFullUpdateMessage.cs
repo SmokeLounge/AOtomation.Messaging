@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.WeaponItemFullUpdate)]
     public class WeaponItemFullUpdateMessage : N3Message
@@ -29,13 +29,46 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
-        [AoMember(0)]
-        public int Unknown1 { get; set; }
+        [AoMember(11)]
+        public int AcgItemLevel { get; set; }
+
+        [AoMember(13)]
+        public int AcgItemTemplateId { get; set; }
+
+        [AoMember(15)]
+        public int AcgItemTemplateId2 { get; set; }
+
+        [AoMember(20)]
+        public int Ammo { get; set; }
+
+        [AoMember(18)]
+        public int Amount { get; set; }
 
         [AoMember(1)]
         public Identity Character { get; set; }
+
+        [AoMember(19)]
+        public int Energy { get; set; }
+
+        [AoMember(7)]
+        public int Flags { get; set; }
+
+        [AoMember(8)]
+        public uint ItemFlags { get; set; }
+
+        [AoMember(17)]
+        public int MultipleCount { get; set; }
+
+        [AoMember(12)]
+        public int QualityLevel { get; set; }
+
+        [AoMember(9)]
+        public int StaticInstance { get; set; }
+
+        [AoMember(0)]
+        public int Unknown1 { get; set; }
 
         [AoMember(2)]
         public int Unknown2 { get; set; }
@@ -52,50 +85,17 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         [AoMember(6)]
         public int Unknown6 { get; set; }
 
-        [AoMember(7)]
-        public int Flags { get; set; }
-
-        [AoMember(8)]
-        public uint ItemFlags { get; set; }
-
-        [AoMember(9)]
-        public int StaticInstance { get; set; }
-
-        [AoMember(10)]
-        public int WeaponItemId { get; set; }
-
-        [AoMember(11)]
-        public int AcgItemLevel { get; set; }
-
-        [AoMember(12)]
-        public int QualityLevel { get; set; }
-
-        [AoMember(13)]
-        public int AcgItemTemplateId { get; set; }
-
-        [AoMember(14)]
-        public int WeaponItemLowId { get; set; }
-
-        [AoMember(15)]
-        public int AcgItemTemplateId2 { get; set; }
+        [AoMember(21)]
+        public int Unknown7 { get; set; }
 
         [AoMember(16)]
         public int WeaponItemHighId { get; set; }
 
-        [AoMember(17)]
-        public int MultipleCount { get; set; }
+        [AoMember(10)]
+        public int WeaponItemId { get; set; }
 
-        [AoMember(18)]
-        public int Amount { get; set; }
-
-        [AoMember(19)]
-        public int Energy { get; set; }
-
-        [AoMember(20)]
-        public int Ammo { get; set; }
-
-        [AoMember(21)]
-        public int Unknown7 { get; set; }
+        [AoMember(14)]
+        public int WeaponItemLowId { get; set; }
 
         #endregion
     }

@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.AddTemplate)]
     public class AddTemplateMessage : N3Message
@@ -28,7 +28,10 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(3)]
+        public int Count { get; set; }
 
         [AoMember(0)]
         public int HighId { get; set; }
@@ -38,9 +41,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(2)]
         public int Quality { get; set; }
-
-        [AoMember(3)]
-        public int Count { get; set; }
 
         #endregion
     }

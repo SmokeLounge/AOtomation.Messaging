@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.SpellList)]
     public class SpellListMessage : N3Message
@@ -29,13 +29,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
-        public NanoEffect[] NanoEffects { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public Identity Character { get; set; }
+
+        [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
+        public NanoEffect[] NanoEffects { get; set; }
 
         #endregion
     }

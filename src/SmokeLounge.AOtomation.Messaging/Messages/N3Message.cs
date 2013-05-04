@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)PacketType.N3Message)]
     [AoKnownType(16, IdentifierType.Int32)]
@@ -30,20 +30,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public N3MessageType N3MessageType { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public Identity Identity { get; set; }
 
-        [AoMember(2)]
-        public byte Unknown { get; set; }
-
-        #endregion
-
-        #region Public Properties
+        [AoMember(0)]
+        public N3MessageType N3MessageType { get; set; }
 
         public override PacketType PacketType
         {
@@ -52,6 +45,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
                 return PacketType.N3Message;
             }
         }
+
+        [AoMember(2)]
+        public byte Unknown { get; set; }
 
         #endregion
     }

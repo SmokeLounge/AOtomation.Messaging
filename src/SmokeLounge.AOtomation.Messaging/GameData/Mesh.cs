@@ -14,23 +14,23 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class Mesh
     {
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public byte Position { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public uint Id { get; set; }
 
+        [AoMember(3)]
+        public byte Layer { get; set; }
+
         [AoMember(2)]
         public int OverrideTextureId { get; set; }
 
-        [AoMember(3)]
-        public byte Layer { get; set; }
+        [AoMember(0)]
+        public byte Position { get; set; }
 
         #endregion
     }

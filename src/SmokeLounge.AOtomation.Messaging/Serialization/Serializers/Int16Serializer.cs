@@ -56,8 +56,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ConstantExpression optionsExpression, 
-            Expression assignmentTargetExpression)
+            ParameterExpression optionsExpression, 
+            Expression assignmentTargetExpression, 
+            MemberOptions memberOptions)
         {
             var readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<short>>(o => o.ReadInt16);
             var callReadExp = Expression.Call(streamReaderExpression, readMethodInfo);
@@ -72,7 +73,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         }
 
         public Expression SerializerExpression(
-            ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
+            ParameterExpression streamWriterExpression, 
+            ParameterExpression optionsExpression, 
+            Expression valueExpression, 
+            MemberOptions memberOptions)
         {
             var writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<short>>(o => o.WriteInt16);
             if (valueExpression.Type.IsAssignableFrom(this.type))

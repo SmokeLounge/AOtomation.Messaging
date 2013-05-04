@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.SetStat)]
     public class SetStatMessage : N3Message
@@ -36,13 +36,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public int Value { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public CharacterStat Stat { get; set; }
+
+        [AoMember(0)]
+        public int Value { get; set; }
 
         #endregion
     }

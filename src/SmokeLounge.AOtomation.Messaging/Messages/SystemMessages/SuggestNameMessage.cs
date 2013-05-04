@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)SystemMessageType.SuggestName)]
     public class SuggestNameMessage : SystemMessage
@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int16)]
         public string Name { get; set; }

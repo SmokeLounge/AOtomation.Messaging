@@ -18,6 +18,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System.Collections.Generic;
     using System.Linq;
 
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+
     public class TypeInfo
     {
         #region Fields

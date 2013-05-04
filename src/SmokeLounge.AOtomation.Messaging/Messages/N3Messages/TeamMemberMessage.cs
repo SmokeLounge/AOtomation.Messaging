@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.TeamMember)]
     public class TeamMemberMessage : N3Message
@@ -29,19 +29,22 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(2)]
+        public Identity Character { get; set; }
+
+        [AoMember(7, SerializeSize = ArraySizeType.Int32)]
+        public string Name { get; set; }
+
+        [AoMember(3)]
+        public Identity Team { get; set; }
 
         [AoMember(0)]
         public byte Unknown1 { get; set; }
 
         [AoMember(1)]
         public short Unknown2 { get; set; }
-
-        [AoMember(2)]
-        public Identity Character { get; set; }
-
-        [AoMember(3)]
-        public Identity Team { get; set; }
 
         [AoMember(4)]
         public uint Unknown3 { get; set; }
@@ -51,9 +54,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(6)]
         public short Unknown5 { get; set; }
-
-        [AoMember(7, SerializeSize = ArraySizeType.Int32)]
-        public string Name { get; set; }
 
         [AoMember(8)]
         public short Unknown6 { get; set; }

@@ -14,11 +14,11 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class ChatMessage
     {
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int16)]
         public string Text { get; set; }

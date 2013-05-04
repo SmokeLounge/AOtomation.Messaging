@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.AppearanceUpdate)]
     public class AppearanceUpdateMessage : N3Message
@@ -29,19 +29,19 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
-        public Texture[] Textures { get; set; }
+        #region Public Properties
 
         [AoMember(1, SerializeSize = ArraySizeType.X3F1)]
         public Mesh[] Meshes { get; set; }
 
-        [AoMember(2)]
-        public short VisualFlags { get; set; }
+        [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
+        public Texture[] Textures { get; set; }
 
         [AoMember(3)]
         public byte Unknown { get; set; }
+
+        [AoMember(2)]
+        public short VisualFlags { get; set; }
 
         #endregion
     }

@@ -14,11 +14,14 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class Quaternion
     {
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(3)]
+        public float W { get; set; }
 
         [AoMember(0)]
         public float X { get; set; }
@@ -28,9 +31,6 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         [AoMember(2)]
         public float Z { get; set; }
-
-        [AoMember(3)]
-        public float W { get; set; }
 
         #endregion
     }

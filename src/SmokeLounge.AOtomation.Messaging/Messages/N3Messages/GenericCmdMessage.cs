@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.GenericCmd)]
     public class GenericCmdMessage : N3Message
@@ -29,25 +29,25 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
-        [AoMember(0)]
-        public int Temp1 { get; set; }
+        [AoMember(2)]
+        public GenericCmdAction Action { get; set; }
 
         [AoMember(1)]
         public int Count { get; set; }
 
-        [AoMember(2)]
-        public GenericCmdAction Action { get; set; }
+        [AoMember(5)]
+        public Identity Target { get; set; }
+
+        [AoMember(0)]
+        public int Temp1 { get; set; }
 
         [AoMember(3)]
         public int Temp4 { get; set; }
 
         [AoMember(4)]
         public Identity User { get; set; }
-
-        [AoMember(5)]
-        public Identity Target { get; set; }
 
         #endregion
     }

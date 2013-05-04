@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerializationOptions.cs" company="SmokeLounge">
+// <copyright file="MemberOptions.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,13 +8,15 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the SerializationOptions type.
+//   Defines the MemberOptions type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
+namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
-    public class SerializationOptions
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+
+    public class MemberOptions
     {
         #region Fields
 
@@ -32,7 +34,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Constructors and Destructors
 
-        public SerializationOptions(
+        public MemberOptions(
             bool isFixedSize, int fixedSizeLength, ArraySizeType serializeSize, int padAfter, int padBefore)
         {
             this.isFixedSize = isFixedSize;

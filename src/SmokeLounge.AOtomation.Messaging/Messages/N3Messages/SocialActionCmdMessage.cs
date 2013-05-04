@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.SocialActionCmd)]
     public class SocialActionCmdMessage : N3Message
@@ -28,7 +28,10 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
+
+        [AoMember(5)]
+        public SocialAction Action { get; set; }
 
         [AoMember(0)]
         public byte Unknown1 { get; set; }
@@ -44,9 +47,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(4)]
         public int Unknown5 { get; set; }
-
-        [AoMember(5)]
-        public SocialAction Action { get; set; }
 
         #endregion
     }

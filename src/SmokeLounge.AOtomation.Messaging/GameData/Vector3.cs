@@ -14,11 +14,11 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class Vector3
     {
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0)]
         public float X { get; set; }

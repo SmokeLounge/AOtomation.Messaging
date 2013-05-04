@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)SystemMessageType.UserCredentials)]
     public class UserCredentialsMessage : SystemMessage
@@ -28,13 +28,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0, IsFixedSize = true, FixedSizeLength = 40)]
-        public string UserName { get; set; }
+        #region Public Properties
 
         [AoMember(1, SerializeSize = ArraySizeType.Int32)]
         public string Credentials { get; set; }
+
+        [AoMember(0, IsFixedSize = true, FixedSizeLength = 40)]
+        public string UserName { get; set; }
 
         #endregion
     }

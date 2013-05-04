@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.KnuBotCloseChatWindow)]
     public class KnuBotCloseChatWindowMessage : N3Message
@@ -29,13 +29,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public short Unknown1 { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public Identity Target { get; set; }
+
+        [AoMember(0)]
+        public short Unknown1 { get; set; }
 
         [AoMember(2)]
         public int Unknown2 { get; set; }

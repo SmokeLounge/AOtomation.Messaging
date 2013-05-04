@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.OrgServer)]
     [AoKnownType(26, IdentifierType.Byte)]
@@ -30,22 +30,22 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0)]
         public OrgServerMessageType OrgServerMessageType { get; set; }
-
-        [AoMember(1)]
-        public int Unknown1 { get; set; }
-
-        [AoMember(2)]
-        public int Unknown2 { get; set; }
 
         [AoMember(3)]
         public Identity Organization { get; set; }
 
         [AoMember(4, SerializeSize = ArraySizeType.Int16)]
         public string OrganizationName { get; set; }
+
+        [AoMember(1)]
+        public int Unknown1 { get; set; }
+
+        [AoMember(2)]
+        public int Unknown2 { get; set; }
 
         #endregion
     }

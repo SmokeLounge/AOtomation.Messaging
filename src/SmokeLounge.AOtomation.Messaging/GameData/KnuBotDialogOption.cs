@@ -14,11 +14,11 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class KnuBotDialogOption
     {
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int32)]
         public string Text { get; set; }

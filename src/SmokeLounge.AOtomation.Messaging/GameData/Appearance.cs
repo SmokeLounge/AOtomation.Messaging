@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class Appearance
     {
@@ -31,25 +31,6 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         private Side side;
 
         private uint value;
-
-        #endregion
-
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public uint Value
-        {
-            get
-            {
-                return this.value;
-            }
-
-            set
-            {
-                this.value = value;
-                this.UpdateStats();
-            }
-        }
 
         #endregion
 
@@ -122,6 +103,21 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
             {
                 this.side = value;
                 this.UpdateValue();
+            }
+        }
+
+        [AoMember(0)]
+        public uint Value
+        {
+            get
+            {
+                return this.value;
+            }
+
+            set
+            {
+                this.value = value;
+                this.UpdateStats();
             }
         }
 

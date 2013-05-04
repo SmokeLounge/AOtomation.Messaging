@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public struct Identity
     {
@@ -24,13 +24,13 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public IdentityType Type { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public int Instance { get; set; }
+
+        [AoMember(0)]
+        public IdentityType Type { get; set; }
 
         #endregion
 

@@ -14,17 +14,17 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class Texture
     {
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public int Place { get; set; }
+        #region Public Properties
 
         [AoMember(1)]
         public int Id { get; set; }
+
+        [AoMember(0)]
+        public int Place { get; set; }
 
         [AoMember(2)]
         public int Unknown { get; set; }

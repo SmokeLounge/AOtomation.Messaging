@@ -14,47 +14,47 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     public class SimplePcInfo : SimpleCharacterInfo
     {
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public uint CurrentNano { get; set; }
-
-        [AoMember(1)]
-        public int Team { get; set; }
-
-        [AoMember(2)]
-        public short Swim { get; set; }
-
-        [AoMember(3)]
-        public short StrengthBase { get; set; }
+        #region Public Properties
 
         [AoMember(4)]
         public short AgilityBase { get; set; }
 
-        [AoMember(5)]
-        public short StaminaBase { get; set; }
-
-        [AoMember(6)]
-        public short IntelligenceBase { get; set; }
-
-        [AoMember(7)]
-        public short SenseBase { get; set; }
-
-        [AoMember(8)]
-        public short PsychicBase { get; set; }
+        [AoMember(0)]
+        public uint CurrentNano { get; set; }
 
         [AoMember(9, SerializeSize = ArraySizeType.Int16)]
         public string FirstName { get; set; }
+
+        [AoMember(6)]
+        public short IntelligenceBase { get; set; }
 
         [AoMember(10, SerializeSize = ArraySizeType.Int16)]
         public string LastName { get; set; }
 
         [AoMember(11, SerializeSize = ArraySizeType.Int16)]
         public string OrgName { get; set; }
+
+        [AoMember(8)]
+        public short PsychicBase { get; set; }
+
+        [AoMember(7)]
+        public short SenseBase { get; set; }
+
+        [AoMember(5)]
+        public short StaminaBase { get; set; }
+
+        [AoMember(3)]
+        public short StrengthBase { get; set; }
+
+        [AoMember(2)]
+        public short Swim { get; set; }
+
+        [AoMember(1)]
+        public int Team { get; set; }
 
         #endregion
     }

@@ -18,6 +18,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
     using System.Collections.Generic;
     using System.Linq.Expressions;
 
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+
     public class StringSerializer : ISerializer
     {
         #region Fields
@@ -57,8 +59,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ConstantExpression optionsExpression, 
-            Expression assignmentTargetExpression)
+            ParameterExpression optionsExpression, 
+            Expression assignmentTargetExpression, 
+            MemberOptions memberOptions)
         {
             var expressions = new List<Expression>();
 
@@ -66,16 +69,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             Expression setSize;
 
-            var options = (SerializationOptions)optionsExpression.Value;
-
-            if (options.SerializeSize == ArraySizeType.NoSerialization)
+            if (memberOptions.SerializeSize == ArraySizeType.NoSerialization)
             {
-                setSize = Expression.Assign(size, Expression.Constant(options.FixedSizeLength, typeof(int)));
+                setSize = Expression.Assign(size, Expression.Constant(memberOptions.FixedSizeLength, typeof(int)));
             }
             else
             {
-                setSize = new ArraySizeSerializer(options.SerializeSize).DeserializerExpression(
-                    streamReaderExpression, optionsExpression, size);
+                setSize =
+                    new ArraySizeSerializer(memberOptions.SerializeSize).DeserializerExpression(
+                        streamReaderExpression, optionsExpression, size, memberOptions);
             }
 
             expressions.Add(setSize);
@@ -96,28 +98,29 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         }
 
         public Expression SerializerExpression(
-            ParameterExpression streamWriterExpression, ConstantExpression optionsExpression, Expression valueExpression)
+            ParameterExpression streamWriterExpression, 
+            ParameterExpression optionsExpression, 
+            Expression valueExpression, 
+            MemberOptions memberOptions)
         {
             if (valueExpression.Type.IsAssignableFrom(this.type) == false)
             {
                 valueExpression = Expression.Convert(valueExpression, this.type);
             }
 
-            var options = (SerializationOptions)optionsExpression.Value;
-
             var expressions = new List<Expression>();
-            if (options.SerializeSize != ArraySizeType.NoSerialization)
+            if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
             {
                 var serializeSizeExp =
-                    new ArraySizeSerializer(options.SerializeSize).SerializerExpression(
-                        streamWriterExpression, optionsExpression, valueExpression);
+                    new ArraySizeSerializer(memberOptions.SerializeSize).SerializerExpression(
+                        streamWriterExpression, optionsExpression, valueExpression, memberOptions);
                 expressions.Add(serializeSizeExp);
             }
 
             var writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<string, int?>>(o => o.WriteString);
 
-            Expression writeStringParam = options.IsFixedSize
-                                              ? Expression.Constant(options.FixedSizeLength, typeof(int?))
+            Expression writeStringParam = memberOptions.IsFixedSize
+                                              ? Expression.Constant(memberOptions.FixedSizeLength, typeof(int?))
                                               : Expression.Constant(null, typeof(int?));
 
             var callWriteExp = Expression.Call(

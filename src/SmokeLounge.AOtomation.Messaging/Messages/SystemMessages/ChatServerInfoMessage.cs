@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)SystemMessageType.ChatServerInfo)]
     public class ChatServerInfoMessage : SystemMessage
@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region AoMember Properties
-
-        [AoMember(0)]
-        public int Unknown1 { get; set; }
+        #region Public Properties
 
         [AoMember(1, SerializeSize = ArraySizeType.Int32)]
         public string HostName { get; set; }
 
         [AoMember(2)]
         public int Port { get; set; }
+
+        [AoMember(0)]
+        public int Unknown1 { get; set; }
 
         [AoMember(3)]
         public int Unknown2 { get; set; }

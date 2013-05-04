@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="MessageBody.cs" company="SmokeLounge">
+// <copyright file="IdentifierType.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,21 +8,18 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the MessageBody type.
+//   Defines the IdentifierType type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Messages
+namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
-
-    [AoKnownType(2, IdentifierType.Int16)]
-    public abstract class MessageBody
+    public enum IdentifierType
     {
-        #region Public Properties
+        Byte, 
 
-        public abstract PacketType PacketType { get; }
+        Int16, 
 
-        #endregion
+        Int32, 
     }
 }

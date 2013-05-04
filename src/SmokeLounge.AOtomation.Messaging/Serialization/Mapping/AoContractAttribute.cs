@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AoKnownTypeAttribute.cs" company="SmokeLounge">
+// <copyright file="AoContractAttribute.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,50 +8,39 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the AoKnownTypeAttribute type.
+//   Defines the AoContractAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization
+namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
 {
     using System;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class AoKnownTypeAttribute : Attribute
+    public class AoContractAttribute : Attribute
     {
         #region Fields
 
-        private readonly IdentifierType identifierType;
-
-        private readonly int offset;
+        private readonly int identifier;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public AoKnownTypeAttribute(int offset, IdentifierType identifierType)
+        public AoContractAttribute(int identifier)
         {
-            this.offset = offset;
-            this.identifierType = identifierType;
+            this.identifier = identifier;
         }
 
         #endregion
 
         #region Public Properties
 
-        public IdentifierType IdentifierType
+        public int Identifier
         {
             get
             {
-                return this.identifierType;
-            }
-        }
-
-        public int Offset
-        {
-            get
-            {
-                return this.offset;
+                return this.identifier;
             }
         }
 

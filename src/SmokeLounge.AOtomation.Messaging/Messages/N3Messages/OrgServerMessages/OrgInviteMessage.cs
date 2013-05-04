@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((byte)OrgServerMessageType.OrgInvite)]
     public class OrgInviteMessage : OrgServerMessage
@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0)]
         public int Unknown3 { get; set; }

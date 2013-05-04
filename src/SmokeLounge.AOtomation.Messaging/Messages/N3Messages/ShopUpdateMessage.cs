@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
 
     [AoContract((int)N3MessageType.ShopUpdate)]
     public class ShopUpdateMessage : N3Message
@@ -29,7 +29,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region AoMember Properties
+        #region Public Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
         public VendingMachineSlot[] VendingMachineSlots { get; set; }
