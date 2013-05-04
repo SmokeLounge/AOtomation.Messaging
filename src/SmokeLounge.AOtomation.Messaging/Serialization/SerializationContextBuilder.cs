@@ -102,14 +102,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 return null;
             }
 
-            var writerParam = Expression.Parameter(typeof(StreamWriter), "writer");
-            var readerParam = Expression.Parameter(typeof(StreamReader), "reader");
-            var optionsParam = Expression.Parameter(typeof(SerializationOptions), "options");
             var typeSerializerBuilder = new TypeSerializerBuilder(type, this.GetSerializer);
-            var serializerExp = typeSerializerBuilder.BuildSerializer(writerParam, optionsParam);
-            var deserializerExp = typeSerializerBuilder.BuildDeserializer(readerParam, optionsParam);
-
-            var typeSerializer = new TypeSerializer(type, serializerExp, deserializerExp);
+            var typeSerializer = new TypeSerializer(type, typeSerializerBuilder);
             return typeSerializer;
         }
 

@@ -23,24 +23,27 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         private readonly Lazy<Func<StreamReader, SerializationOptions, object>> deserializer;
 
-        private readonly Expression deserializerExpression;
+        private readonly Lazy<Expression> deserializerExpression;
 
         private readonly Lazy<Action<StreamWriter, SerializationOptions, object>> serializer;
 
-        private readonly Expression serializerExpression;
+        private readonly Lazy<Expression> serializerExpression;
 
         private readonly Type type;
+
+        private readonly TypeSerializerBuilder typeSerializerBuilder;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public TypeSerializer(Type type, Expression serializerExpression, Expression deserializerExpression)
+        public TypeSerializer(Type type, TypeSerializerBuilder typeSerializerBuilder)
         {
             this.type = type;
-            this.serializerExpression = serializerExpression;
-            this.deserializerExpression = deserializerExpression;
+            this.typeSerializerBuilder = typeSerializerBuilder;
+            this.serializerExpression = new Lazy<Expression>(this.BuildSerializerExpression);
             this.serializer = new Lazy<Action<StreamWriter, SerializationOptions, object>>(this.CompileSerializer);
+            this.deserializerExpression = new Lazy<Expression>(this.BuildDeserializerExpression);
             this.deserializer = new Lazy<Func<StreamReader, SerializationOptions, object>>(this.CompileDeserializer);
         }
 
@@ -83,7 +86,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             MemberOptions memberOptions)
         {
             var invokeExp = Expression.Invoke(
-                this.deserializerExpression, new Expression[] { streamReaderExpression, optionsExpression });
+                this.deserializerExpression.Value, new Expression[] { streamReaderExpression, optionsExpression });
             var assignExp = Expression.Assign(assignmentTargetExpression, Expression.Convert(invokeExp, this.type));
             return assignExp;
         }
@@ -95,7 +98,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             MemberOptions memberOptions)
         {
             var invokeExp = Expression.Invoke(
-                this.serializerExpression, new[] { streamWriterExpression, optionsExpression, valueExpression });
+                this.serializerExpression.Value, new[] { streamWriterExpression, optionsExpression, valueExpression });
             return invokeExp;
         }
 
@@ -103,16 +106,34 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Methods
 
+        private Expression BuildDeserializerExpression()
+        {
+            var readerParam = Expression.Parameter(typeof(StreamReader), "reader");
+            var optionsParam = Expression.Parameter(typeof(SerializationOptions), "options");
+
+            var expression = this.typeSerializerBuilder.BuildDeserializer(readerParam, optionsParam);
+            return expression;
+        }
+
+        private Expression BuildSerializerExpression()
+        {
+            var writerParam = Expression.Parameter(typeof(StreamWriter), "writer");
+            var optionsParam = Expression.Parameter(typeof(SerializationOptions), "options");
+
+            var expression = this.typeSerializerBuilder.BuildSerializer(writerParam, optionsParam);
+            return expression;
+        }
+
         private Func<StreamReader, SerializationOptions, object> CompileDeserializer()
         {
-            var lambda = (Expression<Func<StreamReader, SerializationOptions, object>>)this.deserializerExpression;
+            var lambda = (Expression<Func<StreamReader, SerializationOptions, object>>)this.deserializerExpression.Value;
             var compiledLambda = lambda.Compile();
             return compiledLambda;
         }
 
         private Action<StreamWriter, SerializationOptions, object> CompileSerializer()
         {
-            var lambda = (Expression<Action<StreamWriter, SerializationOptions, object>>)this.serializerExpression;
+            var lambda = (Expression<Action<StreamWriter, SerializationOptions, object>>)this.serializerExpression.Value;
             var compiledLambda = lambda.Compile();
             return compiledLambda;
         }
