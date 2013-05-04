@@ -56,10 +56,10 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                            typeof(SimpleCharFullUpdateMessage), 
                                            new SimpleCharFullUpdateSerializer()
                                        }, 
-                                       {
-                                           typeof(OrgClientMessage), 
-                                           new OrgClientMessageSerializer()
-                                       }
+                                       //{
+                                       //    typeof(OrgClientMessage), 
+                                       //    new OrgClientMessageSerializer()
+                                       //}
                                    };
         }
 

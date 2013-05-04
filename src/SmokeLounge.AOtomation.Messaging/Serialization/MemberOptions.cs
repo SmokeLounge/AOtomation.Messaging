@@ -14,8 +14,6 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
-
     public class MemberOptions
     {
         #region Fields

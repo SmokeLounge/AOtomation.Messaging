@@ -14,7 +14,8 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     [AoContract((int)PacketType.SystemMessage)]
     [AoKnownType(16, IdentifierType.Int32)]

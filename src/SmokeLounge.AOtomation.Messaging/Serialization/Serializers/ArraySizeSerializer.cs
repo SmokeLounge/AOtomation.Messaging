@@ -18,8 +18,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
-
     public class ArraySizeSerializer : ISerializer
     {
         #region Fields

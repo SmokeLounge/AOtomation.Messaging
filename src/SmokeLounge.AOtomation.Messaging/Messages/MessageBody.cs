@@ -14,7 +14,8 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     [AoKnownType(2, IdentifierType.Int16)]
     public abstract class MessageBody

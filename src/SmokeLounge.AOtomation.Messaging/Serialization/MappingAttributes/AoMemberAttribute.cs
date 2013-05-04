@@ -12,7 +12,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
+namespace SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes
 {
     using System;
 

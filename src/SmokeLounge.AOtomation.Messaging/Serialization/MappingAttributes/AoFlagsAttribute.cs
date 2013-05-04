@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AoKnownTypeAttribute.cs" company="SmokeLounge">
+// <copyright file="AoFlagsAttribute.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,50 +8,39 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the AoKnownTypeAttribute type.
+//   Defines the AoFlagsAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
+namespace SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class AoKnownTypeAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    public class AoFlagsAttribute : Attribute
     {
         #region Fields
 
-        private readonly IdentifierType identifierType;
-
-        private readonly int offset;
+        private readonly string flag;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public AoKnownTypeAttribute(int offset, IdentifierType identifierType)
+        public AoFlagsAttribute(string flag)
         {
-            this.offset = offset;
-            this.identifierType = identifierType;
+            this.flag = flag;
         }
 
         #endregion
 
         #region Public Properties
 
-        public IdentifierType IdentifierType
+        public string Flag
         {
             get
             {
-                return this.identifierType;
-            }
-        }
-
-        public int Offset
-        {
-            get
-            {
-                return this.offset;
+                return this.flag;
             }
         }
 

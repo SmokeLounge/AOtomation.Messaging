@@ -17,22 +17,34 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System;
     using System.Reflection;
 
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     public class PropertyMeta
     {
         #region Fields
 
+        private readonly AoFlagsAttribute flagsAttribute;
+
+        private readonly MemberOptions options;
+
         private readonly PropertyInfo propertyInfo;
+
+        private readonly AoUsesFlagsAttribute[] usesFlagsAttributes;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public PropertyMeta(PropertyInfo propertyInfo, AoMemberAttribute memberAttribute)
+        public PropertyMeta(
+            PropertyInfo propertyInfo, 
+            AoMemberAttribute memberAttribute, 
+            AoFlagsAttribute flagsAttribute, 
+            AoUsesFlagsAttribute[] usesFlagsAttributes)
         {
             this.propertyInfo = propertyInfo;
-            this.Options = new MemberOptions(
+            this.flagsAttribute = flagsAttribute;
+            this.usesFlagsAttributes = usesFlagsAttributes;
+            this.options = new MemberOptions(
                 memberAttribute.IsFixedSize, 
                 memberAttribute.FixedSizeLength, 
                 memberAttribute.SerializeSize, 
@@ -44,7 +56,21 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Public Properties
 
-        public MemberOptions Options { get; set; }
+        public AoFlagsAttribute FlagsAttribute
+        {
+            get
+            {
+                return this.flagsAttribute;
+            }
+        }
+
+        public MemberOptions Options
+        {
+            get
+            {
+                return this.options;
+            }
+        }
 
         public PropertyInfo Property
         {
@@ -59,6 +85,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             get
             {
                 return this.propertyInfo.PropertyType;
+            }
+        }
+
+        public AoUsesFlagsAttribute[] UsesFlagsAttributes
+        {
+            get
+            {
+                return this.usesFlagsAttributes;
             }
         }
 

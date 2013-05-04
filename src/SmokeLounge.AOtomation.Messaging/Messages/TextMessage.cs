@@ -15,7 +15,7 @@
 namespace SmokeLounge.AOtomation.Messaging.Messages
 {
     using SmokeLounge.AOtomation.Messaging.GameData;
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     [AoContract((int)PacketType.TextMessage)]
     public class TextMessage : MessageBody

@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AoFlagCriteriaAttribute.cs" company="SmokeLounge">
+// <copyright file="FlagsCriteria.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,13 +8,18 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the AoFlagCriteriaAttribute type.
+//   Defines the FlagsCriteria type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
+namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
-    public class AoFlagCriteriaAttribute
+    public enum FlagsCriteria
     {
+        HasAll, 
+
+        HasAny, 
+
+        EqualsToAny
     }
 }

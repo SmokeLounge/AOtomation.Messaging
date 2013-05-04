@@ -26,7 +26,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
     using SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages;
     using SmokeLounge.AOtomation.Messaging.Messages.SystemMessages;
     using SmokeLounge.AOtomation.Messaging.Serialization;
-    using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
 
     using StreamReader = SmokeLounge.AOtomation.Messaging.Serialization.StreamReader;
     using StreamWriter = SmokeLounge.AOtomation.Messaging.Serialization.StreamWriter;
@@ -117,6 +116,37 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             }
 
             Assert.AreEqual(expected.Expansions, actual.Expansions);
+        }
+
+        [TestMethod]
+        public void OrgClientMessageTest1()
+        {
+            var context = new SerializationContextBuilder<MessageBody>().Build();
+
+            var expected = new OrgClientMessage
+                               {
+                                   Identity =
+                                       new Identity
+                                           {
+                                               Type = IdentityType.CanbeAffected, 
+                                               Instance = 12345
+                                           }, 
+                                   Target =
+                                       new Identity
+                                           {
+                                               Type = IdentityType.CanbeAffected, 
+                                               Instance = 12345
+                                           }, 
+                                   Command = OrgClientCommand.Create, 
+                                   CommandArgs = "test"
+                               };
+
+            var serializer = context.GetSerializer(expected.GetType());
+
+            var actual = (OrgClientMessage)this.SerializeDeserialize(serializer, expected);
+
+            this.AssertN3Message(expected, actual);
+            this.AssertOrgClientMessage(expected, actual);
         }
 
         [TestMethod]
@@ -282,11 +312,18 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         private void AssertN3Message(N3Message expected, N3Message actual)
         {
-            Assert.AreEqual(expected.Identity.Type, actual.Identity.Type);
-            Assert.AreEqual(expected.Identity.Instance, actual.Identity.Instance);
+            Assert.AreEqual(expected.Identity, actual.Identity);
             Assert.AreEqual(expected.N3MessageType, actual.N3MessageType);
             Assert.AreEqual(expected.PacketType, actual.PacketType);
             Assert.AreEqual(expected.Unknown, actual.Unknown);
+        }
+
+        private void AssertOrgClientMessage(OrgClientMessage expected, OrgClientMessage actual)
+        {
+            Assert.AreEqual(expected.Command, actual.Command);
+            Assert.AreEqual(expected.Target, actual.Target);
+            Assert.AreEqual(expected.Unknown1, actual.Unknown1);
+            Assert.AreEqual(expected.CommandArgs, actual.CommandArgs);
         }
 
         private void AssertOrgServerMessage(OrgServerMessage expected, OrgServerMessage actual)
@@ -294,8 +331,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             Assert.AreEqual(expected.OrgServerMessageType, actual.OrgServerMessageType);
             Assert.AreEqual(expected.Unknown1, actual.Unknown1);
             Assert.AreEqual(expected.Unknown2, actual.Unknown2);
-            Assert.AreEqual(expected.Organization.Type, actual.Organization.Type);
-            Assert.AreEqual(expected.Organization.Instance, actual.Organization.Instance);
+            Assert.AreEqual(expected.Organization, actual.Organization);
             Assert.AreEqual(expected.OrganizationName, actual.OrganizationName);
         }
 

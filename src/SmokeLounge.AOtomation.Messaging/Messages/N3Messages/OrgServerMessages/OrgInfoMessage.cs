@@ -14,7 +14,8 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages
 {
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+    using SmokeLounge.AOtomation.Messaging.Serialization;
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     [AoContract((byte)OrgServerMessageType.OrgInfo)]
     public class OrgInfoMessage : OrgServerMessage

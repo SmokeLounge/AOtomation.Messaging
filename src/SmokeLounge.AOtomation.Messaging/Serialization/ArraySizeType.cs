@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IdentifierType.cs" company="SmokeLounge">
+// <copyright file="ArraySizeType.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,18 +8,22 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the IdentifierType type.
+//   Defines the ArraySizeType type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization.Mapping
+namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
-    public enum IdentifierType
+    public enum ArraySizeType
     {
+        NoSerialization, 
+
         Byte, 
 
         Int16, 
 
         Int32, 
+
+        X3F1
     }
 }

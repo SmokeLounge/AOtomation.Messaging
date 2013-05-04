@@ -14,13 +14,38 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
+    using System.Collections.Generic;
+
     public class SerializationOptions
     {
-        #region Constructors and Destructors
+        #region Fields
+
+        private readonly IDictionary<string, int> flags;
 
         #endregion
 
-        #region Public Properties
+        #region Constructors and Destructors
+
+        public SerializationOptions()
+        {
+            this.flags = new Dictionary<string, int>();
+        }
+
+        #endregion
+
+        #region Public Methods and Operators
+
+        public int GetFlagValue(string flag)
+        {
+            int value;
+            this.flags.TryGetValue(flag, out value);
+            return value;
+        }
+
+        public void SetFlagValue(string flag, int value)
+        {
+            this.flags[flag] = value;
+        }
 
         #endregion
     }

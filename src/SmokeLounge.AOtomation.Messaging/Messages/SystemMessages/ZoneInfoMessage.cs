@@ -16,7 +16,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 {
     using System.Net;
 
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     [AoContract((int)SystemMessageType.ZoneInfo)]
     public class ZoneInfoMessage : SystemMessage

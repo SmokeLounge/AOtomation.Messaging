@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="KnownType.cs" company="SmokeLounge">
+// <copyright file="AoKnownTypeAttribute.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,13 +8,16 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the KnownType type.
+//   Defines the AoKnownTypeAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace SmokeLounge.AOtomation.Messaging.Serialization
+namespace SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes
 {
-    public class KnownType
+    using System;
+
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class AoKnownTypeAttribute : Attribute
     {
         #region Fields
 
@@ -26,7 +29,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Constructors and Destructors
 
-        public KnownType(int offset, IdentifierType identifierType)
+        public AoKnownTypeAttribute(int offset, IdentifierType identifierType)
         {
             this.offset = offset;
             this.identifierType = identifierType;

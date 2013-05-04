@@ -20,7 +20,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using SmokeLounge.AOtomation.Messaging.Serialization.Mapping;
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     public class TypeSerializerBuilder
     {
@@ -142,7 +142,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                     .FirstOrDefault()
                         where property.CanWrite && memberAttribute != null && property.DeclaringType == t
                         orderby memberAttribute.Order ascending
-                        select new PropertyMeta(property, memberAttribute);
+                        let flagsAttribute =
+                            property.GetCustomAttributes(typeof(AoFlagsAttribute), false)
+                                    .Cast<AoFlagsAttribute>()
+                                    .FirstOrDefault()
+                        let usesFlagsAttribute =
+                            property.GetCustomAttributes(typeof(AoUsesFlagsAttribute), false)
+                                    .Cast<AoUsesFlagsAttribute>()
+                                    .ToArray()
+                        select new PropertyMeta(property, memberAttribute, flagsAttribute, usesFlagsAttribute);
                 list.AddRange(p);
             }
 
