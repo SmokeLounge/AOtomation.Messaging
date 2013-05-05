@@ -14,6 +14,8 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
+
     public class MemberOptions
     {
         #region Fields
@@ -28,18 +30,26 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         private readonly ArraySizeType serializeSize;
 
+        private readonly AoUsesFlagsAttribute[] usesFlagsAttributes;
+
         #endregion
 
         #region Constructors and Destructors
 
         public MemberOptions(
-            bool isFixedSize, int fixedSizeLength, ArraySizeType serializeSize, int padAfter, int padBefore)
+            bool isFixedSize, 
+            int fixedSizeLength, 
+            ArraySizeType serializeSize, 
+            int padAfter, 
+            int padBefore, 
+            AoUsesFlagsAttribute[] usesFlagsAttributes)
         {
             this.isFixedSize = isFixedSize;
             this.fixedSizeLength = fixedSizeLength;
             this.serializeSize = serializeSize;
             this.padAfter = padAfter;
             this.padBefore = padBefore;
+            this.usesFlagsAttributes = usesFlagsAttributes;
         }
 
         #endregion
@@ -83,6 +93,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             get
             {
                 return this.serializeSize;
+            }
+        }
+
+        public AoUsesFlagsAttribute[] UsesFlagsAttributes
+        {
+            get
+            {
+                return this.usesFlagsAttributes;
             }
         }
 

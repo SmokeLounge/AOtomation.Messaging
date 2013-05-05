@@ -135,53 +135,27 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             PropertyMeta propertyMeta, 
             ParameterExpression objectToSerialize)
         {
-            if (propertyMeta.UsesFlagsAttributes.Any())
-            {
-                var evaluateMethodInfo =
-                    ReflectionHelper
-                        .GetMethodInfo
-                        <SerializationContext, Func<IEnumerable<AoUsesFlagsAttribute>, AoUsesFlagsAttribute>>(
-                            o => o.Evaluate);
-                var evaluateExpression = Expression.Call(
-                    optionsExpression, 
-                    evaluateMethodInfo, 
-                    Expression.Constant(propertyMeta.UsesFlagsAttributes, typeof(IEnumerable<AoUsesFlagsAttribute>)));
-
-                var usesFlagsExpression = Expression.Variable(typeof(AoUsesFlagsAttribute));
-                var assignUsesFlagsExpression = Expression.Assign(usesFlagsExpression, evaluateExpression);
-                var testExpression = Expression.NotEqual(usesFlagsExpression, Expression.Constant(null));
-
-                var typePropertyInfo = ReflectionHelper.GetPropertyInfo<AoUsesFlagsAttribute>(o => o.Type);
-                var typePropertyExpression = Expression.Property(usesFlagsExpression, typePropertyInfo);
-
-                var getSerializerMethodInfo =
-                    ReflectionHelper.GetMethodInfo<SerializationContext, Func<Type, ISerializer>>(o => o.GetSerializer);
-                var getSerializerExpression = Expression.Call(
-                    optionsExpression, getSerializerMethodInfo, new Expression[] { typePropertyExpression });
-
-                var iserializerExpression = Expression.Variable(typeof(ISerializer));
-                var assignISerializerExpression = Expression.Assign(iserializerExpression, getSerializerExpression);
-                var serializerPropertyInfo = ReflectionHelper.GetPropertyInfo<ISerializer>(o => o.Serializer);
-                var serializerPropertyExpression = Expression.Property(iserializerExpression, serializerPropertyInfo);
-                var callSerializerExpression = Expression.Invoke(
-                    serializerPropertyExpression, 
-                    new Expression[] { streamWriterExpression, optionsExpression, objectToSerialize });
-
-                var serializeBlockExpression = Expression.Block(
-                    new[] { iserializerExpression }, assignISerializerExpression, callSerializerExpression);
-
-                var ifExpression = Expression.IfThen(testExpression, serializeBlockExpression);
-                return Expression.Block(new[] { usesFlagsExpression }, assignUsesFlagsExpression, ifExpression);
-            }
-
-            var propertySerializer = this.serializerResolver(propertyMeta.Type);
-
             Expression propertyExpression = Expression.Property(objectToSerialize, propertyMeta.Property);
             if (ReflectionHelper.IsStruct(propertyMeta.Type))
             {
                 propertyExpression = Expression.Convert(propertyExpression, typeof(object));
             }
 
+            if (propertyMeta.UsesFlagsAttributes.Any())
+            {
+                var serializeMethodInfo =
+                    ReflectionHelper.GetMethodInfo<SerializationContext, Action<StreamWriter, object, MemberOptions>>(
+                        o => o.Serialize);
+                var args = new[]
+                               {
+                                   streamWriterExpression, propertyExpression, 
+                                   Expression.Constant(propertyMeta.Options, typeof(MemberOptions))
+                               };
+                var callSerializeExpression = Expression.Call(optionsExpression, serializeMethodInfo, args);
+                return callSerializeExpression;
+            }
+
+            var propertySerializer = this.serializerResolver(propertyMeta.Type);
             var serializerExpression = propertySerializer.SerializerExpression(
                 streamWriterExpression, optionsExpression, propertyExpression, propertyMeta.Options);
 

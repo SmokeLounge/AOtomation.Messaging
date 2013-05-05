@@ -34,17 +34,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         {
             this.type = type;
             this.typeSerializer = typeSerializer;
-            this.Serializer = this.Serialize;
-            this.Deserializer = this.Deserialize;
+            this.SerializerLambda =
+                (streamWriter, serializationContext, value) =>
+                this.Serialize(streamWriter, serializationContext, value, null);
+            this.DeserializerLambda =
+                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
         }
 
         #endregion
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> DeserializerLambda { get; private set; }
 
-        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> SerializerLambda { get; private set; }
 
         public Type Type
         {
@@ -57,6 +60,30 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #endregion
 
         #region Public Methods and Operators
+
+        public object Deserialize(
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+        {
+            int arrayLength;
+            if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
+            {
+                var arraySizeSerializer = new ArraySizeSerializer(memberOptions.SerializeSize);
+                arrayLength = (int)arraySizeSerializer.Deserialize(streamReader, serializationContext, memberOptions);
+            }
+            else
+            {
+                arrayLength = memberOptions.FixedSizeLength;
+            }
+
+            var array = Array.CreateInstance(this.type, arrayLength);
+            for (var i = 0; i < arrayLength; i++)
+            {
+                var element = this.typeSerializer.Deserialize(streamReader, serializationContext, memberOptions);
+                array.SetValue(element, i);
+            }
+
+            return array;
+        }
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
@@ -115,6 +142,25 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             return block;
         }
 
+        public void Serialize(
+            StreamWriter streamWriter, 
+            SerializationContext serializationContext, 
+            object value, 
+            MemberOptions memberOptions)
+        {
+            if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
+            {
+                var arraySizeSerializer = new ArraySizeSerializer(memberOptions.SerializeSize);
+                arraySizeSerializer.Serialize(streamWriter, serializationContext, value, memberOptions);
+            }
+
+            var array = (Array)value;
+            for (var i = 0; i < array.Length; i++)
+            {
+                this.typeSerializer.Serialize(streamWriter, serializationContext, array.GetValue(i), memberOptions);
+            }
+        }
+
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
             ParameterExpression optionsExpression, 
@@ -159,20 +205,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             var block = Expression.Block(new[] { counter }, expressions);
             return block;
-        }
-
-        #endregion
-
-        #region Methods
-
-        private object Deserialize(StreamReader reader, SerializationContext context)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Serialize(StreamWriter writer, SerializationContext context, object obj)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

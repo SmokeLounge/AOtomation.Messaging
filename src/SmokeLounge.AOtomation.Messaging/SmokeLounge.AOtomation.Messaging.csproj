@@ -256,7 +256,6 @@
     <Compile Include="Serialization\Serializers\ArraySerializer.cs" />
     <Compile Include="Serialization\Serializers\ArraySizeSerializer.cs" />
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
-    <Compile Include="Serialization\Serializers\Custom\OrgClientMessageSerializer.cs" />
     <Compile Include="Serialization\Serializers\Custom\PlayfieldVendorInfoSerializer.cs" />
     <Compile Include="Serialization\Serializers\Custom\SimpleCharFullUpdateSerializer.cs" />
     <Compile Include="Serialization\Serializers\IPAddressSerializer.cs" />

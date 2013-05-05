@@ -32,17 +32,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         public HeaderSerializer()
         {
             this.type = typeof(Header);
-            this.Serializer = this.Serialize;
-            this.Deserializer = this.Deserialize;
+            this.SerializerLambda =
+                (streamWriter, serializationContext, value) =>
+                this.Serialize(streamWriter, serializationContext, value, null);
+            this.DeserializerLambda =
+                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
         }
 
         #endregion
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> DeserializerLambda { get; private set; }
 
-        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> SerializerLambda { get; private set; }
 
         public Type Type
         {
@@ -56,6 +59,19 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Public Methods and Operators
 
+        public object Deserialize(
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+        {
+            var header = new Header();
+            header.MessageId = streamReader.ReadInt16();
+            header.PacketType = (PacketType)streamReader.ReadInt16();
+            header.Unknown = streamReader.ReadInt16();
+            header.Size = streamReader.ReadInt16();
+            header.Sender = streamReader.ReadInt32();
+            header.Receiver = streamReader.ReadInt32();
+            return header;
+        }
+
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
             ParameterExpression optionsExpression, 
@@ -65,6 +81,21 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             throw new NotImplementedException();
         }
 
+        public void Serialize(
+            StreamWriter streamWriter, 
+            SerializationContext serializationContext, 
+            object value, 
+            MemberOptions memberOptions)
+        {
+            var header = (Header)value;
+            streamWriter.WriteInt16(header.MessageId);
+            streamWriter.WriteInt16((short)header.PacketType);
+            streamWriter.WriteInt16(header.Unknown);
+            streamWriter.WriteInt16(header.Size);
+            streamWriter.WriteInt32(header.Sender);
+            streamWriter.WriteInt32(header.Receiver);
+        }
+
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
             ParameterExpression optionsExpression, 
@@ -72,33 +103,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             MemberOptions memberOptions)
         {
             throw new NotImplementedException();
-        }
-
-        #endregion
-
-        #region Methods
-
-        private object Deserialize(StreamReader reader, SerializationContext context)
-        {
-            var header = new Header();
-            header.MessageId = reader.ReadInt16();
-            header.PacketType = (PacketType)reader.ReadInt16();
-            header.Unknown = reader.ReadInt16();
-            header.Size = reader.ReadInt16();
-            header.Sender = reader.ReadInt32();
-            header.Receiver = reader.ReadInt32();
-            return header;
-        }
-
-        private void Serialize(StreamWriter writer, SerializationContext context, object value)
-        {
-            var header = (Header)value;
-            writer.WriteInt16(header.MessageId);
-            writer.WriteInt16((short)header.PacketType);
-            writer.WriteInt16(header.Unknown);
-            writer.WriteInt16(header.Size);
-            writer.WriteInt32(header.Sender);
-            writer.WriteInt32(header.Receiver);
         }
 
         #endregion

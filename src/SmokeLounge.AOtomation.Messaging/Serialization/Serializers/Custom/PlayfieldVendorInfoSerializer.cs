@@ -33,17 +33,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         public PlayfieldVendorInfoSerializer()
         {
             this.type = typeof(PlayfieldVendorInfo);
-            this.Serializer = this.Serialize;
-            this.Deserializer = this.Deserialize;
+            this.SerializerLambda =
+                (streamWriter, serializationContext, value) =>
+                this.Serialize(streamWriter, serializationContext, value, null);
+            this.DeserializerLambda =
+                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
         }
 
         #endregion
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> DeserializerLambda { get; private set; }
 
-        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> SerializerLambda { get; private set; }
 
         public Type Type
         {
@@ -57,6 +60,31 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
 
         #region Public Methods and Operators
 
+        public object Deserialize(
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+        {
+            var identityType = (IdentityType)streamReader.ReadInt32();
+            if (identityType != IdentityType.VendingMachine)
+            {
+                streamReader.Position = streamReader.Position - 4;
+                return null;
+            }
+
+            var playfieldVendorInfo = new PlayfieldVendorInfo
+                                          {
+                                              Unknown1 =
+                                                  new Identity
+                                                      {
+                                                          Type = identityType, 
+                                                          Instance = streamReader.ReadInt32()
+                                                      }, 
+                                              Unknown2 = streamReader.ReadInt32(), 
+                                              VendorCount = streamReader.ReadInt32(), 
+                                              FirstVendorId = streamReader.ReadInt32()
+                                          };
+            return playfieldVendorInfo;
+        }
+
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
             ParameterExpression optionsExpression, 
@@ -65,15 +93,41 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         {
             var deserializerMethodInfo =
                 ReflectionHelper
-                    .GetMethodInfo<PlayfieldVendorInfoSerializer, Func<StreamReader, SerializationContext, object>>(
+                    .GetMethodInfo
+                    <PlayfieldVendorInfoSerializer, Func<StreamReader, SerializationContext, MemberOptions, object>>(
                         o => o.Deserialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
-                serializerExp, deserializerMethodInfo, new Expression[] { streamReaderExpression, optionsExpression });
+                serializerExp, 
+                deserializerMethodInfo, 
+                new Expression[]
+                    {
+                        streamReaderExpression, optionsExpression, 
+                        Expression.Constant(memberOptions, typeof(MemberOptions))
+                    });
 
             var assignmentExp = Expression.Assign(
                 assignmentTargetExpression, Expression.TypeAs(callExp, assignmentTargetExpression.Type));
             return assignmentExp;
+        }
+
+        public void Serialize(
+            StreamWriter streamWriter, 
+            SerializationContext serializationContext, 
+            object value, 
+            MemberOptions memberOptions)
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            var playfieldVendorInfo = (PlayfieldVendorInfo)value;
+            streamWriter.WriteInt32((int)playfieldVendorInfo.Unknown1.Type);
+            streamWriter.WriteInt32(playfieldVendorInfo.Unknown1.Instance);
+            streamWriter.WriteInt32(playfieldVendorInfo.Unknown2);
+            streamWriter.WriteInt32(playfieldVendorInfo.VendorCount);
+            streamWriter.WriteInt32(playfieldVendorInfo.FirstVendorId);
         }
 
         public Expression SerializerExpression(
@@ -84,57 +138,19 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         {
             var serializerMethodInfo =
                 ReflectionHelper
-                    .GetMethodInfo<PlayfieldVendorInfoSerializer, Action<StreamWriter, SerializationContext, object>>(
+                    .GetMethodInfo
+                    <PlayfieldVendorInfoSerializer, Action<StreamWriter, SerializationContext, object, MemberOptions>>(
                         o => o.Serialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
                 serializerExp, 
                 serializerMethodInfo, 
-                new[] { streamWriterExpression, optionsExpression, valueExpression });
+                new[]
+                    {
+                        streamWriterExpression, optionsExpression, valueExpression, 
+                        Expression.Constant(memberOptions, typeof(MemberOptions))
+                    });
             return callExp;
-        }
-
-        #endregion
-
-        #region Methods
-
-        private object Deserialize(StreamReader reader, SerializationContext context)
-        {
-            var identityType = (IdentityType)reader.ReadInt32();
-            if (identityType != IdentityType.VendingMachine)
-            {
-                reader.Position = reader.Position - 4;
-                return null;
-            }
-
-            var playfieldVendorInfo = new PlayfieldVendorInfo
-                                          {
-                                              Unknown1 =
-                                                  new Identity
-                                                      {
-                                                          Type = identityType, 
-                                                          Instance = reader.ReadInt32()
-                                                      }, 
-                                              Unknown2 = reader.ReadInt32(), 
-                                              VendorCount = reader.ReadInt32(), 
-                                              FirstVendorId = reader.ReadInt32()
-                                          };
-            return playfieldVendorInfo;
-        }
-
-        private void Serialize(StreamWriter writer, SerializationContext context, object value)
-        {
-            if (value == null)
-            {
-                return;
-            }
-
-            var playfieldVendorInfo = (PlayfieldVendorInfo)value;
-            writer.WriteInt32((int)playfieldVendorInfo.Unknown1.Type);
-            writer.WriteInt32(playfieldVendorInfo.Unknown1.Instance);
-            writer.WriteInt32(playfieldVendorInfo.Unknown2);
-            writer.WriteInt32(playfieldVendorInfo.VendorCount);
-            writer.WriteInt32(playfieldVendorInfo.FirstVendorId);
         }
 
         #endregion

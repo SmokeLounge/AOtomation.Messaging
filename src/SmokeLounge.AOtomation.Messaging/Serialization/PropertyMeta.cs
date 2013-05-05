@@ -49,7 +49,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 memberAttribute.FixedSizeLength, 
                 memberAttribute.SerializeSize, 
                 memberAttribute.PadAfter, 
-                memberAttribute.PadBefore);
+                memberAttribute.PadBefore, 
+                usesFlagsAttributes);
         }
 
         #endregion

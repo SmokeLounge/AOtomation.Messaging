@@ -51,7 +51,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> Deserializer
+        public Func<StreamReader, SerializationContext, object> DeserializerLambda
         {
             get
             {
@@ -59,7 +59,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             }
         }
 
-        public Action<StreamWriter, SerializationContext, object> Serializer
+        public Action<StreamWriter, SerializationContext, object> SerializerLambda
         {
             get
             {
@@ -79,6 +79,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Public Methods and Operators
 
+        public object Deserialize(
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+        {
+            return this.DeserializerLambda(streamReader, serializationContext);
+        }
+
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
             ParameterExpression optionsExpression, 
@@ -89,6 +95,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 this.deserializerExpression.Value, new Expression[] { streamReaderExpression, optionsExpression });
             var assignExp = Expression.Assign(assignmentTargetExpression, Expression.Convert(invokeExp, this.type));
             return assignExp;
+        }
+
+        public void Serialize(
+            StreamWriter streamWriter, 
+            SerializationContext serializationContext, 
+            object value, 
+            MemberOptions memberOptions)
+        {
+            this.SerializerLambda(streamWriter, serializationContext, value);
         }
 
         public Expression SerializerExpression(
@@ -108,7 +123,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         private Expression BuildDeserializerExpression()
         {
-            var readerParam = Expression.Parameter(typeof(StreamReader), "reader");
+            var readerParam = Expression.Parameter(typeof(StreamReader), "streamReader");
             var optionsParam = Expression.Parameter(typeof(SerializationContext), "options");
 
             var expression = this.typeSerializerBuilder.BuildDeserializer(readerParam, optionsParam);
@@ -117,7 +132,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         private Expression BuildSerializerExpression()
         {
-            var writerParam = Expression.Parameter(typeof(StreamWriter), "writer");
+            var writerParam = Expression.Parameter(typeof(StreamWriter), "streamWriter");
             var optionsParam = Expression.Parameter(typeof(SerializationContext), "options");
 
             var expression = this.typeSerializerBuilder.BuildSerializer(writerParam, optionsParam);

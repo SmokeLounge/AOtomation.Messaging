@@ -54,11 +54,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             return value;
         }
 
-        public ISerializer GetSerializer(Type type)
-        {
-            return this.serializerResolver.GetSerializer(type);
-        }
-
         public void SetFlagValue(string flag, int value)
         {
             this.flags[flag] = value;
@@ -67,6 +62,48 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         #endregion
 
         #region Methods
+
+        internal object Deserialize(StreamReader streamReader, object obj, MemberOptions memberOptions)
+        {
+            ISerializer serializer;
+            if (memberOptions.UsesFlagsAttributes.Any() == false)
+            {
+                serializer = this.serializerResolver.GetSerializer(obj.GetType());
+            }
+            else
+            {
+                var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
+                if (usesFlag == null)
+                {
+                    return null;
+                }
+
+                serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
+            }
+
+            return serializer.Deserialize(streamReader, this, memberOptions);
+        }
+
+        internal void Serialize(StreamWriter streamWriter, object obj, MemberOptions memberOptions)
+        {
+            ISerializer serializer;
+            if (memberOptions.UsesFlagsAttributes.Any() == false)
+            {
+                serializer = this.serializerResolver.GetSerializer(obj.GetType());
+            }
+            else
+            {
+                var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
+                if (usesFlag == null)
+                {
+                    return;
+                }
+
+                serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
+            }
+
+            serializer.Serialize(streamWriter, this, obj, memberOptions);
+        }
 
         private bool Evaluate(AoUsesFlagsAttribute usesFlags)
         {

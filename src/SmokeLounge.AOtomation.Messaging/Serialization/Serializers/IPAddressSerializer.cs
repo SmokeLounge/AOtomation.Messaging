@@ -35,17 +35,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         {
             this.type = typeof(IPAddress);
             this.constructor = this.type.GetConstructor(new[] { typeof(byte[]) });
-            this.Serializer = this.Serialize;
-            this.Deserializer = this.Deserialize;
+            this.SerializerLambda =
+                (streamWriter, serializationContext, value) =>
+                this.Serialize(streamWriter, serializationContext, value, null);
+            this.DeserializerLambda =
+                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
         }
 
         #endregion
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> DeserializerLambda { get; private set; }
 
-        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> SerializerLambda { get; private set; }
 
         public Type Type
         {
@@ -58,6 +61,13 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #endregion
 
         #region Public Methods and Operators
+
+        public object Deserialize(
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+        {
+            var address = new IPAddress(streamReader.ReadBytes(4));
+            return address;
+        }
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
@@ -81,6 +91,16 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             return assignmentExp;
         }
 
+        public void Serialize(
+            StreamWriter streamWriter, 
+            SerializationContext serializationContext, 
+            object value, 
+            MemberOptions memberOptions)
+        {
+            var address = (IPAddress)value;
+            streamWriter.WriteBytes(address.GetAddressBytes());
+        }
+
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
             ParameterExpression optionsExpression, 
@@ -96,22 +116,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             var callWriteExp = Expression.Call(
                 streamWriterExpression, writeMethodInfo, new Expression[] { callGetAddressBytesExp });
             return callWriteExp;
-        }
-
-        #endregion
-
-        #region Methods
-
-        private object Deserialize(StreamReader reader, SerializationContext context)
-        {
-            var address = new IPAddress(reader.ReadBytes(4));
-            return address;
-        }
-
-        private void Serialize(StreamWriter writer, SerializationContext context, object value)
-        {
-            var address = (IPAddress)value;
-            writer.WriteBytes(address.GetAddressBytes());
         }
 
         #endregion

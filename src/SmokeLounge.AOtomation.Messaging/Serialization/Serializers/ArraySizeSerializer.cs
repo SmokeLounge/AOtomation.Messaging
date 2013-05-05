@@ -48,15 +48,21 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                     this.type = typeof(int);
                     break;
             }
+
+            this.SerializerLambda =
+                (streamWriter, serializationContext, value) =>
+                this.Serialize(streamWriter, serializationContext, value, null);
+            this.DeserializerLambda =
+                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
         }
 
         #endregion
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> DeserializerLambda { get; private set; }
 
-        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> SerializerLambda { get; private set; }
 
         public Type Type
         {
@@ -69,6 +75,27 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #endregion
 
         #region Public Methods and Operators
+
+        public object Deserialize(
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+        {
+            switch (this.arraySizeType)
+            {
+                case ArraySizeType.NoSerialization:
+                    return null;
+                case ArraySizeType.Byte:
+                    return streamReader.ReadByte();
+                case ArraySizeType.Int16:
+                    return streamReader.ReadInt16();
+                case ArraySizeType.Int32:
+                    return streamReader.ReadInt32();
+                case ArraySizeType.X3F1:
+                    var length3F1 = streamReader.ReadInt32();
+                    return (length3F1 / 0x03F1) - 1;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
@@ -129,6 +156,41 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                     : Expression.Convert(deserializedValueExpression, assignmentTargetExpression.Type));
 
             return deserializerExpression;
+        }
+
+        public void Serialize(
+            StreamWriter streamWriter, 
+            SerializationContext serializationContext, 
+            object value, 
+            MemberOptions memberOptions)
+        {
+            if (this.arraySizeType == ArraySizeType.NoSerialization)
+            {
+                return;
+            }
+
+            var array = value as Array;
+            var length = array != null ? array.Length : ((string)value).Length;
+
+            switch (this.arraySizeType)
+            {
+                case ArraySizeType.NoSerialization:
+                    break;
+                case ArraySizeType.Byte:
+                    streamWriter.WriteByte((byte)length);
+                    break;
+                case ArraySizeType.Int16:
+                    streamWriter.WriteInt16((short)length);
+                    break;
+                case ArraySizeType.Int32:
+                    streamWriter.WriteInt32(length);
+                    break;
+                case ArraySizeType.X3F1:
+                    streamWriter.WriteInt32((length + 1) * 0x03F1);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public Expression SerializerExpression(

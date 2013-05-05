@@ -30,17 +30,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         public Int64Serializer()
         {
             this.type = typeof(long);
-            this.Serializer = this.Serialize;
-            this.Deserializer = this.Deserialize;
+            this.SerializerLambda =
+                (streamWriter, serializationContext, value) =>
+                this.Serialize(streamWriter, serializationContext, value, null);
+            this.DeserializerLambda =
+                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
         }
 
         #endregion
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> DeserializerLambda { get; private set; }
 
-        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> SerializerLambda { get; private set; }
 
         public Type Type
         {
@@ -53,6 +56,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #endregion
 
         #region Public Methods and Operators
+
+        public object Deserialize(
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+        {
+            return streamReader.ReadInt64();
+        }
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
@@ -72,6 +81,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             return assignmentExp;
         }
 
+        public void Serialize(
+            StreamWriter streamWriter, 
+            SerializationContext serializationContext, 
+            object value, 
+            MemberOptions memberOptions)
+        {
+            streamWriter.WriteInt64((long)value);
+        }
+
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
             ParameterExpression optionsExpression, 
@@ -89,20 +107,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 writeMethodInfo, 
                 new Expression[] { Expression.Convert(valueExpression, this.type) });
             return callWriteExp;
-        }
-
-        #endregion
-
-        #region Methods
-
-        private object Deserialize(StreamReader reader, SerializationContext context)
-        {
-            return reader.ReadInt64();
-        }
-
-        private void Serialize(StreamWriter writer, SerializationContext context, object o)
-        {
-            writer.WriteInt64((long)o);
         }
 
         #endregion
