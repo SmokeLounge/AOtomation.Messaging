@@ -29,7 +29,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int16)]
         public string Name { get; set; }

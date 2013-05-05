@@ -196,7 +196,7 @@
         &lt;And&gt;&#xD;
           &lt;Kind Is="property"/&gt;&#xD;
           &lt;Access Is="public"/&gt;&#xD;
-          &lt;HasAttribute CLRName="SmokeLounge.AOtomation.Messaging.Serialization.Mapping.AoMemberAttribute"/&gt;&#xD;
+          &lt;HasAttribute CLRName="SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes.AoMemberAttribute"/&gt;&#xD;
         &lt;/And&gt;&#xD;
       &lt;/Match&gt;&#xD;
       &lt;Group Region="AoMember Properties"/&gt;&#xD;

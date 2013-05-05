@@ -31,22 +31,22 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public OrgServerMessageType OrgServerMessageType { get; set; }
-
-        [AoMember(3)]
-        public Identity Organization { get; set; }
-
-        [AoMember(4, SerializeSize = ArraySizeType.Int16)]
-        public string OrganizationName { get; set; }
 
         [AoMember(1)]
         public int Unknown1 { get; set; }
 
         [AoMember(2)]
         public int Unknown2 { get; set; }
+
+        [AoMember(3)]
+        public Identity Organization { get; set; }
+
+        [AoMember(4, SerializeSize = ArraySizeType.Int16)]
+        public string OrganizationName { get; set; }
 
         #endregion
     }

@@ -28,10 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(5)]
-        public SocialAction Action { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public byte Unknown1 { get; set; }
@@ -47,6 +44,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(4)]
         public int Unknown5 { get; set; }
+
+        [AoMember(5)]
+        public SocialAction Action { get; set; }
 
         #endregion
     }

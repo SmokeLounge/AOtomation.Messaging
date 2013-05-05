@@ -30,10 +30,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(3, SerializeSize = ArraySizeType.X3F1)]
-        public BankSlot[] BankSlots { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int Unknown1 { get; set; }
@@ -43,6 +40,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(2)]
         public int Unknown3 { get; set; }
+
+        [AoMember(3, SerializeSize = ArraySizeType.X3F1)]
+        public BankSlot[] BankSlots { get; set; }
 
         #endregion
     }

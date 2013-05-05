@@ -18,7 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class GameTuple<T1, T2>
     {
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public T1 Value1 { get; set; }

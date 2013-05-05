@@ -31,43 +31,46 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
-        [AoMember(9)]
-        public short AccountFlags { get; set; }
-
-        [AoMember(22, SerializeSize = ArraySizeType.X3F1)]
-        public ActiveNano[] ActiveNanos { get; set; }
-
-        [AoMember(6)]
-        public Appearance Appearance { get; set; }
-
-        [AoMember(8)]
-        public CharacterFlags CharacterFlags { get; set; }
-
-        [AoMember(11)]
-        public SimpleCharacterInfo CharacterInfo { get; set; }
-
-        [AoMember(4)]
-        public Vector3 Coordinates { get; set; }
-
-        [AoMember(10)]
-        public short Expansions { get; set; }
-
-        [AoMember(3)]
-        public Identity? FightingTarget { get; set; }
+        [AoMember(0)]
+        public byte Version { get; set; }
 
         [AoMember(1)]
         public SimpleCharFullUpdateFlags Flags { get; set; }
 
-        [AoMember(25)]
-        public int Flags2 { get; set; }
+        [AoMember(2)]
+        public int? PlayfieldId { get; set; }
 
-        [AoMember(20)]
-        public uint? HeadMesh { get; set; }
+        [AoMember(3)]
+        public Identity? FightingTarget { get; set; }
+
+        [AoMember(4)]
+        public Vector3 Coordinates { get; set; }
 
         [AoMember(5)]
         public Quaternion Heading { get; set; }
+
+        [AoMember(6)]
+        public Appearance Appearance { get; set; }
+
+        [AoMember(7)]
+        public string Name { get; set; }
+
+        [AoMember(8)]
+        public CharacterFlags CharacterFlags { get; set; }
+
+        [AoMember(9)]
+        public short AccountFlags { get; set; }
+
+        [AoMember(10)]
+        public short Expansions { get; set; }
+
+        [AoMember(11)]
+        public SimpleCharacterInfo CharacterInfo { get; set; }
+
+        [AoMember(12)]
+        public short Level { get; set; }
 
         [AoMember(13)]
         public uint Health { get; set; }
@@ -75,44 +78,41 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         [AoMember(14)]
         public int HealthDamage { get; set; }
 
-        [AoMember(12)]
-        public short Level { get; set; }
-
-        [AoMember(24, SerializeSize = ArraySizeType.X3F1)]
-        public Mesh[] Meshes { get; set; }
-
         [AoMember(15)]
         public uint MonsterData { get; set; }
 
         [AoMember(16)]
         public short MonsterScale { get; set; }
 
-        [AoMember(7)]
-        public string Name { get; set; }
-
-        [AoMember(2)]
-        public int? PlayfieldId { get; set; }
-
-        [AoMember(21)]
-        public short RunSpeedBase { get; set; }
-
-        [AoMember(23, SerializeSize = ArraySizeType.X3F1)]
-        public Texture[] Textures { get; set; }
-
-        [AoMember(19, SerializeSize = ArraySizeType.Int32)]
-        public byte[] Unknown1 { get; set; }
-
-        [AoMember(26)]
-        public byte Unknown2 { get; set; }
-
-        [AoMember(0)]
-        public byte Version { get; set; }
+        [AoMember(17)]
+        public short VisualFlags { get; set; }
 
         [AoMember(18)]
         public byte VisibleTitle { get; set; }
 
-        [AoMember(17)]
-        public short VisualFlags { get; set; }
+        [AoMember(19, SerializeSize = ArraySizeType.Int32)]
+        public byte[] Unknown1 { get; set; }
+
+        [AoMember(20)]
+        public uint? HeadMesh { get; set; }
+
+        [AoMember(21)]
+        public short RunSpeedBase { get; set; }
+
+        [AoMember(22, SerializeSize = ArraySizeType.X3F1)]
+        public ActiveNano[] ActiveNanos { get; set; }
+
+        [AoMember(23, SerializeSize = ArraySizeType.X3F1)]
+        public Texture[] Textures { get; set; }
+
+        [AoMember(24, SerializeSize = ArraySizeType.X3F1)]
+        public Mesh[] Meshes { get; set; }
+
+        [AoMember(25)]
+        public int Flags2 { get; set; }
+
+        [AoMember(26)]
+        public byte Unknown2 { get; set; }
 
         #endregion
     }

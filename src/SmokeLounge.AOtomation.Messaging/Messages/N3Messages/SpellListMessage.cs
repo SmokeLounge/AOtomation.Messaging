@@ -30,13 +30,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(1)]
-        public Identity Character { get; set; }
+        #region AoMember Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
         public NanoEffect[] NanoEffects { get; set; }
+
+        [AoMember(1)]
+        public Identity Character { get; set; }
 
         #endregion
     }

@@ -24,13 +24,13 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(1)]
-        public int Instance { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public IdentityType Type { get; set; }
+
+        [AoMember(1)]
+        public int Instance { get; set; }
 
         #endregion
 

@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public int CharacterId { get; set; }

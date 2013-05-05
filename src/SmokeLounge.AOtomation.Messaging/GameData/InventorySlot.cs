@@ -18,25 +18,25 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class InventorySlot
     {
-        #region Public Properties
+        #region AoMember Properties
 
-        [AoMember(2)]
-        public short Count { get; set; }
+        [AoMember(0)]
+        public int Placement { get; set; }
 
         [AoMember(1)]
         public short Flags { get; set; }
 
+        [AoMember(2)]
+        public short Count { get; set; }
+
         [AoMember(3)]
         public Identity Identity { get; set; }
-
-        [AoMember(5)]
-        public int ItemHighId { get; set; }
 
         [AoMember(4)]
         public int ItemLowId { get; set; }
 
-        [AoMember(0)]
-        public int Placement { get; set; }
+        [AoMember(5)]
+        public int ItemHighId { get; set; }
 
         [AoMember(6)]
         public int Quality { get; set; }

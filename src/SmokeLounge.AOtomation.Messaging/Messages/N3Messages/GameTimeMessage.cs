@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public float Unknown1 { get; set; }

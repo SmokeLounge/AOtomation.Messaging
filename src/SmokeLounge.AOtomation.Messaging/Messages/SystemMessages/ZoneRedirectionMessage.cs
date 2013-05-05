@@ -30,7 +30,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public IPAddress ServerIpAddress { get; set; }

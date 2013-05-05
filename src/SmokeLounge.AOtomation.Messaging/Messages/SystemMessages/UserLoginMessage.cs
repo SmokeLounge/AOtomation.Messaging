@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(2, IsFixedSize = true, FixedSizeLength = 20)]
-        public string ClientVersion { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int Unknown { get; set; }
 
         [AoMember(1, IsFixedSize = true, FixedSizeLength = 40)]
         public string UserName { get; set; }
+
+        [AoMember(2, IsFixedSize = true, FixedSizeLength = 20)]
+        public string ClientVersion { get; set; }
 
         #endregion
     }

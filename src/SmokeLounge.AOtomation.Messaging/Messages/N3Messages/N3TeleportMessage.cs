@@ -29,37 +29,37 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(6)]
-        public Identity ChangePlayfield { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public Vector3 Destination { get; set; }
 
-        [AoMember(4)]
-        public int GameServerId { get; set; }
-
         [AoMember(1)]
         public Quaternion Heading { get; set; }
+
+        [AoMember(2)]
+        public byte Unknown1 { get; set; }
 
         [AoMember(3)]
         public Identity Playfield { get; set; }
 
-        [AoMember(9)]
-        public Identity Playfield2 { get; set; }
+        [AoMember(4)]
+        public int GameServerId { get; set; }
 
         [AoMember(5)]
         public int SgId { get; set; }
 
-        [AoMember(2)]
-        public byte Unknown1 { get; set; }
+        [AoMember(6)]
+        public Identity ChangePlayfield { get; set; }
 
         [AoMember(7)]
         public int Unknown4 { get; set; }
 
         [AoMember(8)]
         public int Unknown5 { get; set; }
+
+        [AoMember(9)]
+        public Identity Playfield2 { get; set; }
 
         [AoMember(10)]
         public int Unknown6 { get; set; }

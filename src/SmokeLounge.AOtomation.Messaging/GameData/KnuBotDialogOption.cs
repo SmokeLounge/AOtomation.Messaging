@@ -19,7 +19,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class KnuBotDialogOption
     {
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int32)]
         public string Text { get; set; }

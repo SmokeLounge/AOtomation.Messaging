@@ -31,13 +31,20 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
+
+        [AoMember(0)]
+        public N3MessageType N3MessageType { get; set; }
 
         [AoMember(1)]
         public Identity Identity { get; set; }
 
-        [AoMember(0)]
-        public N3MessageType N3MessageType { get; set; }
+        [AoMember(2)]
+        public byte Unknown { get; set; }
+
+        #endregion
+
+        #region Public Properties
 
         public override PacketType PacketType
         {
@@ -46,9 +53,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
                 return PacketType.N3Message;
             }
         }
-
-        [AoMember(2)]
-        public byte Unknown { get; set; }
 
         #endregion
     }

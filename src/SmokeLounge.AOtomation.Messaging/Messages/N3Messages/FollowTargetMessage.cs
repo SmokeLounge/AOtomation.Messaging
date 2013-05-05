@@ -29,16 +29,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(2)]
-        public Identity Target { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public byte Unknown1 { get; set; }
 
         [AoMember(1)]
         public byte Unknown2 { get; set; }
+
+        [AoMember(2)]
+        public Identity Target { get; set; }
 
         [AoMember(3)]
         public int Unknown3 { get; set; }

@@ -30,7 +30,16 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
+
+        [AoMember(0)]
+        public int Unknown1 { get; set; }
+
+        [AoMember(1)]
+        public int Unknown2 { get; set; }
+
+        [AoMember(2)]
+        public int Unknown3 { get; set; }
 
         [AoMember(3)]
         public Vector3 Coordinates { get; set; }
@@ -41,11 +50,23 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         [AoMember(5)]
         public int PlayfieldId { get; set; }
 
-        [AoMember(15)]
-        public int TemplateId { get; set; }
+        [AoMember(6)]
+        public int Unknown4 { get; set; }
 
-        [AoMember(0)]
-        public int Unknown1 { get; set; }
+        [AoMember(7)]
+        public int Unknown5 { get; set; }
+
+        [AoMember(8)]
+        public short Unknown6 { get; set; }
+
+        [AoMember(9)]
+        public int Unknown7 { get; set; }
+
+        [AoMember(10)]
+        public int Unknown8 { get; set; }
+
+        [AoMember(11)]
+        public byte Unknown9 { get; set; }
 
         [AoMember(12)]
         public byte Unknown10 { get; set; }
@@ -55,6 +76,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(14)]
         public int Unknown12 { get; set; }
+
+        [AoMember(15)]
+        public int TemplateId { get; set; }
 
         [AoMember(16)]
         public int Unknown13 { get; set; }
@@ -76,9 +100,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(22)]
         public int Unknown19 { get; set; }
-
-        [AoMember(1)]
-        public int Unknown2 { get; set; }
 
         [AoMember(23)]
         public int Unknown20 { get; set; }
@@ -109,27 +130,6 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(32)]
         public int Unknown29 { get; set; }
-
-        [AoMember(2)]
-        public int Unknown3 { get; set; }
-
-        [AoMember(6)]
-        public int Unknown4 { get; set; }
-
-        [AoMember(7)]
-        public int Unknown5 { get; set; }
-
-        [AoMember(8)]
-        public short Unknown6 { get; set; }
-
-        [AoMember(9)]
-        public int Unknown7 { get; set; }
-
-        [AoMember(10)]
-        public int Unknown8 { get; set; }
-
-        [AoMember(11)]
-        public byte Unknown9 { get; set; }
 
         #endregion
     }

@@ -28,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public int Unknown3 { get; set; }

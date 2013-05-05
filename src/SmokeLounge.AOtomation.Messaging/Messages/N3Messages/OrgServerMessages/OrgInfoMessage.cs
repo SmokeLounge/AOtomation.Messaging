@@ -29,22 +29,22 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages.OrgServerMessages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0, SerializeSize = ArraySizeType.Int16)]
         public string Description { get; set; }
 
-        [AoMember(3, SerializeSize = ArraySizeType.Int16)]
-        public string GoverningForm { get; set; }
+        [AoMember(1, SerializeSize = ArraySizeType.Int16)]
+        public string Objective { get; set; }
 
         [AoMember(2, SerializeSize = ArraySizeType.Int16)]
         public string History { get; set; }
 
+        [AoMember(3, SerializeSize = ArraySizeType.Int16)]
+        public string GoverningForm { get; set; }
+
         [AoMember(4, SerializeSize = ArraySizeType.Int16)]
         public string LeaderName { get; set; }
-
-        [AoMember(1, SerializeSize = ArraySizeType.Int16)]
-        public string Objective { get; set; }
 
         [AoMember(5, SerializeSize = ArraySizeType.Int16)]
         public string Rank { get; set; }

@@ -29,10 +29,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(6, SerializeSize = ArraySizeType.Byte)]
-        public string Message { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int Unknown1 { get; set; }
@@ -51,6 +48,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(5)]
         public byte Unknown6 { get; set; }
+
+        [AoMember(6, SerializeSize = ArraySizeType.Byte)]
+        public string Message { get; set; }
 
         [AoMember(7)]
         public int Unknown7 { get; set; }

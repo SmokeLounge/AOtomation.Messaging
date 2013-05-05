@@ -18,49 +18,49 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class NanoEffect
     {
-        #region Public Properties
-
-        [AoMember(2)]
-        public int CriterionCount { get; set; }
-
-        [AoMember(4)]
-        public int Delay { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public Identity Effect { get; set; }
 
-        [AoMember(12)]
-        public int GfxBlue { get; set; }
+        [AoMember(1)]
+        public int Unknown1 { get; set; }
 
-        [AoMember(13)]
-        public int GfxFade { get; set; }
-
-        [AoMember(11)]
-        public int GfxGreen { get; set; }
-
-        [AoMember(8)]
-        public int GfxLife { get; set; }
-
-        [AoMember(10)]
-        public int GfxRed { get; set; }
-
-        [AoMember(9)]
-        public int GfxSize { get; set; }
-
-        [AoMember(7)]
-        public int GfxValue { get; set; }
+        [AoMember(2)]
+        public int CriterionCount { get; set; }
 
         [AoMember(3)]
         public int Hits { get; set; }
 
-        [AoMember(1)]
-        public int Unknown1 { get; set; }
+        [AoMember(4)]
+        public int Delay { get; set; }
 
         [AoMember(5)]
         public int Unknown2 { get; set; }
 
         [AoMember(6)]
         public int Unknown3 { get; set; }
+
+        [AoMember(7)]
+        public int GfxValue { get; set; }
+
+        [AoMember(8)]
+        public int GfxLife { get; set; }
+
+        [AoMember(9)]
+        public int GfxSize { get; set; }
+
+        [AoMember(10)]
+        public int GfxRed { get; set; }
+
+        [AoMember(11)]
+        public int GfxGreen { get; set; }
+
+        [AoMember(12)]
+        public int GfxBlue { get; set; }
+
+        [AoMember(13)]
+        public int GfxFade { get; set; }
 
         #endregion
     }

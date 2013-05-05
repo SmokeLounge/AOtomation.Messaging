@@ -18,13 +18,13 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class KnuBotRejectedItem
     {
-        #region Public Properties
-
-        [AoMember(1)]
-        public int HighId { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int LowId { get; set; }
+
+        [AoMember(1)]
+        public int HighId { get; set; }
 
         [AoMember(2)]
         public int Quality { get; set; }

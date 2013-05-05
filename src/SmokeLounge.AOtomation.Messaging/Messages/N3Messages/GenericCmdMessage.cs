@@ -29,25 +29,25 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
+        #region AoMember Properties
 
-        [AoMember(2)]
-        public GenericCmdAction Action { get; set; }
+        [AoMember(0)]
+        public int Temp1 { get; set; }
 
         [AoMember(1)]
         public int Count { get; set; }
 
-        [AoMember(5)]
-        public Identity Target { get; set; }
-
-        [AoMember(0)]
-        public int Temp1 { get; set; }
+        [AoMember(2)]
+        public GenericCmdAction Action { get; set; }
 
         [AoMember(3)]
         public int Temp4 { get; set; }
 
         [AoMember(4)]
         public Identity User { get; set; }
+
+        [AoMember(5)]
+        public Identity Target { get; set; }
 
         #endregion
     }

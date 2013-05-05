@@ -29,10 +29,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         #endregion
 
-        #region Public Properties
-
-        [AoMember(3)]
-        public Identity Caster { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int NanoId { get; set; }
@@ -42,6 +39,9 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(2)]
         public int Unknown1 { get; set; }
+
+        [AoMember(3)]
+        public Identity Caster { get; set; }
 
         #endregion
     }

@@ -18,7 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class Vector3
     {
-        #region Public Properties
+        #region AoMember Properties
 
         [AoMember(0)]
         public float X { get; set; }

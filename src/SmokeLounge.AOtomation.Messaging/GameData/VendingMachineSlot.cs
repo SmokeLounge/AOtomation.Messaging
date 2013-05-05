@@ -18,13 +18,13 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
     public class VendingMachineSlot
     {
-        #region Public Properties
-
-        [AoMember(1)]
-        public int ItemHighId { get; set; }
+        #region AoMember Properties
 
         [AoMember(0)]
         public int ItemLowId { get; set; }
+
+        [AoMember(1)]
+        public int ItemHighId { get; set; }
 
         [AoMember(2)]
         public int Quality { get; set; }
