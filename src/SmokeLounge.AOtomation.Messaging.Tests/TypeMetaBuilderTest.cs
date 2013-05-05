@@ -38,8 +38,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void CharacterActionMessageTest()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new CharacterActionMessage
                                {
                                    Identity =
@@ -53,9 +51,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                    Parameter2 = 12345
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-
-            var actual = (CharacterActionMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (CharacterActionMessage)this.SerializeDeserialize(expected);
 
             this.AssertN3Message(expected, actual);
             this.AssertCharacterActionMessage(expected, actual);
@@ -71,8 +67,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void CharacterListMessageTest()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new CharacterListMessage
                                {
                                    Characters =
@@ -95,8 +89,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                            }
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-            var actual = (CharacterListMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (CharacterListMessage)this.SerializeDeserialize(expected);
 
             this.AssertSystemMessage(expected, actual);
             Assert.AreEqual(expected.AllowedCharacters, actual.AllowedCharacters);
@@ -121,8 +114,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void OrgClientMessageTest1()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new OrgClientMessage
                                {
                                    Identity =
@@ -141,9 +132,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                    CommandArgs = "test"
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-
-            var actual = (OrgClientMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (OrgClientMessage)this.SerializeDeserialize(expected);
 
             this.AssertN3Message(expected, actual);
             this.AssertOrgClientMessage(expected, actual);
@@ -152,8 +141,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void OrgInviteMessageTest()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new OrgInviteMessage
                                {
                                    Identity =
@@ -171,9 +158,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                    OrganizationName = "Trollipopz"
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-
-            var actual = (OrgInviteMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (OrgInviteMessage)this.SerializeDeserialize(expected);
 
             this.AssertN3Message(expected, actual);
             this.AssertOrgServerMessage(expected, actual);
@@ -182,8 +167,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void PlayfieldAnarchyFMessageTest()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new PlayfieldAnarchyFMessage
                                {
                                    Identity = Identity.None, 
@@ -194,9 +177,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                    PlayfieldZ = 2
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-
-            var actual = (PlayfieldAnarchyFMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (PlayfieldAnarchyFMessage)this.SerializeDeserialize(expected);
 
             Assert.AreEqual(expected.PlayfieldX, actual.PlayfieldX);
             Assert.AreEqual(expected.PlayfieldZ, actual.PlayfieldZ);
@@ -205,8 +186,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void PlayfieldAnarchyFMessageWithVendorTest()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new PlayfieldAnarchyFMessage
                                {
                                    Identity = Identity.None, 
@@ -218,9 +197,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                    PlayfieldZ = 2
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-
-            var actual = (PlayfieldAnarchyFMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (PlayfieldAnarchyFMessage)this.SerializeDeserialize(expected);
 
             Assert.AreEqual(expected.PlayfieldX, actual.PlayfieldX);
             Assert.AreEqual(expected.PlayfieldZ, actual.PlayfieldZ);
@@ -229,8 +206,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void StatMessageTest()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new StatMessage
                                {
                                    Identity = Identity.None, 
@@ -261,8 +236,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                            }
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-            var actual = (StatMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (StatMessage)this.SerializeDeserialize(expected);
 
             this.AssertN3Message(expected, actual);
 
@@ -283,8 +257,6 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         [TestMethod]
         public void ZoneRedirectionMessageTest()
         {
-            var context = new SerializationContextBuilder<MessageBody>().Build();
-
             var expected = new ZoneInfoMessage
                                {
                                    CharacterId = 1234567890, 
@@ -292,8 +264,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                                    ServerPort = 45678
                                };
 
-            var serializer = context.GetSerializer(expected.GetType());
-            var actual = (ZoneInfoMessage)this.SerializeDeserialize(serializer, expected);
+            var actual = (ZoneInfoMessage)this.SerializeDeserialize(expected);
 
             this.AssertSystemMessage(expected, actual);
             Assert.AreEqual(expected.CharacterId, actual.CharacterId);
@@ -341,9 +312,12 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             Assert.AreEqual(expected.SystemMessageType, actual.SystemMessageType);
         }
 
-        private object SerializeDeserialize(ISerializer serializer, object obj)
+        private object SerializeDeserialize(object obj)
         {
             MemoryStream memoryStream = null;
+
+            var serializerResolver = new SerializerResolverBuilder<MessageBody>().Build();
+            var serializer = serializerResolver.GetSerializer(obj.GetType());
 
             try
             {
@@ -351,12 +325,14 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                 using (var streamWriter = new StreamWriter(memoryStream))
                 using (var streamReader = new StreamReader(memoryStream))
                 {
-                    serializer.Serializer(streamWriter, null, obj);
+                    var serializationContext = new SerializationContext(serializerResolver);
+                    serializer.Serializer(streamWriter, serializationContext, obj);
                     var arr = memoryStream.ToArray();
                     Console.WriteLine(BitConverter.ToString(arr));
 
                     memoryStream.Position = 0;
-                    var result = serializer.Deserializer(streamReader, null);
+                    var deserializationContext = new SerializationContext(serializerResolver);
+                    var result = serializer.Deserializer(streamReader, deserializationContext);
                     memoryStream = null;
                     return result;
                 }

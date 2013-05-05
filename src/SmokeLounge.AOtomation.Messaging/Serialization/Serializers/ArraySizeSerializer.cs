@@ -54,9 +54,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationOptions, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
 
-        public Action<StreamWriter, SerializationOptions, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
 
         public Type Type
         {

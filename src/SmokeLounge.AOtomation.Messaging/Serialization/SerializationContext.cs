@@ -1,6 +1,6 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="SerializationContext.cs" company="SmokeLounge">
-//   Copyright © 2013 SmokeLounge.
+//   Copyright � 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -16,36 +16,91 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     public class SerializationContext
     {
         #region Fields
 
-        private readonly Dictionary<Type, ISerializer> typeSerializers;
+        private readonly IDictionary<string, int> flags;
+
+        private readonly SerializerResolver serializerResolver;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public SerializationContext(Dictionary<Type, ISerializer> typeSerializers)
+        public SerializationContext(SerializerResolver serializerResolver)
         {
-            this.typeSerializers = typeSerializers;
+            this.serializerResolver = serializerResolver;
+            this.flags = new Dictionary<string, int>();
         }
 
         #endregion
 
         #region Public Methods and Operators
 
-        public void Add(Type type, ISerializer serializer)
+        public AoUsesFlagsAttribute Evaluate(IEnumerable<AoUsesFlagsAttribute> usesFlags)
         {
-            this.typeSerializers[type] = serializer;
+            return usesFlags.FirstOrDefault(this.Evaluate);
+        }
+
+        public int GetFlagValue(string flag)
+        {
+            int value;
+            this.flags.TryGetValue(flag, out value);
+            return value;
         }
 
         public ISerializer GetSerializer(Type type)
         {
-            ISerializer typeSerializer;
-            this.typeSerializers.TryGetValue(type, out typeSerializer);
-            return typeSerializer;
+            return this.serializerResolver.GetSerializer(type);
+        }
+
+        public void SetFlagValue(string flag, int value)
+        {
+            this.flags[flag] = value;
+        }
+
+        #endregion
+
+        #region Methods
+
+        private bool Evaluate(AoUsesFlagsAttribute usesFlags)
+        {
+            switch (usesFlags.Criteria)
+            {
+                case FlagsCriteria.HasAll:
+                    return this.EvaluateHasAll(usesFlags);
+                case FlagsCriteria.HasAny:
+                    return this.EvaluateHasAny(usesFlags);
+                case FlagsCriteria.EqualsToAny:
+                    return this.EvaluateEqualsToAny(usesFlags);
+                case FlagsCriteria.Default:
+                    return true;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        private bool EvaluateEqualsToAny(AoUsesFlagsAttribute usesFlags)
+        {
+            var flagValue = this.GetFlagValue(usesFlags.Flag);
+            return usesFlags.CriteriaValues.Any(v => v == flagValue);
+        }
+
+        private bool EvaluateHasAll(AoUsesFlagsAttribute usesFlags)
+        {
+            var flagValue = this.GetFlagValue(usesFlags.Flag);
+            return (flagValue & usesFlags.CriteriaValue) == usesFlags.CriteriaValue;
+        }
+
+        private bool EvaluateHasAny(AoUsesFlagsAttribute usesFlags)
+        {
+            var flagValue = this.GetFlagValue(usesFlags.Flag);
+            return (flagValue & usesFlags.CriteriaValue) > 0;
         }
 
         #endregion

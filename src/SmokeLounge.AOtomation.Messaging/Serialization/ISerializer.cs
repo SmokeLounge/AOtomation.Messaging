@@ -21,9 +21,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     {
         #region Public Properties
 
-        Func<StreamReader, SerializationOptions, object> Deserializer { get; }
+        Func<StreamReader, SerializationContext, object> Deserializer { get; }
 
-        Action<StreamWriter, SerializationOptions, object> Serializer { get; }
+        Action<StreamWriter, SerializationContext, object> Serializer { get; }
 
         Type Type { get; }
 

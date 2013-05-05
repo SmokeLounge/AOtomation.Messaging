@@ -23,25 +23,29 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes
 
         private readonly FlagsCriteria criteria;
 
+        private readonly int criteriaValue;
+
         private readonly int[] criteriaValues;
 
         private readonly string flag;
 
-        private readonly Type onFail;
-
-        private readonly Type onMatch;
+        private readonly Type type;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public AoUsesFlagsAttribute(string flag, Type onMatch, Type onFail, FlagsCriteria criteria, params int[] criteriaValues)
+        public AoUsesFlagsAttribute(string flag, Type type, FlagsCriteria criteria, params int[] criteriaValues)
         {
             this.flag = flag;
-            this.onMatch = onMatch;
-            this.onFail = onFail;
+            this.type = type;
             this.criteria = criteria;
             this.criteriaValues = criteriaValues;
+
+            foreach (var value in criteriaValues)
+            {
+                this.criteriaValue |= value;
+            }
         }
 
         #endregion
@@ -53,6 +57,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes
             get
             {
                 return this.criteria;
+            }
+        }
+
+        public int CriteriaValue
+        {
+            get
+            {
+                return this.criteriaValue;
             }
         }
 
@@ -72,19 +84,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes
             }
         }
 
-        public Type OnFail
+        public Type Type
         {
             get
             {
-                return this.onFail;
-            }
-        }
-
-        public Type OnMatch
-        {
-            get
-            {
-                return this.onMatch;
+                return this.type;
             }
         }
 

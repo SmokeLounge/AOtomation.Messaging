@@ -36,14 +36,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         [AoFlags("flags")]
         public OrgClientCommand Command { get; set; }
 
-        [AoMember(1)]
-        public Identity Target { get; set; }
-
-        [AoMember(2)]
-        public int Unknown1 { get; set; }
-
         [AoMember(3, SerializeSize = ArraySizeType.Int16)]
-        [AoUsesFlags("flags", typeof(string), null, FlagsCriteria.EqualsToAny,
+        [AoUsesFlags("flags", typeof(string), FlagsCriteria.EqualsToAny, 
             new[]
                 {
                     (int)OrgClientCommand.Create, (int)OrgClientCommand.StartVote, (int)OrgClientCommand.Vote, 
@@ -53,6 +47,12 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
                     (int)OrgClientCommand.GoverningForm, (int)OrgClientCommand.StopVote
                 })]
         public string CommandArgs { get; set; }
+
+        [AoMember(1)]
+        public Identity Target { get; set; }
+
+        [AoMember(2)]
+        public int Unknown1 { get; set; }
 
         #endregion
     }

@@ -40,9 +40,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationOptions, object> Deserializer { get; private set; }
+        public Func<StreamReader, SerializationContext, object> Deserializer { get; private set; }
 
-        public Action<StreamWriter, SerializationOptions, object> Serializer { get; private set; }
+        public Action<StreamWriter, SerializationContext, object> Serializer { get; private set; }
 
         public Type Type
         {
@@ -78,7 +78,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         #region Methods
 
-        private object Deserialize(StreamReader reader, SerializationOptions options)
+        private object Deserialize(StreamReader reader, SerializationContext context)
         {
             var header = new Header();
             header.MessageId = reader.ReadInt16();
@@ -90,7 +90,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             return header;
         }
 
-        private void Serialize(StreamWriter writer, SerializationOptions options, object value)
+        private void Serialize(StreamWriter writer, SerializationContext context, object value)
         {
             var header = (Header)value;
             writer.WriteInt16(header.MessageId);

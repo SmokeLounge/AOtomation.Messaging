@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerializationContextBuilder.cs" company="SmokeLounge">
+// <copyright file="SerializerResolverBuilder.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the SerializationContextBuilder type.
+//   Defines the SerializerResolverBuilder type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -17,7 +17,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Linq.Expressions;
     using System.Net;
 
     using SmokeLounge.AOtomation.Messaging.GameData;
@@ -25,7 +24,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom;
 
-    public class SerializationContextBuilder<T>
+    public class SerializerResolverBuilder<T>
     {
         #region Fields
 
@@ -35,7 +34,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Constructors and Destructors
 
-        public SerializationContextBuilder()
+        public SerializerResolverBuilder()
         {
             this.serializers = new Dictionary<Type, ISerializer>
                                    {
@@ -56,10 +55,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                            typeof(SimpleCharFullUpdateMessage), 
                                            new SimpleCharFullUpdateSerializer()
                                        }, 
-                                       //{
-                                       //    typeof(OrgClientMessage), 
-                                       //    new OrgClientMessageSerializer()
-                                       //}
+                                       
+                                       
+                                       // {
+                                       // typeof(OrgClientMessage), 
+                                       // new OrgClientMessageSerializer()
+                                       // }
                                    };
         }
 
@@ -67,7 +68,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Public Methods and Operators
 
-        public SerializationContext Build()
+        public SerializerResolver Build()
         {
             var rootType = typeof(T);
 
@@ -87,7 +88,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 }
             }
 
-            var serializationContext = new SerializationContext(this.serializers);
+            var serializationContext = new SerializerResolver(this.serializers);
             return serializationContext;
         }
 

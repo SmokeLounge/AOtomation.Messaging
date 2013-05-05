@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="SerializationOptions.cs" company="SmokeLounge">
-//   Copyright � 2013 SmokeLounge.
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SerializerResolver.cs" company="SmokeLounge">
+//   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -8,43 +8,44 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the SerializationOptions type.
+//   Defines the SerializerResolver type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
+    using System;
     using System.Collections.Generic;
 
-    public class SerializationOptions
+    public class SerializerResolver
     {
         #region Fields
 
-        private readonly IDictionary<string, int> flags;
+        private readonly Dictionary<Type, ISerializer> typeSerializers;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public SerializationOptions()
+        public SerializerResolver(Dictionary<Type, ISerializer> typeSerializers)
         {
-            this.flags = new Dictionary<string, int>();
+            this.typeSerializers = typeSerializers;
         }
 
         #endregion
 
         #region Public Methods and Operators
 
-        public int GetFlagValue(string flag)
+        public void Add(Type type, ISerializer serializer)
         {
-            int value;
-            this.flags.TryGetValue(flag, out value);
-            return value;
+            this.typeSerializers[type] = serializer;
         }
 
-        public void SetFlagValue(string flag, int value)
+        public ISerializer GetSerializer(Type type)
         {
-            this.flags[flag] = value;
+            ISerializer typeSerializer;
+            this.typeSerializers.TryGetValue(type, out typeSerializer);
+            return typeSerializer;
         }
 
         #endregion

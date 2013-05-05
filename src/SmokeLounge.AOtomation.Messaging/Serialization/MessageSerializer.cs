@@ -25,7 +25,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         private readonly HeaderSerializer headerSerializer;
 
-        private readonly SerializationContext serializationContext;
+        private readonly SerializerResolver serializerResolver;
 
         private readonly TypeInfo typeInfo;
 
@@ -36,7 +36,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         public MessageSerializer()
         {
             this.typeInfo = new TypeInfo(typeof(MessageBody));
-            this.serializationContext = new SerializationContextBuilder<MessageBody>().Build();
+            this.serializerResolver = new SerializerResolverBuilder<MessageBody>().Build();
             this.headerSerializer = new HeaderSerializer();
         }
 
@@ -54,14 +54,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 return null;
             }
 
-            var serializer = this.serializationContext.GetSerializer(subTypeInfo.Type);
+            var serializer = this.serializerResolver.GetSerializer(subTypeInfo.Type);
             if (serializer == null)
             {
                 return null;
             }
 
             reader.Position = 0;
-            var serializationOptions = new SerializationOptions();
+            var serializationOptions = new SerializationContext(this.serializerResolver);
             var message = new Message
                               {
                                   Header =
@@ -73,13 +73,13 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         public void Serialize(Stream stream, Message message)
         {
-            var serializer = this.serializationContext.GetSerializer(message.Body.GetType());
+            var serializer = this.serializerResolver.GetSerializer(message.Body.GetType());
             if (serializer == null)
             {
                 return;
             }
 
-            var serializationOptions = new SerializationOptions();
+            var serializationOptions = new SerializationContext(this.serializerResolver);
             var writer = new StreamWriter(stream) { Position = 0 };
             this.headerSerializer.Serializer(writer, serializationOptions, message.Header);
             serializer.Serializer(writer, serializationOptions, message.Body);

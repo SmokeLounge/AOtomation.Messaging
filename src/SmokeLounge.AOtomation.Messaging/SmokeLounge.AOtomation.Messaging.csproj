@@ -252,7 +252,7 @@
     <Compile Include="Serialization\MemberOptions.cs" />
     <Compile Include="Serialization\PropertyMeta.cs" />
     <Compile Include="Serialization\ReflectionHelper.cs" />
-    <Compile Include="Serialization\SerializationOptions.cs" />
+    <Compile Include="Serialization\SerializationContext.cs" />
     <Compile Include="Serialization\Serializers\ArraySerializer.cs" />
     <Compile Include="Serialization\Serializers\ArraySizeSerializer.cs" />
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
@@ -268,7 +268,7 @@
     <Compile Include="Serialization\Serializers\Int32Serializer.cs" />
     <Compile Include="Serialization\Serializers\Int16Serializer.cs" />
     <Compile Include="Serialization\KnownType.cs" />
-    <Compile Include="Serialization\SerializationContext.cs" />
+    <Compile Include="Serialization\SerializerResolver.cs" />
     <Compile Include="Serialization\Serializers\SingleSerializer.cs" />
     <Compile Include="Serialization\StreamWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -276,7 +276,7 @@
     <Compile Include="Serialization\StreamReader.cs" />
     <Compile Include="Serialization\Serializers\TypeSerializer.cs" />
     <Compile Include="Serialization\TypeInfo.cs" />
-    <Compile Include="Serialization\SerializationContextBuilder.cs" />
+    <Compile Include="Serialization\SerializerResolverBuilder.cs" />
     <Compile Include="Serialization\TypeSerializerBuilder.cs" />
   </ItemGroup>
   <ItemGroup />

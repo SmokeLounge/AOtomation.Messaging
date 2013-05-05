@@ -20,6 +20,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         HasAny, 
 
-        EqualsToAny
+        EqualsToAny, 
+
+        Default
     }
 }
