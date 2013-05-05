@@ -124,7 +124,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         private Expression BuildDeserializerExpression()
         {
             var readerParam = Expression.Parameter(typeof(StreamReader), "streamReader");
-            var optionsParam = Expression.Parameter(typeof(SerializationContext), "options");
+            var optionsParam = Expression.Parameter(typeof(SerializationContext), "serializationContext");
 
             var expression = this.typeSerializerBuilder.BuildDeserializer(readerParam, optionsParam);
             return expression;
@@ -133,7 +133,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         private Expression BuildSerializerExpression()
         {
             var writerParam = Expression.Parameter(typeof(StreamWriter), "streamWriter");
-            var optionsParam = Expression.Parameter(typeof(SerializationContext), "options");
+            var optionsParam = Expression.Parameter(typeof(SerializationContext), "serializationContext");
 
             var expression = this.typeSerializerBuilder.BuildSerializer(writerParam, optionsParam);
             return expression;

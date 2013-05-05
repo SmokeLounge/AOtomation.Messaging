@@ -139,6 +139,33 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         }
 
         [TestMethod]
+        public void OrgClientMessageTest2()
+        {
+            var expected = new OrgClientMessage
+                               {
+                                   Identity =
+                                       new Identity
+                                           {
+                                               Type = IdentityType.CanbeAffected, 
+                                               Instance = 12345
+                                           }, 
+                                   Target =
+                                       new Identity
+                                           {
+                                               Type = IdentityType.CanbeAffected, 
+                                               Instance = 12345
+                                           }, 
+                                   Command = OrgClientCommand.Ranks, 
+                                   CommandArgs = "test"
+                               };
+
+            var actual = (OrgClientMessage)this.SerializeDeserialize(expected);
+
+            this.AssertN3Message(expected, actual);
+            Assert.IsNull(actual.CommandArgs);
+        }
+
+        [TestMethod]
         public void OrgInviteMessageTest()
         {
             var expected = new OrgInviteMessage

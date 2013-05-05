@@ -84,9 +84,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 case ArraySizeType.NoSerialization:
                     return null;
                 case ArraySizeType.Byte:
-                    return streamReader.ReadByte();
+                    return (int)streamReader.ReadByte();
                 case ArraySizeType.Int16:
-                    return streamReader.ReadInt16();
+                    return (int)streamReader.ReadInt16();
                 case ArraySizeType.Int32:
                     return streamReader.ReadInt32();
                 case ArraySizeType.X3F1:

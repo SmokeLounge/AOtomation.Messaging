@@ -109,8 +109,25 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             PropertyMeta propertyMeta, 
             ParameterExpression deserializedObject)
         {
-            var propertySerializer = this.serializerResolver(propertyMeta.Type);
             Expression propertyExpression = Expression.Property(deserializedObject, propertyMeta.Property);
+
+            if (propertyMeta.UsesFlagsAttributes.Any())
+            {
+                var serializeMethodInfo =
+                    ReflectionHelper
+                        .GetMethodInfo<SerializationContext, Func<StreamReader, object, MemberOptions, object>>(
+                            o => o.Deserialize);
+                var args = new[]
+                               {
+                                   streamReaderExpression, propertyExpression, 
+                                   Expression.Constant(propertyMeta.Options, typeof(MemberOptions))
+                               };
+                var callSerializeExpression = Expression.Call(optionsExpression, serializeMethodInfo, args);
+                return Expression.Assign(
+                    propertyExpression, Expression.Convert(callSerializeExpression, propertyMeta.Type));
+            }
+
+            var propertySerializer = this.serializerResolver(propertyMeta.Type);
             var deserializerExpression = propertySerializer.DeserializerExpression(
                 streamReaderExpression, optionsExpression, propertyExpression, propertyMeta.Options);
             return deserializerExpression;
@@ -123,9 +140,24 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         {
             foreach (var propertyMeta in this.propertyMetas.Value)
             {
-                yield return
-                    this.CreatePropertyDeserializer(
-                        streamReaderExpression, optionsExpression, propertyMeta, deserializedObject);
+                var deserializerExpression = this.CreatePropertyDeserializer(
+                    streamReaderExpression, optionsExpression, propertyMeta, deserializedObject);
+                yield return deserializerExpression;
+
+                if (propertyMeta.FlagsAttribute == null)
+                {
+                    continue;
+                }
+
+                Expression propertyExpression = Expression.Property(deserializedObject, propertyMeta.Property);
+                var setFlagValueMethodInfo =
+                    ReflectionHelper.GetMethodInfo<SerializationContext, Action<string, int>>(o => o.SetFlagValue);
+                var setFlagExpression = Expression.Call(
+                    optionsExpression, 
+                    setFlagValueMethodInfo, 
+                    Expression.Constant(propertyMeta.FlagsAttribute.Flag, typeof(string)), 
+                    Expression.Convert(propertyExpression, typeof(int)));
+                yield return setFlagExpression;
             }
         }
 
