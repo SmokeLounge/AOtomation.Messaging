@@ -100,6 +100,36 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
             Assert.AreNotEqual(0, infoPacket.CityPlayfieldId);
         }
 
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #5 - 0x54")]
+        public void InfoPacket0x54Test()
+        {
+            var packet = this.ReadTestPacket("InfoPacket #5 - 0x54");
+
+            var messageSerialzer = new MessageSerializer();
+            var actual = this.Deserialize(messageSerialzer, packet);
+            var infoPacketMessage = (InfoPacketMessage)actual.Body;
+            var infoPacket = (TowerInfoPacket)infoPacketMessage.Info;
+
+            Assert.IsNull(infoPacket.Timer);
+            Assert.IsNull(infoPacket.Unknown13);
+        }
+
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #6 - 0x57")]
+        public void InfoPacket0x57Test()
+        {
+            var packet = this.ReadTestPacket("InfoPacket #6 - 0x57");
+
+            var messageSerialzer = new MessageSerializer();
+            var actual = this.Deserialize(messageSerialzer, packet);
+            var infoPacketMessage = (InfoPacketMessage)actual.Body;
+            var infoPacket = (TowerInfoPacket)infoPacketMessage.Info;
+
+            Assert.IsNotNull(infoPacket.Timer);
+            Assert.IsNotNull(infoPacket.Unknown13);
+        }
+
         #endregion
 
         #region Methods

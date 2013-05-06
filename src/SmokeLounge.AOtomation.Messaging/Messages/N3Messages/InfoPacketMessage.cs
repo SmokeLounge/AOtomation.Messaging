@@ -45,10 +45,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
                 })]
         [AoUsesFlags("flags", typeof(MonsterInfoPacket), FlagsCriteria.EqualsToAny, 
             new[] { (int)InfoPacketType.Monster, })]
-        [AoUsesFlags("flags", typeof(ControlTowerInfoPacket), FlagsCriteria.EqualsToAny, 
-            new[] { (int)InfoPacketType.Tower, })]
-        [AoUsesFlags("flags", typeof(ControlTowerInfoPacket), FlagsCriteria.EqualsToAny, 
-            new[] { (int)InfoPacketType.ControlTower, })]
+        [AoUsesFlags("flags", typeof(TowerInfoPacket), FlagsCriteria.EqualsToAny, 
+            new[] { (int)InfoPacketType.Tower, (int)InfoPacketType.ControlTower })]
         public InfoPacket Info { get; set; }
 
         #endregion

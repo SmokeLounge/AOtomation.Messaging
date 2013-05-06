@@ -130,7 +130,6 @@
     <Compile Include="GameData\CharacterStatus.cs" />
     <Compile Include="GameData\ChatMessage.cs" />
     <Compile Include="GameData\ChatMessageType.cs" />
-    <Compile Include="GameData\ControlTowerInfoPacket.cs" />
     <Compile Include="GameData\Fatness.cs" />
     <Compile Include="GameData\GameTuple.cs" />
     <Compile Include="GameData\InfoPacket.cs" />

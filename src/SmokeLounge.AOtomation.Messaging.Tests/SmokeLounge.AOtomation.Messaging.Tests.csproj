@@ -92,6 +92,14 @@
       <Link>TestData\InfoPacket #4 - 0x47</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\test\TestData\InfoPacket #5 - 0x54">
+      <Link>TestData\InfoPacket #5 - 0x54</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\test\TestData\InfoPacket #6 - 0x57">
+      <Link>TestData\InfoPacket #6 - 0x57</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
