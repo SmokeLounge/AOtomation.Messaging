@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="Tower.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,30 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the Tower type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.GameData
+{
+    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
+    public class Tower
+    {
+        #region AoMember Properties
 
-using System.Reflection;
+        [AoMember(0)]
+        public int LowId { get; set; }
 
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.54.0.0")]
-[assembly: AssemblyFileVersion("0.54.0.0")]
+        [AoMember(1)]
+        public int HighId { get; set; }
+
+        [AoMember(2)]
+        public int Quality { get; set; }
+
+        [AoMember(3)]
+        public int Unknown { get; set; }
+
+        #endregion
+    }
+}

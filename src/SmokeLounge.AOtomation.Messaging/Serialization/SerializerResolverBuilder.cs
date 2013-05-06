@@ -60,6 +60,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                        
                                        
                                        
+                                       
                                        // {
                                        // typeof(OrgClientMessage), 
                                        // new OrgClientMessageSerializer()

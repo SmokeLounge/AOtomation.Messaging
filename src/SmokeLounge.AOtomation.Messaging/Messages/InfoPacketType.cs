@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CommonAssemblyInfo.cs" company="SmokeLounge">
+// <copyright file="InfoPacketType.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,15 +8,26 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   CommonAssemblyInfo.cs
+//   Defines the InfoPacketType type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+namespace SmokeLounge.AOtomation.Messaging.Messages
+{
+    public enum InfoPacketType : byte
+    {
+        Character = 0x40, // 0100 0000
 
+        CharacterOrg = 0x41, // 0100 0001
 
-using System.Reflection;
+        CharacterOrgSite = 0x43, // 0100 0011
 
-[assembly: AssemblyCompany("SmokeLounge")]
-[assembly: AssemblyCopyright("Copyright © SmokeLounge 2013")]
-[assembly: AssemblyVersion("0.54.0.0")]
-[assembly: AssemblyFileVersion("0.54.0.0")]
+        CharacterOrgSiteTower = 0x47, // 0100 0111
+
+        Monster = 0x50, // 0101 0000
+
+        Tower = 0x54, // 0101 0100
+
+        ControlTower = 0x5C // 0101 1100
+    }
+}
