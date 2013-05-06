@@ -90,7 +90,7 @@
     </None>
     <None Include="..\..\test\TestData\InfoPacket #4 - 0x47">
       <Link>TestData\InfoPacket #4 - 0x47</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Choose>

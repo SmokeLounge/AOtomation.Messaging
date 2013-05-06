@@ -95,25 +95,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             return value;
         }
 
-        internal T Deserialize2<T>(StreamReader streamReader, MemberOptions memberOptions)
-        {
-            if (memberOptions.UsesFlagsAttributes.Any() == false)
-            {
-                return default(T);
-            }
-
-            var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
-            if (usesFlag == null)
-            {
-                return default(T);
-            }
-
-            var serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
-            var value = serializer.Deserialize(streamReader, this, memberOptions);
-            var lol = Convert.ChangeType(value, typeof(T));
-            return (T)value;
-        }
-
         internal void Serialize(StreamWriter streamWriter, object obj, MemberOptions memberOptions)
         {
             ISerializer serializer;
@@ -130,6 +111,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 }
 
                 serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
+            }
+
+            if (memberOptions.Type.IsValueType)
+            {
+                if (memberOptions.Type.IsPrimitive || memberOptions.Type.IsEnum)
+                {
+                    obj = Convert.ChangeType(obj, serializer.Type);
+                }
             }
 
             serializer.Serialize(streamWriter, this, obj, memberOptions);

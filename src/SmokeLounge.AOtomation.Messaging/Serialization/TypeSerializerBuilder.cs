@@ -177,9 +177,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 var serializeMethodInfo =
                     ReflectionHelper.GetMethodInfo<SerializationContext, Action<StreamWriter, object, MemberOptions>>(
                         o => o.Serialize);
-                var args = new[]
+                var args = new Expression[]
                                {
-                                   streamWriterExpression, propertyExpression, 
+                                   streamWriterExpression, Expression.Convert(propertyExpression, typeof(object)), 
                                    Expression.Constant(propertyMeta.Options, typeof(MemberOptions))
                                };
                 var callSerializeExpression = Expression.Call(optionsExpression, serializeMethodInfo, args);
