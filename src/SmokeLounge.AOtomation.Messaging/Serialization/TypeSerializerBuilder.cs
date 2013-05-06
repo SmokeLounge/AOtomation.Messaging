@@ -114,12 +114,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             if (propertyMeta.UsesFlagsAttributes.Any())
             {
                 var serializeMethodInfo =
-                    ReflectionHelper
-                        .GetMethodInfo<SerializationContext, Func<StreamReader, object, MemberOptions, object>>(
-                            o => o.Deserialize);
-                var args = new[]
+                    ReflectionHelper.GetMethodInfo<SerializationContext, Func<StreamReader, MemberOptions, object>>(
+                        o => o.Deserialize);
+                var args = new Expression[]
                                {
-                                   streamReaderExpression, propertyExpression, 
+                                   streamReaderExpression, 
                                    Expression.Constant(propertyMeta.Options, typeof(MemberOptions))
                                };
                 var callSerializeExpression = Expression.Call(optionsExpression, serializeMethodInfo, args);

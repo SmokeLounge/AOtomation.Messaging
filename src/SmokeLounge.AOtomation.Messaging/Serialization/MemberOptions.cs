@@ -14,6 +14,8 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
+    using System;
+
     using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     public class MemberOptions
@@ -30,6 +32,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         private readonly ArraySizeType serializeSize;
 
+        private readonly Type type;
+
         private readonly AoUsesFlagsAttribute[] usesFlagsAttributes;
 
         #endregion
@@ -37,6 +41,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         #region Constructors and Destructors
 
         public MemberOptions(
+            Type type, 
             bool isFixedSize, 
             int fixedSizeLength, 
             ArraySizeType serializeSize, 
@@ -44,6 +49,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             int padBefore, 
             AoUsesFlagsAttribute[] usesFlagsAttributes)
         {
+            this.type = type;
             this.isFixedSize = isFixedSize;
             this.fixedSizeLength = fixedSizeLength;
             this.serializeSize = serializeSize;
@@ -93,6 +99,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             get
             {
                 return this.serializeSize;
+            }
+        }
+
+        public Type Type
+        {
+            get
+            {
+                return this.type;
             }
         }
 

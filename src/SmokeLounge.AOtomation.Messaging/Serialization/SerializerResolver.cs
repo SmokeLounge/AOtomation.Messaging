@@ -15,21 +15,20 @@
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
     using System;
-    using System.Collections.Generic;
 
     public class SerializerResolver
     {
         #region Fields
 
-        private readonly Dictionary<Type, ISerializer> typeSerializers;
+        private readonly SerializerResolverBuilder serializerResolverBuilder;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public SerializerResolver(Dictionary<Type, ISerializer> typeSerializers)
+        public SerializerResolver(SerializerResolverBuilder serializerResolverBuilder)
         {
-            this.typeSerializers = typeSerializers;
+            this.serializerResolverBuilder = serializerResolverBuilder;
         }
 
         #endregion
@@ -38,14 +37,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         public void Add(Type type, ISerializer serializer)
         {
-            this.typeSerializers[type] = serializer;
+            throw new NotImplementedException();
         }
 
         public ISerializer GetSerializer(Type type)
         {
-            ISerializer typeSerializer;
-            this.typeSerializers.TryGetValue(type, out typeSerializer);
-            return typeSerializer;
+            return this.serializerResolverBuilder.GetSerializer(type);
         }
 
         #endregion

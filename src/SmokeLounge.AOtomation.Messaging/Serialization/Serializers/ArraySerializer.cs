@@ -75,7 +75,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                 arrayLength = memberOptions.FixedSizeLength;
             }
 
-            var array = Array.CreateInstance(this.type, arrayLength);
+            var array = Array.CreateInstance(this.typeSerializer.Type, arrayLength);
             for (var i = 0; i < arrayLength; i++)
             {
                 var element = this.typeSerializer.Deserialize(streamReader, serializationContext, memberOptions);

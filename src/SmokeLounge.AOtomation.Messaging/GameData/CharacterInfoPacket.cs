@@ -14,7 +14,7 @@
 
 namespace SmokeLounge.AOtomation.Messaging.GameData
 {
-    using SmokeLounge.AOtomation.Messaging.Messages;
+    using SmokeLounge.AOtomation.Messaging.Messages.N3Messages;
     using SmokeLounge.AOtomation.Messaging.Serialization;
     using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
@@ -58,7 +58,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
                     (int)InfoPacketType.CharacterOrg, (int)InfoPacketType.CharacterOrgSite, 
                     (int)InfoPacketType.CharacterOrgSiteTower
                 })]
-        public int OrganizationId { get; set; }
+        public int? OrganizationId { get; set; }
 
         [AoMember(10, SerializeSize = ArraySizeType.Int16)]
         public string FirstName { get; set; }
@@ -90,7 +90,7 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
         public int CityPlayfieldId { get; set; }
 
         [AoMember(17, SerializeSize = ArraySizeType.X3F1)]
-        [AoUsesFlags("flags", typeof(TowerField[]), FlagsCriteria.EqualsToAny, 
+        [AoUsesFlags("flags", typeof(Tower[]), FlagsCriteria.EqualsToAny, 
             new[] { (int)InfoPacketType.CharacterOrgSiteTower })]
         public Tower[] Towers { get; set; }
 

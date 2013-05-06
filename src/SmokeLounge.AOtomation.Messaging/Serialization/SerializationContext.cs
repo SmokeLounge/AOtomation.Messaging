@@ -63,25 +63,55 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Methods
 
-        internal object Deserialize(StreamReader streamReader, object obj, MemberOptions memberOptions)
+        internal object Deserialize(StreamReader streamReader, MemberOptions memberOptions)
         {
-            ISerializer serializer;
             if (memberOptions.UsesFlagsAttributes.Any() == false)
             {
-                serializer = this.serializerResolver.GetSerializer(obj.GetType());
+                return null;
             }
-            else
+
+            var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
+            if (usesFlag == null)
             {
-                var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
-                if (usesFlag == null)
+                return null;
+            }
+
+            var serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
+            var value = serializer.Deserialize(streamReader, this, memberOptions);
+
+            if (memberOptions.Type.IsValueType)
+            {
+                if (memberOptions.Type.IsPrimitive)
                 {
-                    return null;
+                    return Convert.ChangeType(value, memberOptions.Type);
                 }
 
-                serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
+                if (memberOptions.Type.IsEnum)
+                {
+                    return Convert.ChangeType(value, Enum.GetUnderlyingType(memberOptions.Type));
+                }
             }
 
-            return serializer.Deserialize(streamReader, this, memberOptions);
+            return value;
+        }
+
+        internal T Deserialize2<T>(StreamReader streamReader, MemberOptions memberOptions)
+        {
+            if (memberOptions.UsesFlagsAttributes.Any() == false)
+            {
+                return default(T);
+            }
+
+            var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
+            if (usesFlag == null)
+            {
+                return default(T);
+            }
+
+            var serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
+            var value = serializer.Deserialize(streamReader, this, memberOptions);
+            var lol = Convert.ChangeType(value, typeof(T));
+            return (T)value;
         }
 
         internal void Serialize(StreamWriter streamWriter, object obj, MemberOptions memberOptions)

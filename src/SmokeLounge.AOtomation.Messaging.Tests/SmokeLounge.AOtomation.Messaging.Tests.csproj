@@ -64,6 +64,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="InfoPacketTests.cs" />
     <Compile Include="TypeMetaBuilderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +73,25 @@
       <Project>{3CEAC898-BFCA-45EA-BF34-C4BBB85D2DA4}</Project>
       <Name>SmokeLounge.AOtomation.Messaging</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="..\..\test\TestData\InfoPacket #1 - 0x40">
+      <Link>TestData\InfoPacket #1 - 0x40</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\test\TestData\InfoPacket #2 - 0x41">
+      <Link>TestData\InfoPacket #2 - 0x41</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\test\TestData\InfoPacket #3 - 0x43">
+      <Link>TestData\InfoPacket #3 - 0x43</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\test\TestData\InfoPacket #4 - 0x47">
+      <Link>TestData\InfoPacket #4 - 0x47</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -24,7 +24,16 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom;
 
-    public class SerializerResolverBuilder<T>
+    public abstract class SerializerResolverBuilder
+    {
+        #region Methods
+
+        internal abstract ISerializer GetSerializer(Type type);
+
+        #endregion
+    }
+
+    public class SerializerResolverBuilder<T> : SerializerResolverBuilder
     {
         #region Fields
 
@@ -55,16 +64,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                                            typeof(SimpleCharFullUpdateMessage), 
                                            new SimpleCharFullUpdateSerializer()
                                        }, 
-                                       
-                                       
-                                       
-                                       
-                                       
-                                       
-                                       // {
-                                       // typeof(OrgClientMessage), 
-                                       // new OrgClientMessageSerializer()
-                                       // }
                                    };
         }
 
@@ -92,7 +91,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 }
             }
 
-            var serializationContext = new SerializerResolver(this.serializers);
+            var serializationContext = new SerializerResolver(this);
             return serializationContext;
         }
 
@@ -100,19 +99,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Methods
 
-        private ISerializer CreateSerializer(Type type)
-        {
-            if (type.IsAbstract)
-            {
-                return null;
-            }
-
-            var typeSerializerBuilder = new TypeSerializerBuilder(type, this.GetSerializer);
-            var typeSerializer = new TypeSerializer(type, typeSerializerBuilder);
-            return typeSerializer;
-        }
-
-        private ISerializer GetSerializer(Type type)
+        internal override ISerializer GetSerializer(Type type)
         {
             ISerializer serializer;
             if (this.serializers.TryGetValue(type, out serializer))
@@ -150,6 +137,18 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             }
 
             return serializer;
+        }
+
+        private ISerializer CreateSerializer(Type type)
+        {
+            if (type.IsAbstract)
+            {
+                return null;
+            }
+
+            var typeSerializerBuilder = new TypeSerializerBuilder(type, this.GetSerializer);
+            var typeSerializer = new TypeSerializer(type, typeSerializerBuilder);
+            return typeSerializer;
         }
 
         #endregion

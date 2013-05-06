@@ -161,7 +161,7 @@
     <Compile Include="GameData\Vector3.cs" />
     <Compile Include="GameData\VendingMachineSlot.cs" />
     <Compile Include="Messages\Header.cs" />
-    <Compile Include="Messages\InfoPacketType.cs" />
+    <Compile Include="Messages\N3Messages\InfoPacketType.cs" />
     <Compile Include="Messages\InitiateCompressionMessage.cs" />
     <Compile Include="Messages\N3Messages\AddTemplateMessage.cs" />
     <Compile Include="Messages\N3Messages\AppearanceUpdateMessage.cs" />

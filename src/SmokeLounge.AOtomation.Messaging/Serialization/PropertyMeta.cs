@@ -45,6 +45,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             this.flagsAttribute = flagsAttribute;
             this.usesFlagsAttributes = usesFlagsAttributes;
             this.options = new MemberOptions(
+                this.propertyInfo.PropertyType, 
                 memberAttribute.IsFixedSize, 
                 memberAttribute.FixedSizeLength, 
                 memberAttribute.SerializeSize, 
