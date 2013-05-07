@@ -30,7 +30,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         [TestMethod]
         [DeploymentItem(".\\TestData\\InfoPacket #1 - 0x40")]
-        public void InfoPacket0x40Test()
+        public void Deserialize0x40Test()
         {
             var packet = this.ReadTestPacket("InfoPacket #1 - 0x40");
 
@@ -48,7 +48,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         [TestMethod]
         [DeploymentItem(".\\TestData\\InfoPacket #2 - 0x41")]
-        public void InfoPacket0x41Test()
+        public void Deserialize0x41Test()
         {
             var packet = this.ReadTestPacket("InfoPacket #2 - 0x41");
 
@@ -66,7 +66,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         [TestMethod]
         [DeploymentItem(".\\TestData\\InfoPacket #3 - 0x43")]
-        public void InfoPacket0x43Test()
+        public void Deserialize0x43Test()
         {
             var packet = this.ReadTestPacket("InfoPacket #3 - 0x43");
 
@@ -84,7 +84,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         [TestMethod]
         [DeploymentItem(".\\TestData\\InfoPacket #4 - 0x47")]
-        public void InfoPacket0x47Test()
+        public void Deserialize0x47Test()
         {
             var packet = this.ReadTestPacket("InfoPacket #4 - 0x47");
 
@@ -102,7 +102,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         [TestMethod]
         [DeploymentItem(".\\TestData\\InfoPacket #5 - 0x54")]
-        public void InfoPacket0x54Test()
+        public void Deserialize0x54Test()
         {
             var packet = this.ReadTestPacket("InfoPacket #5 - 0x54");
 
@@ -117,7 +117,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
         [TestMethod]
         [DeploymentItem(".\\TestData\\InfoPacket #6 - 0x57")]
-        public void InfoPacket0x57Test()
+        public void Deserialize0x57Test()
         {
             var packet = this.ReadTestPacket("InfoPacket #6 - 0x57");
 
@@ -128,6 +128,84 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
 
             Assert.IsNotNull(infoPacket.Timer);
             Assert.IsNotNull(infoPacket.Unknown13);
+        }
+
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #1 - 0x40")]
+        public void Roundtrip0x40Test()
+        {
+            var expected = this.ReadTestPacket("InfoPacket #1 - 0x40");
+
+            var messageSerializer = new MessageSerializer();
+            var deserialized = this.Deserialize(messageSerializer, expected);
+            var actual = this.Serialize(messageSerializer, deserialized);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #2 - 0x41")]
+        public void Roundtrip0x41Test()
+        {
+            var expected = this.ReadTestPacket("InfoPacket #2 - 0x41");
+
+            var messageSerializer = new MessageSerializer();
+            var deserialized = this.Deserialize(messageSerializer, expected);
+            var actual = this.Serialize(messageSerializer, deserialized);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #3 - 0x43")]
+        public void Roundtrip0x43Test()
+        {
+            var expected = this.ReadTestPacket("InfoPacket #3 - 0x43");
+
+            var messageSerializer = new MessageSerializer();
+            var deserialized = this.Deserialize(messageSerializer, expected);
+            var actual = this.Serialize(messageSerializer, deserialized);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #4 - 0x47")]
+        public void Roundtrip0x47Test()
+        {
+            var expected = this.ReadTestPacket("InfoPacket #4 - 0x47");
+
+            var messageSerializer = new MessageSerializer();
+            var deserialized = this.Deserialize(messageSerializer, expected);
+            var actual = this.Serialize(messageSerializer, deserialized);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #5 - 0x54")]
+        public void Roundtrip0x54Test()
+        {
+            var expected = this.ReadTestPacket("InfoPacket #5 - 0x54");
+
+            var messageSerializer = new MessageSerializer();
+            var deserialized = this.Deserialize(messageSerializer, expected);
+            var actual = this.Serialize(messageSerializer, deserialized);
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        [DeploymentItem(".\\TestData\\InfoPacket #6 - 0x57")]
+        public void Roundtrip0x57Test()
+        {
+            var expected = this.ReadTestPacket("InfoPacket #6 - 0x57");
+
+            var messageSerializer = new MessageSerializer();
+            var deserialized = this.Deserialize(messageSerializer, expected);
+            var actual = this.Serialize(messageSerializer, deserialized);
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         #endregion
@@ -163,6 +241,15 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                 {
                     binaryReader.Dispose();
                 }
+            }
+        }
+
+        private byte[] Serialize(MessageSerializer messageSerializer, Message message)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                messageSerializer.Serialize(memoryStream, message);
+                return memoryStream.ToArray();
             }
         }
 
