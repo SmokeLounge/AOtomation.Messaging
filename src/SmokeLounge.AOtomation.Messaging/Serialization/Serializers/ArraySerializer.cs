@@ -34,20 +34,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         {
             this.type = type;
             this.typeSerializer = typeSerializer;
-            this.SerializerLambda =
-                (streamWriter, serializationContext, value) =>
-                this.Serialize(streamWriter, serializationContext, value, null);
-            this.DeserializerLambda =
-                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
         }
 
         #endregion
 
         #region Public Properties
-
-        public Func<StreamReader, SerializationContext, object> DeserializerLambda { get; private set; }
-
-        public Action<StreamWriter, SerializationContext, object> SerializerLambda { get; private set; }
 
         public Type Type
         {
@@ -62,7 +53,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
         {
             int arrayLength;
             if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
@@ -146,7 +137,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions)
+            MemberOptions memberOptions = null)
         {
             if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
             {

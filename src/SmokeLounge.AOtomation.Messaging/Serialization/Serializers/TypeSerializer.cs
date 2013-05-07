@@ -21,11 +21,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
     {
         #region Fields
 
-        private readonly Lazy<Func<StreamReader, SerializationContext, object>> deserializer;
-
         private readonly Lazy<Expression> deserializerExpression;
 
-        private readonly Lazy<Action<StreamWriter, SerializationContext, object>> serializer;
+        private readonly Lazy<Func<StreamReader, SerializationContext, object>> lazyDeserializerLambda;
+
+        private readonly Lazy<Action<StreamWriter, SerializationContext, object>> lazySerializerLambda;
 
         private readonly Lazy<Expression> serializerExpression;
 
@@ -42,36 +42,42 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             this.type = type;
             this.typeSerializerBuilder = typeSerializerBuilder;
             this.serializerExpression = new Lazy<Expression>(this.BuildSerializerExpression);
-            this.serializer = new Lazy<Action<StreamWriter, SerializationContext, object>>(this.CompileSerializer);
+            this.lazySerializerLambda =
+                new Lazy<Action<StreamWriter, SerializationContext, object>>(this.CompileSerializer);
             this.deserializerExpression = new Lazy<Expression>(this.BuildDeserializerExpression);
-            this.deserializer = new Lazy<Func<StreamReader, SerializationContext, object>>(this.CompileDeserializer);
+            this.lazyDeserializerLambda =
+                new Lazy<Func<StreamReader, SerializationContext, object>>(this.CompileDeserializer);
         }
 
         #endregion
 
         #region Public Properties
 
-        public Func<StreamReader, SerializationContext, object> DeserializerLambda
-        {
-            get
-            {
-                return this.deserializer.Value;
-            }
-        }
-
-        public Action<StreamWriter, SerializationContext, object> SerializerLambda
-        {
-            get
-            {
-                return this.serializer.Value;
-            }
-        }
-
         public Type Type
         {
             get
             {
                 return this.type;
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        private Func<StreamReader, SerializationContext, object> DeserializerLambda
+        {
+            get
+            {
+                return this.lazyDeserializerLambda.Value;
+            }
+        }
+
+        private Action<StreamWriter, SerializationContext, object> SerializerLambda
+        {
+            get
+            {
+                return this.lazySerializerLambda.Value;
             }
         }
 

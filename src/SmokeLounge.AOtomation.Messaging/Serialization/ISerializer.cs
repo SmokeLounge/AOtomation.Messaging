@@ -21,10 +21,6 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     {
         #region Public Properties
 
-        Func<StreamReader, SerializationContext, object> DeserializerLambda { get; }
-
-        Action<StreamWriter, SerializationContext, object> SerializerLambda { get; }
-
         Type Type { get; }
 
         #endregion
@@ -32,7 +28,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         #region Public Methods and Operators
 
         object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions);
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null);
 
         Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
@@ -44,7 +40,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions);
+            MemberOptions memberOptions = null);
 
         Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 

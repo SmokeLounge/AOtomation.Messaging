@@ -353,13 +353,13 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
                 using (var streamReader = new StreamReader(memoryStream))
                 {
                     var serializationContext = new SerializationContext(serializerResolver);
-                    serializer.SerializerLambda(streamWriter, serializationContext, obj);
+                    serializer.Serialize(streamWriter, serializationContext, obj);
                     var arr = memoryStream.ToArray();
                     Console.WriteLine(BitConverter.ToString(arr));
 
                     memoryStream.Position = 0;
                     var deserializationContext = new SerializationContext(serializerResolver);
-                    var result = serializer.DeserializerLambda(streamReader, deserializationContext);
+                    var result = serializer.Deserialize(streamReader, deserializationContext);
                     memoryStream = null;
                     return result;
                 }

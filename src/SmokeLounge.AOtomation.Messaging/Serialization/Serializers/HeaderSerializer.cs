@@ -33,10 +33,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         {
             this.type = typeof(Header);
             this.SerializerLambda =
-                (streamWriter, serializationContext, value) =>
-                this.Serialize(streamWriter, serializationContext, value, null);
+                (streamWriter, serializationContext, value) => this.Serialize(streamWriter, serializationContext, value);
             this.DeserializerLambda =
-                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext, null);
+                (streamReader, serializationContext) => this.Deserialize(streamReader, serializationContext);
         }
 
         #endregion
@@ -60,7 +59,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
         {
             var header = new Header();
             header.MessageId = streamReader.ReadInt16();
@@ -85,7 +84,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions)
+            MemberOptions memberOptions = null)
         {
             var header = (Header)value;
             streamWriter.WriteInt16(header.MessageId);

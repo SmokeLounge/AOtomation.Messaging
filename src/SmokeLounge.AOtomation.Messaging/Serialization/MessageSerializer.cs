@@ -64,11 +64,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             var serializationContext = new SerializationContext(this.serializerResolver);
             var message = new Message
                               {
-                                  Header =
-                                      (Header)
-                                      this.headerSerializer.DeserializerLambda(reader, serializationContext), 
-                                  Body =
-                                      (MessageBody)serializer.DeserializerLambda(reader, serializationContext)
+                                  Header = (Header)this.headerSerializer.Deserialize(reader, serializationContext), 
+                                  Body = (MessageBody)serializer.Deserialize(reader, serializationContext)
                               };
             return message;
         }
@@ -83,8 +80,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
             var serializationContext = new SerializationContext(this.serializerResolver);
             var writer = new StreamWriter(stream) { Position = 0 };
-            this.headerSerializer.SerializerLambda(writer, serializationContext, message.Header);
-            serializer.SerializerLambda(writer, serializationContext, message.Body);
+            this.headerSerializer.Serialize(writer, serializationContext, message.Header);
+            serializer.Serialize(writer, serializationContext, message.Body);
             var length = writer.Position;
             writer.Position = 6;
             writer.WriteInt16((short)length);
