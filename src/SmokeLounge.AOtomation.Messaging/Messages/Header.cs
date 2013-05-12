@@ -18,7 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
     {
         #region Public Properties
 
-        public short MessageId { get; set; }
+        public ushort MessageId { get; set; }
 
         public PacketType PacketType { get; set; }
 
