@@ -62,7 +62,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
         {
             var header = new Header();
-            header.MessageId = streamReader.ReadInt16();
+            header.MessageId = streamReader.ReadUInt16();
             header.PacketType = (PacketType)streamReader.ReadInt16();
             header.Unknown = streamReader.ReadInt16();
             header.Size = streamReader.ReadInt16();
@@ -87,7 +87,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             MemberOptions memberOptions = null)
         {
             var header = (Header)value;
-            streamWriter.WriteInt16(header.MessageId);
+            streamWriter.WriteUInt16(header.MessageId);
             streamWriter.WriteInt16((short)header.PacketType);
             streamWriter.WriteInt16(header.Unknown);
             streamWriter.WriteInt16(header.Size);
