@@ -25,9 +25,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         private readonly HeaderSerializer headerSerializer;
 
-        private readonly SerializerResolver serializerResolver;
+        private readonly PacketInspector packetInspector;
 
-        private readonly TypeInfo typeInfo;
+        private readonly SerializerResolver serializerResolver;
 
         #endregion
 
@@ -35,8 +35,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         public MessageSerializer()
         {
-            this.typeInfo = new TypeInfo(typeof(MessageBody));
+            this.packetInspector = new PacketInspector(typeof(MessageBody));
             this.serializerResolver = new SerializerResolverBuilder<MessageBody>().Build();
+            this.headerSerializer = new HeaderSerializer();
+        }
+
+        public MessageSerializer(SerializerResolverBuilder serializerResolverBuilder)
+        {
+            this.packetInspector = new PacketInspector(typeof(MessageBody));
+            this.serializerResolver = serializerResolverBuilder.Build();
             this.headerSerializer = new HeaderSerializer();
         }
 
@@ -46,8 +53,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         public Message Deserialize(Stream stream)
         {
+            SerializationContext ignore;
+            return this.Deserialize(stream, out ignore);
+        }
+
+        public Message Deserialize(Stream stream, out SerializationContext serializationContext)
+        {
+            serializationContext = null;
             var reader = new StreamReader(stream) { Position = 0 };
-            var subTypeInfo = this.typeInfo.FindSubType(reader);
+            var subTypeInfo = this.packetInspector.FindSubType(reader);
 
             if (subTypeInfo == null)
             {
@@ -61,7 +75,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             }
 
             reader.Position = 0;
-            var serializationContext = new SerializationContext(this.serializerResolver);
+            serializationContext = new SerializationContext(this.serializerResolver);
             var message = new Message
                               {
                                   Header = (Header)this.headerSerializer.Deserialize(reader, serializationContext), 
@@ -72,13 +86,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         public void Serialize(Stream stream, Message message)
         {
+            SerializationContext ignore;
+            this.Serialize(stream, message, out ignore);
+        }
+
+        public void Serialize(Stream stream, Message message, out SerializationContext serializationContext)
+        {
+            serializationContext = null;
             var serializer = this.serializerResolver.GetSerializer(message.Body.GetType());
             if (serializer == null)
             {
                 return;
             }
 
-            var serializationContext = new SerializationContext(this.serializerResolver);
+            serializationContext = new SerializationContext(this.serializerResolver);
             var writer = new StreamWriter(stream) { Position = 0 };
             this.headerSerializer.Serialize(writer, serializationContext, message.Header);
             serializer.Serialize(writer, serializationContext, message.Body);

@@ -59,7 +59,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
+            StreamReader streamReader, 
+            SerializationContext serializationContext, 
+            PropertyMetaData propertyMetaData = null)
         {
             var header = new Header();
             header.MessageId = streamReader.ReadUInt16();
@@ -73,9 +75,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression assignmentTargetExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             throw new NotImplementedException();
         }
@@ -84,7 +86,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions = null)
+            PropertyMetaData propertyMetaData = null)
         {
             var header = (Header)value;
             streamWriter.WriteUInt16(header.MessageId);
@@ -97,9 +99,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression valueExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             throw new NotImplementedException();
         }

@@ -26,6 +26,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
     public abstract class SerializerResolverBuilder
     {
+        #region Public Methods and Operators
+
+        public abstract SerializerResolver Build();
+
+        #endregion
+
         #region Methods
 
         internal abstract ISerializer GetSerializer(Type type);
@@ -71,7 +77,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Public Methods and Operators
 
-        public SerializerResolver Build()
+        public override SerializerResolver Build()
         {
             var rootType = typeof(T);
 

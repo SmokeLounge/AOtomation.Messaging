@@ -86,19 +86,22 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions)
+            StreamReader streamReader, 
+            SerializationContext serializationContext, 
+            PropertyMetaData propertyMetaData = null)
         {
             return this.DeserializerLambda(streamReader, serializationContext);
         }
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression assignmentTargetExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             var invokeExp = Expression.Invoke(
-                this.deserializerExpression.Value, new Expression[] { streamReaderExpression, optionsExpression });
+                this.deserializerExpression.Value, 
+                new Expression[] { streamReaderExpression, serializationContextExpression });
             var assignExp = Expression.Assign(assignmentTargetExpression, Expression.Convert(invokeExp, this.type));
             return assignExp;
         }
@@ -107,19 +110,20 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData = null)
         {
             this.SerializerLambda(streamWriter, serializationContext, value);
         }
 
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression valueExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             var invokeExp = Expression.Invoke(
-                this.serializerExpression.Value, new[] { streamWriterExpression, optionsExpression, valueExpression });
+                this.serializerExpression.Value, 
+                new[] { streamWriterExpression, serializationContextExpression, valueExpression });
             return invokeExp;
         }
 

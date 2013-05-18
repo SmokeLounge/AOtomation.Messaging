@@ -49,16 +49,18 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
+            StreamReader streamReader, 
+            SerializationContext serializationContext, 
+            PropertyMetaData propertyMetaData = null)
         {
             return streamReader.ReadUInt32();
         }
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression assignmentTargetExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             var readMethodInfo = ReflectionHelper.GetMethodInfo<StreamReader, Func<uint>>(o => o.ReadUInt32);
             var callReadExp = Expression.Call(streamReaderExpression, readMethodInfo);
@@ -76,16 +78,16 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions = null)
+            PropertyMetaData propertyMetaData = null)
         {
             streamWriter.WriteUInt32((uint)value);
         }
 
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression valueExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             var writeMethodInfo = ReflectionHelper.GetMethodInfo<StreamWriter, Action<uint>>(o => o.WriteUInt32);
             if (valueExpression.Type.IsAssignableFrom(this.type))

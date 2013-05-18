@@ -53,23 +53,25 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
+            StreamReader streamReader, 
+            SerializationContext serializationContext, 
+            PropertyMetaData propertyMetaData = null)
         {
             int arrayLength;
-            if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
+            if (propertyMetaData.Options.SerializeSize != ArraySizeType.NoSerialization)
             {
-                var arraySizeSerializer = new ArraySizeSerializer(memberOptions.SerializeSize);
-                arrayLength = (int)arraySizeSerializer.Deserialize(streamReader, serializationContext, memberOptions);
+                var arraySizeSerializer = new ArraySizeSerializer(propertyMetaData.Options.SerializeSize);
+                arrayLength = (int)arraySizeSerializer.Deserialize(streamReader, serializationContext, propertyMetaData);
             }
             else
             {
-                arrayLength = memberOptions.FixedSizeLength;
+                arrayLength = propertyMetaData.Options.FixedSizeLength;
             }
 
             var array = Array.CreateInstance(this.typeSerializer.Type, arrayLength);
             for (var i = 0; i < arrayLength; i++)
             {
-                var element = this.typeSerializer.Deserialize(streamReader, serializationContext, memberOptions);
+                var element = this.typeSerializer.Deserialize(streamReader, serializationContext, propertyMetaData);
                 array.SetValue(element, i);
             }
 
@@ -78,25 +80,25 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression assignmentTargetExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             var expressions = new List<Expression>();
 
             var arrayLength = Expression.Variable(typeof(int), "size");
 
             Expression setArrayLength;
-            if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
+            if (propertyMetaData.Options.SerializeSize != ArraySizeType.NoSerialization)
             {
                 setArrayLength =
-                    new ArraySizeSerializer(memberOptions.SerializeSize).DeserializerExpression(
-                        streamReaderExpression, optionsExpression, arrayLength, memberOptions);
+                    new ArraySizeSerializer(propertyMetaData.Options.SerializeSize).DeserializerExpression(
+                        streamReaderExpression, serializationContextExpression, arrayLength, propertyMetaData);
             }
             else
             {
                 setArrayLength = Expression.Assign(
-                    arrayLength, Expression.Constant(memberOptions.FixedSizeLength, typeof(int)));
+                    arrayLength, Expression.Constant(propertyMetaData.Options.FixedSizeLength, typeof(int)));
             }
 
             expressions.Add(setArrayLength);
@@ -117,9 +119,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                     new[]
                         {
                             this.typeSerializer.DeserializerExpression(
-                                streamReaderExpression, optionsExpression, element, memberOptions), 
-                            assign, 
-                            Expression.Assign(counter, Expression.Increment(counter))
+                                streamReaderExpression, serializationContextExpression, element, propertyMetaData), 
+                            assign, Expression.Assign(counter, Expression.Increment(counter))
                         }), 
                 Expression.Break(@break));
 
@@ -137,26 +138,28 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions = null)
+            PropertyMetaData propertyMetaData = null)
         {
-            if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
+            if (propertyMetaData.Options.SerializeSize != ArraySizeType.NoSerialization)
             {
-                var arraySizeSerializer = new ArraySizeSerializer(memberOptions.SerializeSize);
-                arraySizeSerializer.Serialize(streamWriter, serializationContext, value, memberOptions);
+                var arraySizeSerializer = new ArraySizeSerializer(propertyMetaData.Options.SerializeSize);
+                arraySizeSerializer.Serialize(
+                    streamWriter, serializationContext, value, propertyMetaData: propertyMetaData);
             }
 
             var array = (Array)value;
             for (var i = 0; i < array.Length; i++)
             {
-                this.typeSerializer.Serialize(streamWriter, serializationContext, array.GetValue(i), memberOptions);
+                this.typeSerializer.Serialize(
+                    streamWriter, serializationContext, array.GetValue(i), propertyMetaData: propertyMetaData);
             }
         }
 
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression valueExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             if (valueExpression.Type.IsAssignableFrom(this.type) == false)
             {
@@ -164,11 +167,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             }
 
             var expressions = new List<Expression>();
-            if (memberOptions.SerializeSize != ArraySizeType.NoSerialization)
+            if (propertyMetaData.Options.SerializeSize != ArraySizeType.NoSerialization)
             {
                 var serializeSizeExp =
-                    new ArraySizeSerializer(memberOptions.SerializeSize).SerializerExpression(
-                        streamWriterExpression, optionsExpression, valueExpression, memberOptions);
+                    new ArraySizeSerializer(propertyMetaData.Options.SerializeSize).SerializerExpression(
+                        streamWriterExpression, serializationContextExpression, valueExpression, propertyMetaData);
                 expressions.Add(serializeSizeExp);
             }
 
@@ -186,7 +189,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
                         {
                             assign, 
                             this.typeSerializer.SerializerExpression(
-                                streamWriterExpression, optionsExpression, element, memberOptions), 
+                                streamWriterExpression, serializationContextExpression, element, propertyMetaData), 
                             Expression.Assign(counter, Expression.Increment(counter))
                         }), 
                 Expression.Break(@break));

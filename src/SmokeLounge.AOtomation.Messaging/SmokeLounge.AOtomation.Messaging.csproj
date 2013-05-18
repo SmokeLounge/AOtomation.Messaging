@@ -249,6 +249,8 @@
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Messages\TextMessageRange.cs" />
     <Compile Include="Serialization\ArraySizeType.cs" />
+    <Compile Include="Serialization\DebuggingSerializerBuilderResolver.cs" />
+    <Compile Include="Serialization\DebugInfo.cs" />
     <Compile Include="Serialization\FlagsCriteria.cs" />
     <Compile Include="Serialization\IdentifierType.cs" />
     <Compile Include="Serialization\ISerializer.cs" />
@@ -258,7 +260,7 @@
     <Compile Include="Serialization\MappingAttributes\AoMemberAttribute.cs" />
     <Compile Include="Serialization\MappingAttributes\AoUsesFlagsAttribute.cs" />
     <Compile Include="Serialization\MemberOptions.cs" />
-    <Compile Include="Serialization\PropertyMeta.cs" />
+    <Compile Include="Serialization\PropertyMetaData.cs" />
     <Compile Include="Serialization\ReflectionHelper.cs" />
     <Compile Include="Serialization\SerializationContext.cs" />
     <Compile Include="Serialization\Serializers\ArraySerializer.cs" />
@@ -266,6 +268,7 @@
     <Compile Include="Serialization\Serializers\ByteSerializer.cs" />
     <Compile Include="Serialization\Serializers\Custom\PlayfieldVendorInfoSerializer.cs" />
     <Compile Include="Serialization\Serializers\Custom\SimpleCharFullUpdateSerializer.cs" />
+    <Compile Include="Serialization\Serializers\DebuggingSerializer.cs" />
     <Compile Include="Serialization\Serializers\IPAddressSerializer.cs" />
     <Compile Include="Serialization\Serializers\UInt16Serializer.cs" />
     <Compile Include="Serialization\Serializers\HeaderSerializer.cs" />
@@ -282,7 +285,7 @@
     <Compile Include="Serialization\MessageSerializer.cs" />
     <Compile Include="Serialization\StreamReader.cs" />
     <Compile Include="Serialization\Serializers\TypeSerializer.cs" />
-    <Compile Include="Serialization\TypeInfo.cs" />
+    <Compile Include="Serialization\PacketInspector.cs" />
     <Compile Include="Serialization\SerializerResolverBuilder.cs" />
     <Compile Include="Serialization\TypeSerializerBuilder.cs" />
   </ItemGroup>

@@ -28,25 +28,27 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         #region Public Methods and Operators
 
         object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null);
+            StreamReader streamReader, 
+            SerializationContext serializationContext, 
+            PropertyMetaData propertyMetaData = null);
 
         Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression assignmentTargetExpression, 
-            MemberOptions memberOptions);
+            PropertyMetaData propertyMetaData);
 
         void Serialize(
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions = null);
+            PropertyMetaData propertyMetaData = null);
 
         Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression valueExpression, 
-            MemberOptions memberOptions);
+            PropertyMetaData propertyMetaData);
 
         #endregion
     }

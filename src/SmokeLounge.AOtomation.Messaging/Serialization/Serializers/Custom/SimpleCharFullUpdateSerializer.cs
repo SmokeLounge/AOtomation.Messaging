@@ -53,30 +53,32 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
+            StreamReader streamReader, 
+            SerializationContext serializationContext, 
+            PropertyMetaData propertyMetaData = null)
         {
             return new SimpleCharFullUpdateMessage();
         }
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression assignmentTargetExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             var deserializerMethodInfo =
                 ReflectionHelper
                     .GetMethodInfo
-                    <SimpleCharFullUpdateSerializer, Func<StreamReader, SerializationContext, MemberOptions, object>>(
-                        o => o.Deserialize);
+                    <SimpleCharFullUpdateSerializer, Func<StreamReader, SerializationContext, PropertyMetaData, object>>
+                    (o => o.Deserialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
                 serializerExp, 
                 deserializerMethodInfo, 
                 new Expression[]
                     {
-                        streamReaderExpression, optionsExpression, 
-                        Expression.Constant(memberOptions, typeof(MemberOptions))
+                        streamReaderExpression, serializationContextExpression, 
+                        Expression.Constant(propertyMetaData, typeof(PropertyMetaData))
                     });
 
             var assignmentExp = Expression.Assign(
@@ -88,7 +90,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions = null)
+            PropertyMetaData propertyMetaData = null)
         {
             var scfu = (SimpleCharFullUpdateMessage)value;
 
@@ -292,23 +294,23 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
 
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression valueExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             var serializerMethodInfo =
                 ReflectionHelper
                     .GetMethodInfo
-                    <SimpleCharFullUpdateSerializer, Action<StreamWriter, SerializationContext, object, MemberOptions>>(
-                        o => o.Serialize);
+                    <SimpleCharFullUpdateSerializer, 
+                        Action<StreamWriter, SerializationContext, object, PropertyMetaData>>(o => o.Serialize);
             var serializerExp = Expression.New(this.GetType());
             var callExp = Expression.Call(
                 serializerExp, 
                 serializerMethodInfo, 
                 new[]
                     {
-                        streamWriterExpression, optionsExpression, valueExpression, 
-                        Expression.Constant(memberOptions, typeof(MemberOptions))
+                        streamWriterExpression, serializationContextExpression, valueExpression, 
+                        Expression.Constant(propertyMetaData, typeof(PropertyMetaData))
                     });
             return callExp;
         }

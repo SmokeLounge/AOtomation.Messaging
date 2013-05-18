@@ -26,7 +26,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     {
         #region Fields
 
-        private readonly Lazy<PropertyMeta[]> propertyMetas;
+        private readonly Lazy<PropertyMetaData[]> propertyMetas;
 
         private readonly Func<Type, ISerializer> serializerResolver;
 
@@ -40,7 +40,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         {
             this.type = type;
             this.serializerResolver = serializerResolver;
-            this.propertyMetas = new Lazy<PropertyMeta[]>(this.InitializePropertyMetas);
+            this.propertyMetas = new Lazy<PropertyMetaData[]>(this.InitializePropertyMetas);
         }
 
         #endregion
@@ -48,7 +48,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         #region Public Methods and Operators
 
         public Expression BuildDeserializer(
-            ParameterExpression streamReaderExpression, ParameterExpression optionsExpression)
+            ParameterExpression streamReaderExpression, ParameterExpression serializationContextExpression)
         {
             var deserializedObject = Expression.Variable(this.type, "serializerVar");
 
@@ -56,7 +56,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             var deserializationExpressions = new List<Expression> { createInstance };
 
             var propertyDeserializers = this.CreatePropertyDeserializers(
-                streamReaderExpression, optionsExpression, deserializedObject);
+                streamReaderExpression, serializationContextExpression, deserializedObject);
             deserializationExpressions.AddRange(propertyDeserializers);
 
             Expression returnValue = deserializedObject;
@@ -75,12 +75,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             var deserialization = Expression.Block(new[] { deserializedObject }, deserializationExpressions);
             var deserializationLambda =
                 Expression.Lambda<Func<StreamReader, SerializationContext, object>>(
-                    deserialization, streamReaderExpression, optionsExpression);
+                    deserialization, streamReaderExpression, serializationContextExpression);
             return deserializationLambda;
         }
 
         public Expression BuildSerializer(
-            ParameterExpression streamWriterExpression, ParameterExpression optionsExpression)
+            ParameterExpression streamWriterExpression, ParameterExpression serializationContextExpression)
         {
             var objectParam = Expression.Parameter(typeof(object), "object");
             var objectToSerialize = Expression.Variable(this.type, "serializerVar");
@@ -89,13 +89,13 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             var serializationExpressions = new List<Expression> { unboxObject };
 
             var propertySerializers = this.CreatePropertySerializers(
-                streamWriterExpression, optionsExpression, objectToSerialize);
+                streamWriterExpression, serializationContextExpression, objectToSerialize);
             serializationExpressions.AddRange(propertySerializers);
 
             var serialization = Expression.Block(new[] { objectToSerialize }, serializationExpressions);
             var serializationLambda =
                 Expression.Lambda<Action<StreamWriter, SerializationContext, object>>(
-                    serialization, streamWriterExpression, optionsExpression, objectParam);
+                    serialization, streamWriterExpression, serializationContextExpression, objectParam);
             return serializationLambda;
         }
 
@@ -105,42 +105,41 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         private Expression CreatePropertyDeserializer(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
-            PropertyMeta propertyMeta, 
+            ParameterExpression serializationContextExpression, 
+            PropertyMetaData propertyMetaData, 
             ParameterExpression deserializedObject)
         {
-            Expression propertyExpression = Expression.Property(deserializedObject, propertyMeta.Property);
+            Expression propertyExpression = Expression.Property(deserializedObject, propertyMetaData.Property);
 
-            if (propertyMeta.UsesFlagsAttributes.Any())
+            if (propertyMetaData.UsesFlagsAttributes.Any())
             {
                 var serializeMethodInfo =
-                    ReflectionHelper.GetMethodInfo<SerializationContext, Func<StreamReader, MemberOptions, object>>(
+                    ReflectionHelper.GetMethodInfo<SerializationContext, Func<StreamReader, PropertyMetaData, object>>(
                         o => o.Deserialize);
                 var args = new Expression[]
                                {
-                                   streamReaderExpression, 
-                                   Expression.Constant(propertyMeta.Options, typeof(MemberOptions))
+                                   streamReaderExpression, Expression.Constant(propertyMetaData, typeof(PropertyMetaData))
                                };
-                var callSerializeExpression = Expression.Call(optionsExpression, serializeMethodInfo, args);
+                var callSerializeExpression = Expression.Call(serializationContextExpression, serializeMethodInfo, args);
                 return Expression.Assign(
-                    propertyExpression, Expression.Convert(callSerializeExpression, propertyMeta.Type));
+                    propertyExpression, Expression.Convert(callSerializeExpression, propertyMetaData.Type));
             }
 
-            var propertySerializer = this.serializerResolver(propertyMeta.Type);
+            var propertySerializer = this.serializerResolver(propertyMetaData.Type);
             var deserializerExpression = propertySerializer.DeserializerExpression(
-                streamReaderExpression, optionsExpression, propertyExpression, propertyMeta.Options);
+                streamReaderExpression, serializationContextExpression, propertyExpression, propertyMetaData);
             return deserializerExpression;
         }
 
         private IEnumerable<Expression> CreatePropertyDeserializers(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             ParameterExpression deserializedObject)
         {
             foreach (var propertyMeta in this.propertyMetas.Value)
             {
                 var deserializerExpression = this.CreatePropertyDeserializer(
-                    streamReaderExpression, optionsExpression, propertyMeta, deserializedObject);
+                    streamReaderExpression, serializationContextExpression, propertyMeta, deserializedObject);
                 yield return deserializerExpression;
 
                 if (propertyMeta.FlagsAttribute == null)
@@ -152,7 +151,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 var setFlagValueMethodInfo =
                     ReflectionHelper.GetMethodInfo<SerializationContext, Action<string, int>>(o => o.SetFlagValue);
                 var setFlagExpression = Expression.Call(
-                    optionsExpression, 
+                    serializationContextExpression, 
                     setFlagValueMethodInfo, 
                     Expression.Constant(propertyMeta.FlagsAttribute.Flag, typeof(string)), 
                     Expression.Convert(propertyExpression, typeof(int)));
@@ -162,40 +161,40 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         private Expression CreatePropertySerializer(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
-            PropertyMeta propertyMeta, 
+            ParameterExpression serializationContextExpression, 
+            PropertyMetaData propertyMetaData, 
             ParameterExpression objectToSerialize)
         {
-            Expression propertyExpression = Expression.Property(objectToSerialize, propertyMeta.Property);
-            if (ReflectionHelper.IsStruct(propertyMeta.Type))
+            Expression propertyExpression = Expression.Property(objectToSerialize, propertyMetaData.Property);
+            if (ReflectionHelper.IsStruct(propertyMetaData.Type))
             {
                 propertyExpression = Expression.Convert(propertyExpression, typeof(object));
             }
 
-            if (propertyMeta.UsesFlagsAttributes.Any())
+            if (propertyMetaData.UsesFlagsAttributes.Any())
             {
                 var serializeMethodInfo =
-                    ReflectionHelper.GetMethodInfo<SerializationContext, Action<StreamWriter, object, MemberOptions>>(
-                        o => o.Serialize);
+                    ReflectionHelper.GetMethodInfo<SerializationContext, Action<StreamWriter, object, PropertyMetaData>>
+                        (o => o.Serialize);
                 var args = new Expression[]
                                {
                                    streamWriterExpression, Expression.Convert(propertyExpression, typeof(object)), 
-                                   Expression.Constant(propertyMeta.Options, typeof(MemberOptions))
+                                   Expression.Constant(propertyMetaData, typeof(PropertyMetaData))
                                };
-                var callSerializeExpression = Expression.Call(optionsExpression, serializeMethodInfo, args);
+                var callSerializeExpression = Expression.Call(serializationContextExpression, serializeMethodInfo, args);
                 return callSerializeExpression;
             }
 
-            var propertySerializer = this.serializerResolver(propertyMeta.Type);
+            var propertySerializer = this.serializerResolver(propertyMetaData.Type);
             var serializerExpression = propertySerializer.SerializerExpression(
-                streamWriterExpression, optionsExpression, propertyExpression, propertyMeta.Options);
+                streamWriterExpression, serializationContextExpression, propertyExpression, propertyMetaData);
 
             return serializerExpression;
         }
 
         private IEnumerable<Expression> CreatePropertySerializers(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             ParameterExpression objectToSerialize)
         {
             foreach (var propertyMeta in this.propertyMetas.Value)
@@ -206,7 +205,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                     var setFlagValueMethodInfo =
                         ReflectionHelper.GetMethodInfo<SerializationContext, Action<string, int>>(o => o.SetFlagValue);
                     var setFlagExpression = Expression.Call(
-                        optionsExpression, 
+                        serializationContextExpression, 
                         setFlagValueMethodInfo, 
                         Expression.Constant(propertyMeta.FlagsAttribute.Flag, typeof(string)), 
                         Expression.Convert(propertyExpression, typeof(int)));
@@ -214,12 +213,12 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 }
 
                 var serializerExpression = this.CreatePropertySerializer(
-                    streamWriterExpression, optionsExpression, propertyMeta, objectToSerialize);
+                    streamWriterExpression, serializationContextExpression, propertyMeta, objectToSerialize);
                 yield return serializerExpression;
             }
         }
 
-        private PropertyMeta[] InitializePropertyMetas()
+        private PropertyMetaData[] InitializePropertyMetas()
         {
             var baseType = this.type;
             var stack = new Stack<Type>();
@@ -230,7 +229,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
             }
             while (baseType != null);
 
-            var list = new List<PropertyMeta>();
+            var list = new List<PropertyMetaData>();
 
             while (stack.Count > 0)
             {
@@ -250,7 +249,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                             property.GetCustomAttributes(typeof(AoUsesFlagsAttribute), false)
                                     .Cast<AoUsesFlagsAttribute>()
                                     .ToArray()
-                        select new PropertyMeta(property, memberAttribute, flagsAttribute, usesFlagsAttribute);
+                        select new PropertyMetaData(property, memberAttribute, flagsAttribute, usesFlagsAttribute);
                 list.AddRange(p);
             }
 

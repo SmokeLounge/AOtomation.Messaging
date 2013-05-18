@@ -67,7 +67,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
         #region Public Methods and Operators
 
         public object Deserialize(
-            StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
+            StreamReader streamReader, 
+            SerializationContext serializationContext, 
+            PropertyMetaData propertyMetaData = null)
         {
             switch (this.arraySizeType)
             {
@@ -89,9 +91,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression DeserializerExpression(
             ParameterExpression streamReaderExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression assignmentTargetExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             if (this.arraySizeType == ArraySizeType.NoSerialization)
             {
@@ -122,9 +124,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             Expression deserializedValueExpression;
 
-            if (memberOptions.IsFixedSize)
+            if (propertyMetaData.Options.IsFixedSize)
             {
-                deserializedValueExpression = Expression.Constant(memberOptions.FixedSizeLength, this.type);
+                deserializedValueExpression = Expression.Constant(propertyMetaData.Options.FixedSizeLength, this.type);
             }
             else
             {
@@ -152,7 +154,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             StreamWriter streamWriter, 
             SerializationContext serializationContext, 
             object value, 
-            MemberOptions memberOptions = null)
+            PropertyMetaData propertyMetaData = null)
         {
             if (this.arraySizeType == ArraySizeType.NoSerialization)
             {
@@ -185,9 +187,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
         public Expression SerializerExpression(
             ParameterExpression streamWriterExpression, 
-            ParameterExpression optionsExpression, 
+            ParameterExpression serializationContextExpression, 
             Expression valueExpression, 
-            MemberOptions memberOptions)
+            PropertyMetaData propertyMetaData)
         {
             if (this.arraySizeType == ArraySizeType.NoSerialization)
             {
@@ -218,9 +220,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
 
             Expression serializedValueExpression;
 
-            if (memberOptions.IsFixedSize)
+            if (propertyMetaData.Options.IsFixedSize)
             {
-                serializedValueExpression = Expression.Constant(memberOptions.FixedSizeLength, this.type);
+                serializedValueExpression = Expression.Constant(propertyMetaData.Options.FixedSizeLength, this.type);
             }
             else
             {

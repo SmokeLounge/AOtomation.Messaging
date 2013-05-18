@@ -24,6 +24,8 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     {
         #region Fields
 
+        private readonly List<DebugInfo> debugInfos;
+
         private readonly IDictionary<string, int> flags;
 
         private readonly SerializerResolver serializerResolver;
@@ -35,12 +37,30 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         public SerializationContext(SerializerResolver serializerResolver)
         {
             this.serializerResolver = serializerResolver;
+            this.debugInfos = new List<DebugInfo>();
             this.flags = new Dictionary<string, int>();
         }
 
         #endregion
 
+        #region Public Properties
+
+        public IEnumerable<DebugInfo> Type
+        {
+            get
+            {
+                return this.debugInfos;
+            }
+        }
+
+        #endregion
+
         #region Public Methods and Operators
+
+        public void AddDebugInfo(PropertyMetaData propertyMetaData, long offset, long length)
+        {
+            this.debugInfos.Add(new DebugInfo(propertyMetaData, offset, length));
+        }
 
         public AoUsesFlagsAttribute Evaluate(IEnumerable<AoUsesFlagsAttribute> usesFlags)
         {
@@ -63,48 +83,48 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Methods
 
-        internal object Deserialize(StreamReader streamReader, MemberOptions memberOptions)
+        internal object Deserialize(StreamReader streamReader, PropertyMetaData propertyMetaData)
         {
-            if (memberOptions.UsesFlagsAttributes.Any() == false)
+            if (propertyMetaData.UsesFlagsAttributes.Any() == false)
             {
                 return null;
             }
 
-            var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
+            var usesFlag = this.Evaluate(propertyMetaData.UsesFlagsAttributes);
             if (usesFlag == null)
             {
                 return null;
             }
 
             var serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
-            var value = serializer.Deserialize(streamReader, this, memberOptions);
+            var value = serializer.Deserialize(streamReader, this, propertyMetaData);
 
-            if (memberOptions.Type.IsValueType)
+            if (propertyMetaData.Type.IsValueType)
             {
-                if (memberOptions.Type.IsPrimitive)
+                if (propertyMetaData.Type.IsPrimitive)
                 {
-                    return Convert.ChangeType(value, memberOptions.Type);
+                    return Convert.ChangeType(value, propertyMetaData.Type);
                 }
 
-                if (memberOptions.Type.IsEnum)
+                if (propertyMetaData.Type.IsEnum)
                 {
-                    return Convert.ChangeType(value, Enum.GetUnderlyingType(memberOptions.Type));
+                    return Convert.ChangeType(value, Enum.GetUnderlyingType(propertyMetaData.Type));
                 }
             }
 
             return value;
         }
 
-        internal void Serialize(StreamWriter streamWriter, object obj, MemberOptions memberOptions)
+        internal void Serialize(StreamWriter streamWriter, object obj, PropertyMetaData propertyMetaData)
         {
             ISerializer serializer;
-            if (memberOptions.UsesFlagsAttributes.Any() == false)
+            if (propertyMetaData.UsesFlagsAttributes.Any() == false)
             {
                 serializer = this.serializerResolver.GetSerializer(obj.GetType());
             }
             else
             {
-                var usesFlag = this.Evaluate(memberOptions.UsesFlagsAttributes);
+                var usesFlag = this.Evaluate(propertyMetaData.UsesFlagsAttributes);
                 if (usesFlag == null)
                 {
                     return;
@@ -113,15 +133,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
                 serializer = this.serializerResolver.GetSerializer(usesFlag.Type);
             }
 
-            if (memberOptions.Type.IsValueType)
+            if (propertyMetaData.Type.IsValueType)
             {
-                if (memberOptions.Type.IsPrimitive || memberOptions.Type.IsEnum)
+                if (propertyMetaData.Type.IsPrimitive || propertyMetaData.Type.IsEnum)
                 {
                     obj = Convert.ChangeType(obj, serializer.Type);
                 }
             }
 
-            serializer.Serialize(streamWriter, this, obj, memberOptions);
+            serializer.Serialize(streamWriter, this, obj, propertyMetaData: propertyMetaData);
         }
 
         private bool Evaluate(AoUsesFlagsAttribute usesFlags)
