@@ -55,7 +55,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers.Custom
         public object Deserialize(
             StreamReader streamReader, SerializationContext serializationContext, MemberOptions memberOptions = null)
         {
-            throw new NotSupportedException("Deserializing SimpleCharFullUpdateMessage is not supported yet.");
+            return new SimpleCharFullUpdateMessage();
         }
 
         public Expression DeserializerExpression(
