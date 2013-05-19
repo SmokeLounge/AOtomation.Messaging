@@ -16,52 +16,15 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
     public class DebugInfo
     {
-        #region Fields
-
-        private readonly long length;
-
-        private readonly long offset;
-
-        private readonly PropertyMetaData propertyMetaData;
-
-        #endregion
-
-        #region Constructors and Destructors
-
-        public DebugInfo(PropertyMetaData propertyMetaData, long offset, long length)
-        {
-            this.propertyMetaData = propertyMetaData;
-            this.offset = offset;
-            this.length = length;
-        }
-
-        #endregion
-
         #region Public Properties
 
-        public long Length
-        {
-            get
-            {
-                return this.length;
-            }
-        }
+        public long Length { get; set; }
 
-        public long Offset
-        {
-            get
-            {
-                return this.offset;
-            }
-        }
+        public long Offset { get; set; }
 
-        public PropertyMetaData PropertyMetaData
-        {
-            get
-            {
-                return this.propertyMetaData;
-            }
-        }
+        public PropertyMetaData PropertyMetaData { get; set; }
+
+        public object Value { get; set; }
 
         #endregion
     }

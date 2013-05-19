@@ -17,7 +17,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
     using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     [AoContract((int)PacketType.OperatorMessage)]
-    public abstract class OperatorMessage : MessageBody
+    public class OperatorMessage : MessageBody
     {
         #region Public Properties
 

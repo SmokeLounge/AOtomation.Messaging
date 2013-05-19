@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DebuggingSerializerBuilderResolver.cs" company="SmokeLounge">
+// <copyright file="DebuggingSerializerResolverBuilder.cs" company="SmokeLounge">
 //   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
@@ -8,7 +8,7 @@
 //   http://www.wtfpl.net/ for more details.
 // </copyright>
 // <summary>
-//   Defines the DebuggingSerializerBuilderResolver type.
+//   Defines the DebuggingSerializerResolverBuilder type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
     using SmokeLounge.AOtomation.Messaging.Serialization.Serializers;
 
-    public class DebuggingSerializerBuilderResolver<T> : SerializerResolverBuilder<T>
+    public class DebuggingSerializerResolverBuilder<T> : SerializerResolverBuilder<T>
     {
         #region Methods
 

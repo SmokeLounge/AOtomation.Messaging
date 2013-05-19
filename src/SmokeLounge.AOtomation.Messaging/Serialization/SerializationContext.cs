@@ -45,7 +45,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Public Properties
 
-        public IEnumerable<DebugInfo> Type
+        public IEnumerable<DebugInfo> DebugInfos
         {
             get
             {
@@ -57,9 +57,9 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Public Methods and Operators
 
-        public void AddDebugInfo(PropertyMetaData propertyMetaData, long offset, long length)
+        public void AddDebugInfo(DebugInfo debugInfo)
         {
-            this.debugInfos.Add(new DebugInfo(propertyMetaData, offset, length));
+            this.debugInfos.Add(debugInfo);
         }
 
         public AoUsesFlagsAttribute Evaluate(IEnumerable<AoUsesFlagsAttribute> usesFlags)

@@ -249,7 +249,7 @@
     <Compile Include="Messages\TextMessage.cs" />
     <Compile Include="Messages\TextMessageRange.cs" />
     <Compile Include="Serialization\ArraySizeType.cs" />
-    <Compile Include="Serialization\DebuggingSerializerBuilderResolver.cs" />
+    <Compile Include="Serialization\DebuggingSerializerResolverBuilder.cs" />
     <Compile Include="Serialization\DebugInfo.cs" />
     <Compile Include="Serialization\FlagsCriteria.cs" />
     <Compile Include="Serialization\IdentifierType.cs" />

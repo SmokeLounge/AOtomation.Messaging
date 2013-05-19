@@ -62,36 +62,50 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             Expression assignmentTargetExpression, 
             PropertyMetaData propertyMetaData)
         {
-            var offsetExpression = Expression.Variable(typeof(long));
-            var lengthExpression = Expression.Variable(typeof(long));
-            var propertyExpression = Expression.Constant(propertyMetaData, typeof(PropertyMetaData));
+            var debugInfoExpression = Expression.Variable(typeof(DebugInfo));
+            var debugInfoAssignmentExpression = Expression.Assign(
+                debugInfoExpression, Expression.New(typeof(DebugInfo)));
 
-            var positionPropertyInfo = ReflectionHelper.GetPropertyInfo<StreamReader>(o => o.Position);
-            var assignOffsetExpression = Expression.Assign(
-                offsetExpression, Expression.Property(streamReaderExpression, positionPropertyInfo));
-
-            var serializerExpression = this.serializer.DeserializerExpression(
-                streamReaderExpression, serializationContextExpression, assignmentTargetExpression, propertyMetaData);
-
-            var subrtactExpression =
-                Expression.Subtract(Expression.Property(streamReaderExpression, positionPropertyInfo), offsetExpression);
-            var assignLengthExpression = Expression.Assign(lengthExpression, subrtactExpression);
+            var propertyMetaDataPropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.PropertyMetaData);
+            var assignPropertyMetaDataExpression =
+                Expression.Assign(
+                    Expression.Property(debugInfoExpression, propertyMetaDataPropertyInfo), 
+                    Expression.Constant(propertyMetaData, typeof(PropertyMetaData)));
 
             var addDebugInfoMethodInfo =
-                ReflectionHelper.GetMethodInfo<SerializationContext, Action<PropertyMetaData, long, long>>(
-                    o => o.AddDebugInfo);
+                ReflectionHelper.GetMethodInfo<SerializationContext, Action<DebugInfo>>(o => o.AddDebugInfo);
             var callAddDebugInfoExpression = Expression.Call(
-                serializationContextExpression, 
-                addDebugInfoMethodInfo, 
-                new Expression[] { propertyExpression, offsetExpression, lengthExpression });
+                serializationContextExpression, addDebugInfoMethodInfo, new Expression[] { debugInfoExpression });
+
+            var offsetPropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.Offset);
+            var positionPropertyInfo = ReflectionHelper.GetPropertyInfo<StreamReader>(o => o.Position);
+            var assignOffsetExpression = Expression.Assign(
+                Expression.Property(debugInfoExpression, offsetPropertyInfo), 
+                Expression.Property(streamReaderExpression, positionPropertyInfo));
+
+            var deserializerExpression = this.serializer.DeserializerExpression(
+                streamReaderExpression, serializationContextExpression, assignmentTargetExpression, propertyMetaData);
+
+            var lengthPropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.Length);
+            var calculateLengthExpression =
+                Expression.Subtract(
+                    Expression.Property(streamReaderExpression, positionPropertyInfo), 
+                    Expression.Property(debugInfoExpression, offsetPropertyInfo));
+            var assignLengthExpression = Expression.Assign(
+                Expression.Property(debugInfoExpression, lengthPropertyInfo), calculateLengthExpression);
+
+            var valuePropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.Value);
+            var assignValueExpression = Expression.Assign(
+                Expression.Property(debugInfoExpression, valuePropertyInfo), 
+                Expression.Convert(assignmentTargetExpression, typeof(object)));
 
             var blockExpression = Expression.Block(
-                new[] { offsetExpression, lengthExpression }, 
+                new[] { debugInfoExpression }, 
                 new[]
                     {
-                       assignOffsetExpression, serializerExpression, assignLengthExpression, callAddDebugInfoExpression 
+                        debugInfoAssignmentExpression, assignPropertyMetaDataExpression, callAddDebugInfoExpression, 
+                        assignOffsetExpression, deserializerExpression, assignLengthExpression, assignValueExpression
                     });
-
             return blockExpression;
         }
 
@@ -110,36 +124,50 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization.Serializers
             Expression valueExpression, 
             PropertyMetaData propertyMetaData)
         {
-            var offsetExpression = Expression.Variable(typeof(long));
-            var lengthExpression = Expression.Variable(typeof(long));
-            var propertyExpression = Expression.Constant(propertyMetaData, typeof(PropertyMetaData));
+            var debugInfoExpression = Expression.Variable(typeof(DebugInfo));
+            var debugInfoAssignmentExpression = Expression.Assign(
+                debugInfoExpression, Expression.New(typeof(DebugInfo)));
 
+            var propertyMetaDataPropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.PropertyMetaData);
+            var assignPropertyMetaDataExpression =
+                Expression.Assign(
+                    Expression.Property(debugInfoExpression, propertyMetaDataPropertyInfo), 
+                    Expression.Constant(propertyMetaData, typeof(PropertyMetaData)));
+
+            var addDebugInfoMethodInfo =
+                ReflectionHelper.GetMethodInfo<SerializationContext, Action<DebugInfo>>(o => o.AddDebugInfo);
+            var callAddDebugInfoExpression = Expression.Call(
+                serializationContextExpression, addDebugInfoMethodInfo, new Expression[] { debugInfoExpression });
+
+            var offsetPropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.Offset);
             var positionPropertyInfo = ReflectionHelper.GetPropertyInfo<StreamWriter>(o => o.Position);
             var assignOffsetExpression = Expression.Assign(
-                offsetExpression, Expression.Property(streamWriterExpression, positionPropertyInfo));
+                Expression.Property(debugInfoExpression, offsetPropertyInfo), 
+                Expression.Property(streamWriterExpression, positionPropertyInfo));
 
             var serializerExpression = this.serializer.SerializerExpression(
                 streamWriterExpression, serializationContextExpression, valueExpression, propertyMetaData);
 
-            var subrtactExpression =
-                Expression.Subtract(Expression.Property(streamWriterExpression, positionPropertyInfo), offsetExpression);
-            var assignLengthExpression = Expression.Assign(lengthExpression, subrtactExpression);
+            var lengthPropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.Length);
+            var calculateLengthExpression =
+                Expression.Subtract(
+                    Expression.Property(streamWriterExpression, positionPropertyInfo), 
+                    Expression.Property(debugInfoExpression, offsetPropertyInfo));
+            var assignLengthExpression = Expression.Assign(
+                Expression.Property(debugInfoExpression, lengthPropertyInfo), calculateLengthExpression);
 
-            var addDebugInfoMethodInfo =
-                ReflectionHelper.GetMethodInfo<SerializationContext, Action<PropertyMetaData, long, long>>(
-                    o => o.AddDebugInfo);
-            var callAddDebugInfoExpression = Expression.Call(
-                serializationContextExpression, 
-                addDebugInfoMethodInfo, 
-                new Expression[] { propertyExpression, offsetExpression, lengthExpression });
+            var valuePropertyInfo = ReflectionHelper.GetPropertyInfo<DebugInfo>(o => o.Value);
+            var assignValueExpression = Expression.Assign(
+                Expression.Property(debugInfoExpression, valuePropertyInfo), 
+                Expression.Convert(valueExpression, typeof(object)));
 
             var blockExpression = Expression.Block(
-                new[] { offsetExpression, lengthExpression }, 
+                new[] { debugInfoExpression }, 
                 new[]
                     {
-                       assignOffsetExpression, serializerExpression, assignLengthExpression, callAddDebugInfoExpression 
+                        debugInfoAssignmentExpression, assignPropertyMetaDataExpression, callAddDebugInfoExpression, 
+                        assignOffsetExpression, serializerExpression, assignLengthExpression, assignValueExpression
                     });
-
             return blockExpression;
         }
 

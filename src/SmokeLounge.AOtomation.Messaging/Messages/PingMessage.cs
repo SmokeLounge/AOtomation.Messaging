@@ -17,7 +17,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages
     using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
 
     [AoContract((int)PacketType.PingMessage)]
-    public abstract class PingMessage : MessageBody
+    public class PingMessage : MessageBody
     {
         #region Public Properties
 
