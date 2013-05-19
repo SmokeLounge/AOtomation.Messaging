@@ -35,14 +35,14 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         public MessageSerializer()
         {
-            this.packetInspector = new PacketInspector(typeof(MessageBody));
+            this.packetInspector = new PacketInspector();
             this.serializerResolver = new SerializerResolverBuilder<MessageBody>().Build();
             this.headerSerializer = new HeaderSerializer();
         }
 
         public MessageSerializer(SerializerResolverBuilder serializerResolverBuilder)
         {
-            this.packetInspector = new PacketInspector(typeof(MessageBody));
+            this.packetInspector = new PacketInspector();
             this.serializerResolver = serializerResolverBuilder.Build();
             this.headerSerializer = new HeaderSerializer();
         }

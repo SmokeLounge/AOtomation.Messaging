@@ -1,6 +1,6 @@
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="PacketInspector.cs" company="SmokeLounge">
-//   Copyright � 2013 SmokeLounge.
+//   Copyright © 2013 SmokeLounge.
 //   This program is free software. It comes without any warranty, to
 //   the extent permitted by applicable law. You can redistribute it
 //   and/or modify it under the terms of the Do What The Fuck You Want
@@ -14,110 +14,65 @@
 
 namespace SmokeLounge.AOtomation.Messaging.Serialization
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using SmokeLounge.AOtomation.Messaging.Serialization.MappingAttributes;
+    using SmokeLounge.AOtomation.Messaging.Messages;
 
     public class PacketInspector
     {
         #region Fields
 
-        private readonly Dictionary<int, PacketInspector> subTypes;
-
-        private readonly Type type;
+        private readonly TypeInfo typeInfo;
 
         #endregion
 
         #region Constructors and Destructors
 
-        public PacketInspector(Type type)
+        public PacketInspector()
         {
-            this.type = type;
-            this.subTypes = new Dictionary<int, PacketInspector>();
-
-            var knownTypes =
-                this.type.GetCustomAttributes(typeof(AoKnownTypeAttribute), false)
-                    .Cast<AoKnownTypeAttribute>()
-                    .FirstOrDefault();
-            if (knownTypes != null)
-            {
-                this.KnownType = new KnownType(knownTypes.Offset, knownTypes.IdentifierType);
-            }
-
-            this.InitializeSubTypes();
-        }
-
-        #endregion
-
-        #region Public Properties
-
-        public KnownType KnownType { get; set; }
-
-        public Type Type
-        {
-            get
-            {
-                return this.type;
-            }
+            this.typeInfo = new TypeInfo(typeof(MessageBody));
         }
 
         #endregion
 
         #region Public Methods and Operators
 
-        public PacketInspector FindSubType(StreamReader reader)
+        public TypeInfo FindSubType(StreamReader reader)
         {
-            if (this.KnownType == null)
+            var current = this.typeInfo;
+
+            while (current != null)
             {
-                return this;
-            }
-
-            reader.Position = this.KnownType.Offset;
-            int identifier;
-            switch (this.KnownType.IdentifierType)
-            {
-                case IdentifierType.Byte:
-                    identifier = reader.ReadByte();
-                    break;
-                case IdentifierType.Int16:
-                    identifier = reader.ReadInt16();
-                    break;
-                case IdentifierType.Int32:
-                    identifier = reader.ReadInt32();
-                    break;
-                default:
-                    return null;
-            }
-
-            PacketInspector subType;
-            this.subTypes.TryGetValue(identifier, out subType);
-            return subType == null ? null : subType.FindSubType(reader);
-        }
-
-        #endregion
-
-        #region Methods
-
-        private void InitializeSubTypes()
-        {
-            this.subTypes.Clear();
-            var types = this.type.Assembly.GetTypes().Where(t => t.BaseType == this.type);
-            foreach (var subType in types)
-            {
-                var contract =
-                    subType.GetCustomAttributes(typeof(AoContractAttribute), false)
-                           .Cast<AoContractAttribute>()
-                           .FirstOrDefault();
-                if (contract == null)
+                if (current.KnownType == null)
                 {
-                    continue;
+                    return current;
                 }
 
-                var typeInfo = new PacketInspector(subType);
-                this.subTypes.Add(contract.Identifier, typeInfo);
+                reader.Position = current.KnownType.Offset;
+                int identifier;
+                switch (current.KnownType.IdentifierType)
+                {
+                    case IdentifierType.Byte:
+                        identifier = reader.ReadByte();
+                        break;
+                    case IdentifierType.Int16:
+                        identifier = reader.ReadInt16();
+                        break;
+                    case IdentifierType.Int32:
+                        identifier = reader.ReadInt32();
+                        break;
+                    default:
+                        return null;
+                }
+
+                var subType = current.GetSubType(identifier);
+                if (subType == null)
+                {
+                    return null;
+                }
+
+                current = subType;
             }
+
+            return null;
         }
 
         #endregion

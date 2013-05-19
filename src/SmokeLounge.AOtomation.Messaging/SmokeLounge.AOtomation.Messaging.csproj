@@ -260,6 +260,7 @@
     <Compile Include="Serialization\MappingAttributes\AoMemberAttribute.cs" />
     <Compile Include="Serialization\MappingAttributes\AoUsesFlagsAttribute.cs" />
     <Compile Include="Serialization\MemberOptions.cs" />
+    <Compile Include="Serialization\PacketInspector.cs" />
     <Compile Include="Serialization\PropertyMetaData.cs" />
     <Compile Include="Serialization\ReflectionHelper.cs" />
     <Compile Include="Serialization\SerializationContext.cs" />
@@ -285,7 +286,7 @@
     <Compile Include="Serialization\MessageSerializer.cs" />
     <Compile Include="Serialization\StreamReader.cs" />
     <Compile Include="Serialization\Serializers\TypeSerializer.cs" />
-    <Compile Include="Serialization\PacketInspector.cs" />
+    <Compile Include="Serialization\TypeInfo.cs" />
     <Compile Include="Serialization\SerializerResolverBuilder.cs" />
     <Compile Include="Serialization\TypeSerializerBuilder.cs" />
   </ItemGroup>

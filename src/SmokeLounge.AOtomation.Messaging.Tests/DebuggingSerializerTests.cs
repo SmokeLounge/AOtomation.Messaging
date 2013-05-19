@@ -86,7 +86,7 @@ namespace SmokeLounge.AOtomation.Messaging.Tests
         {
             MemoryStream memoryStream = null;
 
-            var serializerResolver = new DebuggingSerializerBuilderResolver<MessageBody>().Build();
+            var serializerResolver = new DebuggingSerializerResolverBuilder<MessageBody>().Build();
             var serializer = serializerResolver.GetSerializer(obj.GetType());
 
             try
