@@ -42,13 +42,10 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.SystemMessages
         public ushort ServerPort { get; set; }
 
         [AoMember(3)]
-        public short Unknown1 { get; set; }
+        public uint Cookie1 { get; set; }
 
         [AoMember(4)]
-        public int Unknown2 { get; set; }
-
-        [AoMember(5)]
-        public int Unknown3 { get; set; }
+        public uint Cookie2 { get; set; }
 
         #endregion
     }
