@@ -24,11 +24,13 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
     {
         #region Fields
 
-        private readonly List<DebugInfo> debugInfos;
+        private readonly List<DiagnosticInfo> diagnosticInfos;
 
         private readonly IDictionary<string, int> flags;
 
         private readonly SerializerResolver serializerResolver;
+
+        private Probe probe;
 
         #endregion
 
@@ -37,7 +39,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         public SerializationContext(SerializerResolver serializerResolver)
         {
             this.serializerResolver = serializerResolver;
-            this.debugInfos = new List<DebugInfo>();
+            this.diagnosticInfos = new List<DiagnosticInfo>();
             this.flags = new Dictionary<string, int>();
         }
 
@@ -45,11 +47,11 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Public Properties
 
-        public IEnumerable<DebugInfo> DebugInfos
+        public IEnumerable<DiagnosticInfo> DiagnosticInfos
         {
             get
             {
-                return this.debugInfos;
+                return this.diagnosticInfos;
             }
         }
 
@@ -57,9 +59,23 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
 
         #region Public Methods and Operators
 
-        public void AddDebugInfo(DebugInfo debugInfo)
+        public Probe BeginProbe()
         {
-            this.debugInfos.Add(debugInfo);
+            this.probe = new Probe(this.probe);
+            return this.probe;
+        }
+
+        public void EndProbe(Probe probe)
+        {
+            this.probe = probe.Parent;
+            if (this.probe != null)
+            {
+                this.probe.DiagnosticInfo.Add(probe.DiagnosticInfo);
+            }
+            else
+            {
+                this.diagnosticInfos.Add(probe.DiagnosticInfo);
+            }
         }
 
         public AoUsesFlagsAttribute Evaluate(IEnumerable<AoUsesFlagsAttribute> usesFlags)

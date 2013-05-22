@@ -25,7 +25,7 @@ namespace SmokeLounge.AOtomation.Messaging.Serialization
         internal override ISerializer GetSerializer(Type type)
         {
             var serializer = base.GetSerializer(type);
-            var debuggingSerializer = new DebuggingSerializer(serializer);
+            var debuggingSerializer = new DiagnosticSerializer(serializer);
             return debuggingSerializer;
         }
 
