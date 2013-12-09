@@ -64,12 +64,13 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         [AoMember(10)]
         public int Unknown6 { get; set; }
 
+        /* These are not in the packet from the client
         [AoMember(11)]
         public int Unknown7 { get; set; }
 
         [AoMember(12)]
         public int Unknown8 { get; set; }
-
+        */
         #endregion
     }
 }
