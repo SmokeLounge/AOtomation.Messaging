@@ -26,6 +26,8 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         AcceptTeamRequest = 0x00000023,
 
+        RemoveFriendlyNano = 0x00000041,
+
         UseItemOnItem = 0x00000051,
 
         StandUp = 0x00000057,
