@@ -16,61 +16,63 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 {
     public enum CharacterActionType
     {
-        TeamRequest = 0x0000001A, 
+        TeamRequest = 0x0000001A,
 
-        CastNano = 0x00000013, 
+        CastNano = 0x00000013,
 
-        TeamRequestReply = 0x00000015, 
+        TeamRequestReply = 0x00000015,
 
-        LeaveTeam = 0x00000020, 
+        LeaveTeam = 0x00000020,
 
-        AcceptTeamRequest = 0x00000023, 
+        AcceptTeamRequest = 0x00000023,
 
-        UseItemOnItem = 0x00000051, 
+        UseItemOnItem = 0x00000051,
 
-        StandUp = 0x00000057, 
+        StandUp = 0x00000057,
 
-        Unknown3 = 0x00000061, 
+        Unknown3 = 0x00000061,
 
-        Unknown2 = 0x00000062, 
+        SetNanoDuration = 0x00000062,
 
-        InfoRequest = 0x00000069, 
+        InfoRequest = 0x00000069,
 
-        Unknown1 = 0x0000006B, 
+        FinishNanoCasting = 0x0000006B,
 
-        DeleteItem = 0x00000070, 
+        InterruptNanoCasting = 0x0000006C,
 
-        Logout = 0x00000078, 
+        DeleteItem = 0x00000070,
 
-        StopLogout = 0x0000007A, 
+        Logout = 0x00000078,
 
-        Equip = 0x00000083, 
+        StopLogout = 0x0000007A,
 
-        StartedSneaking = 0x000000A2, 
+        Equip = 0x00000083,
 
-        StartSneak = 0x000000A3, 
+        StartedSneaking = 0x000000A2,
 
-        ChangeVisualFlag = 0x000000A6, 
+        StartSneak = 0x000000A3,
 
-        ChangeAnimationAndStance = 0x000000A7, 
+        ChangeVisualFlag = 0x000000A6,
 
-        UploadNano = 0x000000CC, 
+        ChangeAnimationAndStance = 0x000000A7,
 
-        TradeskillSourceChanged = 0x000000DC, 
+        UploadNano = 0x000000CC,
 
-        TradeskillTargetChanged = 0x000000DD, 
+        TradeskillSourceChanged = 0x000000DC,
 
-        TradeskillBuildPressed = 0x000000DE, 
+        TradeskillTargetChanged = 0x000000DD,
 
-        TradeskillSource = 0x000000DF, 
+        TradeskillBuildPressed = 0x000000DE,
 
-        TradeskillTarget = 0x000000E0, 
+        TradeskillSource = 0x000000DF,
 
-        TradeskillNotValid = 0x000000E1, 
+        TradeskillTarget = 0x000000E0,
 
-        TradeskillOutOfRange = 0x000000E2, 
+        TradeskillNotValid = 0x000000E1,
 
-        TradeskillRequirement = 0x000000E3, 
+        TradeskillOutOfRange = 0x000000E2,
+
+        TradeskillRequirement = 0x000000E3,
 
         TradeskillResult = 0x000000E4
     }
