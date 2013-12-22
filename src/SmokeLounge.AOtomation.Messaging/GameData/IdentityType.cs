@@ -44,7 +44,11 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         Playfield2 = 0x00009C50, 
 
-        CanbeAffected = 0x0000C350, 
+        CanbeAffected = 0x0000C350,
+
+        Terminal = 0x0000C73D,
+
+        Door = 0x0000C748,
 
         WeaponInstance = 0x0000C74A, 
 
@@ -52,15 +56,19 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         TempBag = 0x0000C767, 
 
-        Corpse = 0x0000C76A, 
+        Corpse = 0x0000C76A,
 
+        MailTerminal = 0x0000C773,
+        
         Playfield1 = 0x0000C79C, 
 
         Playfield = 0x0000C79D, 
 
         NanoProgram = 0x0000CF1B, 
 
-        GfxEffect = 0x0000CF26, 
+        GfxEffect = 0x0000CF26,
+
+        MissionTerminal = 0x0000DCA1,
 
         TeamWindow = 0x0000DEA9, 
 
@@ -68,6 +76,6 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
 
         IncomingTradeWindow = 0x0000DEAD, 
 
-        Playfield3 = 0x000186A1
+        Playfield3 = 0x000186A1,
     }
 }
