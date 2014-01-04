@@ -60,6 +60,15 @@ namespace SmokeLounge.AOtomation.Messaging.GameData
             return hashCode;
         }
 
+        // Get Type/Instance as ulong
+        public ulong Long()
+        {
+            ulong temp = (ulong)(int)this.Type;
+            temp = temp << 32;
+            temp |= (ulong)(uint)this.Instance;
+            return temp;
+        }
+
         #endregion
     }
 }
