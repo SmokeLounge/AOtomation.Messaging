@@ -31,7 +31,7 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
         #endregion
 
         #region AoMember Properties
-
+        /* Obsolete now?
         [AoMember(0)]
         public int Unknown1 { get; set; }
 
@@ -40,10 +40,11 @@ namespace SmokeLounge.AOtomation.Messaging.Messages.N3Messages
 
         [AoMember(2)]
         public int Unknown3 { get; set; }
-
-        [AoMember(3, SerializeSize = ArraySizeType.X3F1)]
+        */
+        [AoMember(0, SerializeSize = ArraySizeType.X3F1)]
         public BankSlot[] BankSlots { get; set; }
 
         #endregion
     }
 }
+
